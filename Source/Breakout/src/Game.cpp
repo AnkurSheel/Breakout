@@ -48,16 +48,9 @@ void cGame::VCreateHumanView()
 }
 
 // *****************************************************************************
-cString cGame::VGetGameTitle() const
-{
-	return VGetName();
-}
-
-// *****************************************************************************
 void cGame::VOnUpdate()
 {
 	cBaseApp::VOnUpdate();
-	IMessageDispatchManager::GetInstance()->VOnUpdate();
 }
 
 // *****************************************************************************
@@ -65,7 +58,6 @@ void cGame::VCleanup()
 {
 	cBaseApp::VCleanup();
 }
-
 
 // *****************************************************************************
 bool cGame::VOnHandleMessage(const AI::Telegram & telegram)

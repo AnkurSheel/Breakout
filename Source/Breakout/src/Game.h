@@ -44,7 +44,6 @@ private:
 	~cGame();
 	void VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 		const Base::cString & strOptionsFile);
-	Base::cString VGetGameTitle() const;
 	void VOnUpdate();
 	void VCleanup();
 	bool VOnHandleMessage(const AI::Telegram & telegram);
