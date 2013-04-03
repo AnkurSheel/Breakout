@@ -35,6 +35,10 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 {
 	cBaseApp::VOnInitialization(hInstance, nCmdShow, strOptionsFile);
 
+	if(m_bQuitting)
+	{
+		return;
+	}
 	m_iDisplayHeight = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetHeight());
 	m_iDisplayWidth = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetWidth());
 
@@ -50,6 +54,10 @@ void cGame::VCreateHumanView()
 // *****************************************************************************
 void cGame::VOnUpdate()
 {
+	if(m_bQuitting)
+	{
+		return;
+	}
 	cBaseApp::VOnUpdate();
 }
 
