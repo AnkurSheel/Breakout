@@ -8,10 +8,8 @@
 #include "GameFlowStateMachine.h"
 #include "BreakoutView.h"
 #include "BaseControl.hxx"
-#include "Paddle.h"
-#include "EntityManager.hxx"
+#include "StatePlayGame.h"
 
-using namespace MySound;
 using namespace Graphics;
 using namespace Base;
 using namespace GameBase;
@@ -20,6 +18,7 @@ using namespace Utilities;
 // *****************************************************************************
 cGame::cGame(const cString strName)
 : cBaseApp(strName)
+, m_pStateMachine(NULL)
 {
 }
 
@@ -39,12 +38,16 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 	{
 		return;
 	}
+	if(m_bQuitting)
+	{
+		return;
+	}
+
 	m_iDisplayHeight = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetHeight());
 	m_iDisplayWidth = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetWidth());
 
-	IBaseEntity * pPaddle = DEBUG_NEW cPaddle("Paddle");
-	IEntityManager::GetInstance()->VRegisterEntity(pPaddle);
-	IEntityManager::GetInstance()->VAddComponent(pPaddle, "ModelComponent");
+	m_pStateMachine = DEBUG_NEW cGameFlowStateMachine(this);
+	m_pStateMachine->SetCurrentState(cStatePlayGame::Instance());
 }
 
 void cGame::VCreateHumanView()
@@ -60,18 +63,20 @@ void cGame::VOnUpdate()
 		return;
 	}
 	cBaseApp::VOnUpdate();
+	m_pStateMachine->Update();
 }
 
 // *****************************************************************************
 void cGame::VCleanup()
 {
 	cBaseApp::VCleanup();
+	SafeDelete(&m_pStateMachine);
 }
 
 // *****************************************************************************
 bool cGame::VOnHandleMessage(const AI::Telegram & telegram)
 {
-	return false;
+	return m_pStateMachine->HandleMessage(telegram);
 }
 
 // *****************************************************************************

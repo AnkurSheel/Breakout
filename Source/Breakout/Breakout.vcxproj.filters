@@ -4,6 +4,9 @@
     <Filter Include="Elements">
       <UniqueIdentifier>{33aa9349-f52f-45b0-8673-d789231736c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{b5bf78bb-9ac9-4471-a9da-3212340a776d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BreakoutView.h" />
@@ -16,6 +19,12 @@
     <ClInclude Include="src\Paddle.h">
       <Filter>Elements</Filter>
     </ClInclude>
+    <ClInclude Include="src\StatePlayGame.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameFlowStates.h">
+      <Filter>States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -24,6 +33,9 @@
     <ClCompile Include="src\GameFlowStateMachine.cpp" />
     <ClCompile Include="src\Paddle.cpp">
       <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatePlayGame.cpp">
+      <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

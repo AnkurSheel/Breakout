@@ -9,8 +9,6 @@
 #include "fsm\statemachine.h"
 #include "Game.h"
 
-class IGameFlowStates;
-
 class cGameFlowStateMachine :
 	public AI::cStateMachine<cGame>
 {

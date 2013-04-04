@@ -10,6 +10,7 @@
 #include "Game.h"
 #include "Vector3.h"
 #include "Messages.h"
+#include "EntityManager.hxx"
 
 using namespace Utilities;
 using namespace Graphics;
@@ -57,8 +58,10 @@ bool cBreakoutView::VOnMsgProc( const Base::AppMsg & msg )
 			{
 				// lock the ESC key
 				LockKey(VK_ESCAPE);
-				IMessageDispatchManager::GetInstance()->VDispatchMessage(0.0f, m_pGame->VGetID(),
-					m_pGame->VGetID(), MSG_ESCAPE_PRESSED, NULL);
+				IMessageDispatchManager::GetInstance()->VDispatchMessage(0.0f,
+					IEntityManager::GetInstance()->VGetEntityID(m_pGame), 
+					IEntityManager::GetInstance()->VGetEntityID(m_pGame),
+					MSG_ESCAPE_PRESSED, NULL);
 			}
 		}
 		else if (msg.m_uMsg == WM_KEYUP)

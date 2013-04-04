@@ -15,22 +15,6 @@ namespace GameBase
 	class cGameElementDef;
 }
 
-namespace Utilities
-{
-	class IRandomGenerator;
-}
-
-namespace MySound
-{
-	class ISound;
-}
-
-namespace Graphics
-{
-	class IBaseControl;
-}
-
-class cAsteroidGameElement;
 class cGameFlowStateMachine;
 
 class cGame 
@@ -50,8 +34,9 @@ private:
 	void VCreateHumanView();
 
 private:
-	int										m_iDisplayHeight ;		// the display height of the window
-	int										m_iDisplayWidth ;		// the display width of the window
+	int						m_iDisplayHeight;	/// the display height of the window
+	int						m_iDisplayWidth;	/// the display width of the window
+	cGameFlowStateMachine *	m_pStateMachine;	/// Pointer to the state machine
 
 private:
 	friend class cBreakoutView;
