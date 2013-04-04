@@ -1,23 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Elements">
+      <UniqueIdentifier>{33aa9349-f52f-45b0-8673-d789231736c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\BreakoutView.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="Includes\Game.hxx" />
+    <ClInclude Include="Includes\GameDefines.h" />
+    <ClInclude Include="src\GameFlowStateMachine.h" />
+    <ClInclude Include="src\Messages.h" />
+    <ClInclude Include="src\Paddle.h">
+      <Filter>Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\BreakoutView.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameFlowStateMachine.cpp" />
+    <ClCompile Include="src\Paddle.cpp">
+      <Filter>Elements</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

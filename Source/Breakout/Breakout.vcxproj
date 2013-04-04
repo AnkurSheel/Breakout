@@ -80,12 +80,14 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameFlowStateMachine.h" />
     <ClInclude Include="src\Messages.h" />
+    <ClInclude Include="src\Paddle.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameFlowStateMachine.cpp" />
+    <ClCompile Include="src\Paddle.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

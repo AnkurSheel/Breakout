@@ -8,8 +8,8 @@
 #include "GameFlowStateMachine.h"
 #include "BreakoutView.h"
 #include "BaseControl.hxx"
+#include "Paddle.h"
 #include "EntityManager.hxx"
-#include "MessageDispatchManager.hxx"
 
 using namespace MySound;
 using namespace Graphics;
@@ -41,6 +41,10 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 	}
 	m_iDisplayHeight = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetHeight());
 	m_iDisplayWidth = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetWidth());
+
+	IBaseEntity * pPaddle = DEBUG_NEW cPaddle("Paddle");
+	IEntityManager::GetInstance()->VRegisterEntity(pPaddle);
+	IEntityManager::GetInstance()->VAddComponent(pPaddle, "ModelComponent");
 }
 
 void cGame::VCreateHumanView()
