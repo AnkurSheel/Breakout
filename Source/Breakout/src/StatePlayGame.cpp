@@ -6,13 +6,21 @@
 #include "stdafx.h"
 #include "StatePlayGame.h"
 #include "BaseEntity.hxx"
-#include "ModelComponent.h"
 #include "EntityManager.hxx"
 #include "Paddle.h"
+#include "ModelComponent.h"
+#include "TransformComponent.h"
+#include "Game.h"
+#include "ProcessManager.hxx"
+#include "RenderSystem.h"
+#include "GraphicUtils.hxx"
+#include "vector2.h"
+#include "HumanView.h"
 
 using namespace Base;
 using namespace GameBase;
 using namespace AI;
+using namespace Graphics;
 
 // *****************************************************************************
 cStatePlayGame::cStatePlayGame()
@@ -36,10 +44,20 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 {
 	IGameFlowStates::VOnEnter(pGame);
 	IBaseEntity * pPaddle = DEBUG_NEW cPaddle("paddle");
+	IEntityManager::GetInstance()->VRegisterEntity(pPaddle);
+	
 	cModelComponent * pModelComponent = DEBUG_NEW cModelComponent();
 	pModelComponent->m_strModelName = "cube";
-	IEntityManager::GetInstance()->VRegisterEntity(pPaddle);
 	IEntityManager::GetInstance()->VAddComponent(pPaddle, pModelComponent);
+
+	cVector3 vScreenBottomRightPos = IGraphicUtils::GetInstance()->ScreenToWorldSpace(cVector2(static_cast<float>(pGame->m_iDisplayWidth), static_cast<float>(pGame->m_iDisplayHeight)),
+		pGame->m_pHumanView->GetCamera());
+	cTransformComponent * pTransformComponent = DEBUG_NEW cTransformComponent();
+	pTransformComponent->m_vPosition = cVector3(0, vScreenBottomRightPos.y, 0.0f);
+	pTransformComponent->m_vScale = cVector3(2.0f, 0.25f, 1.0f);
+	IEntityManager::GetInstance()->VAddComponent(pPaddle, pTransformComponent);
+
+	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRenderSystem()));
 
 }
 

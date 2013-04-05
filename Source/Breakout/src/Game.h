@@ -40,5 +40,6 @@ private:
 
 private:
 	friend class cBreakoutView;
+	friend class cStatePlayGame;
 };
 #endif // Game_h__
