@@ -12,7 +12,7 @@
 #include "TransformComponent.h"
 #include "Game.h"
 #include "ProcessManager.hxx"
-#include "RenderSystem.h"
+#include "Render3DSystem.h"
 #include "GraphicUtils.hxx"
 #include "vector2.h"
 #include "HumanView.h"
@@ -57,7 +57,7 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 	pTransformComponent->m_vScale = cVector3(2.0f, 0.25f, 1.0f);
 	IEntityManager::GetInstance()->VAddComponent(pPaddle, pTransformComponent);
 
-	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRenderSystem()));
+	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRender3DSystem()));
 
 }
 

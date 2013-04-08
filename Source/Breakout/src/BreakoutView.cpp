@@ -12,7 +12,7 @@
 #include "Messages.h"
 #include "EntityManager.hxx"
 #include "ProcessManager.hxx"
-#include "RenderSystem.h"
+#include "Render3DSystem.h"
 
 using namespace Utilities;
 using namespace Graphics;
@@ -81,11 +81,11 @@ bool cBreakoutView::VOnMsgProc( const Base::AppMsg & msg )
 void cBreakoutView::VRenderPrivate()
 {
 	ProcessList pProcessList;
-	m_pGame->VGetProcessManager()->VGetProcesses("Render System", pProcessList);
+	m_pGame->VGetProcessManager()->VGetProcesses("Render3DSystem", pProcessList);
 	ProcessList::iterator curProcess;
 	for (curProcess = pProcessList.begin(); curProcess != pProcessList.end(); curProcess++)
 	{
-		shared_ptr<cRenderSystem> p = dynamic_pointer_cast<cRenderSystem>(*curProcess);
+		shared_ptr<cRender3DSystem> p = dynamic_pointer_cast<cRender3DSystem>(*curProcess);
 		p->Render(m_pCamera);
 	}
 
