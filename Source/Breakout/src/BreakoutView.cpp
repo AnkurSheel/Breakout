@@ -13,6 +13,7 @@
 #include "EntityManager.hxx"
 #include "ProcessManager.hxx"
 #include "Render3DSystem.h"
+#include "Render2DSystem.h"
 
 using namespace Utilities;
 using namespace Graphics;
@@ -88,6 +89,13 @@ void cBreakoutView::VRenderPrivate()
 		shared_ptr<cRender3DSystem> p = dynamic_pointer_cast<cRender3DSystem>(*curProcess);
 		p->Render(m_pCamera);
 	}
+	
+	pProcessList.clear();
 
-	cHumanView::VRenderPrivate();
+	m_pGame->VGetProcessManager()->VGetProcesses("Render2DSystem", pProcessList);
+	for (curProcess = pProcessList.begin(); curProcess != pProcessList.end(); curProcess++)
+	{
+		shared_ptr<cRender2DSystem> p = dynamic_pointer_cast<cRender2DSystem>(*curProcess);
+		p->Render(m_pCamera);
+	}
 }
