@@ -15,6 +15,11 @@ namespace GameBase
 	class cGameElementDef;
 }
 
+namespace AI
+{
+	struct Telegram;
+}
+
 class cGameFlowStateMachine;
 
 class cGame 
@@ -22,10 +27,12 @@ class cGame
 	, public GameBase::cBaseApp
 {
 public:
-	cGame(const Base::cString strName);
+	cGame(const Base::cString & Name);
 
 private:
 	~cGame();
+	virtual void VInitialize();
+
 	void VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 		const Base::cString & strOptionsFile);
 	void VOnUpdate();

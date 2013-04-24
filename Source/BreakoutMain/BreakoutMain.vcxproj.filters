@@ -11,8 +11,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Debug\OptionsDebug.ini" />
-    <None Include="..\..\bin\OptionsRetail.ini" />
+    <None Include="..\..\Debug\Options.ini" />
+    <None Include="..\..\bin\Options.ini" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">

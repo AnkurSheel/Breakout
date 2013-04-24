@@ -25,14 +25,8 @@ int WINAPI WinMain(const HINSTANCE hInstance,
 	CheckForMemoryLeaks() ;
 
 	pGame = IGame::CreateGame("Game");
-	cString strOptionsFileName;
-#ifdef _DEBUG
-	strOptionsFileName = "OptionsDebug.ini";
-#else
-	strOptionsFileName = "OptionsRetail.ini";
-#endif
 
-	pGame->VOnInitialization(hInstance, nCmdShow, strOptionsFileName);
+	pGame->VOnInitialization(hInstance, nCmdShow, "Options.ini");
 	pGame->VRun();
 	Cleanup() ;
 

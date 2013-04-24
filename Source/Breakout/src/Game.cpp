@@ -16,9 +16,9 @@ using namespace GameBase;
 using namespace Utilities;
 
 // *****************************************************************************
-cGame::cGame(const cString strName)
-: cBaseApp(strName)
-, m_pStateMachine(NULL)
+cGame::cGame(const Base::cString & Name) 
+	: cBaseApp(Name)
+	, m_pStateMachine(NULL)
 {
 }
 
@@ -34,11 +34,11 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 {
 	cBaseApp::VOnInitialization(hInstance, nCmdShow, strOptionsFile);
 
-	if(m_bQuitting)
+	if(m_Quitting)
 	{
 		return;
 	}
-	if(m_bQuitting)
+	if(m_Quitting)
 	{
 		return;
 	}
@@ -58,7 +58,7 @@ void cGame::VCreateHumanView()
 // *****************************************************************************
 void cGame::VOnUpdate()
 {
-	if(m_bQuitting)
+	if(m_Quitting)
 	{
 		return;
 	}
@@ -77,6 +77,12 @@ void cGame::VCleanup()
 bool cGame::VOnHandleMessage(const AI::Telegram & telegram)
 {
 	return m_pStateMachine->HandleMessage(telegram);
+}
+
+// *****************************************************************************
+void cGame::VInitialize()
+{
+	throw std::exception("The method or operation is not implemented.");
 }
 
 // *****************************************************************************
