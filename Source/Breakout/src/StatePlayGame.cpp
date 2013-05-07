@@ -5,25 +5,23 @@
 // *****************************************************************************
 #include "stdafx.h"
 #include "StatePlayGame.h"
-#include "BaseEntity.hxx"
+//#include "BaseEntity.hxx"
 #include "EntityManager.hxx"
-#include "Paddle.h"
-#include "ModelComponent.h"
-#include "Transform3DComponent.h"
-#include "Transform2DComponent.h"
+//#include "ModelComponent.h"
+//#include "Transform3DComponent.h"
+//#include "Transform2DComponent.h"
 #include "Game.h"
 #include "ProcessManager.hxx"
-#include "Render3DSystem.h"
-#include "Render2DSystem.h"
-#include "GraphicUtils.hxx"
-#include "vector2.h"
-#include "HumanView.h"
-#include "SpriteComponent.h"
+//#include "Render3DSystem.h"
+//#include "Render2DSystem.h"
+//#include "GraphicUtils.hxx"
+//#include "vector2.h"
+//#include "HumanView.h"
+//#include "SpriteComponent.h"
 
 using namespace Base;
 using namespace GameBase;
 using namespace AI;
-using namespace Graphics;
 
 // *****************************************************************************
 cStatePlayGame::cStatePlayGame()
@@ -75,7 +73,7 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 	//pTransform2DComponent->m_vSize = cVector2(100, 100);
 	//IEntityManager::GetInstance()->VAddComponent(pPaddle1, pTransform2DComponent);
 
-	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRender2DSystem()));
+	//m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRender2DSystem()));
 
 }
 
