@@ -9,6 +9,7 @@
 #include "BreakoutView.h"
 #include "BaseControl.hxx"
 #include "StatePlayGame.h"
+#include "BreakoutEntityFactory.h"
 
 using namespace Graphics;
 using namespace Base;
@@ -19,6 +20,7 @@ using namespace Utilities;
 cGame::cGame(const Base::cString & Name) 
 	: cBaseApp(Name)
 	, m_pStateMachine(NULL)
+	, m_pEntityFactory(NULL)
 {
 }
 
@@ -47,6 +49,9 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 	m_iDisplayWidth = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetWidth());
 
 	m_pStateMachine = DEBUG_NEW cGameFlowStateMachine(this);
+	m_pEntityFactory = DEBUG_NEW cBreakOutEntityFactory();
+	m_pEntityFactory->RegisterEntities();
+
 	m_pStateMachine->SetCurrentState(cStatePlayGame::Instance());
 }
 
@@ -71,6 +76,7 @@ void cGame::VCleanup()
 {
 	cBaseApp::VCleanup();
 	SafeDelete(&m_pStateMachine);
+	SafeDelete(&m_pEntityFactory);
 }
 
 // *****************************************************************************

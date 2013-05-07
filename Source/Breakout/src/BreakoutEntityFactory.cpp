@@ -1,46 +1,38 @@
 // *****************************************************************************
-//  Paddle   version:  1.0   Ankur Sheel  date: 2013/04/04
+//  BreakOutEntityFactory   version:  1.0   Ankur Sheel  date: 2013/05/06
 // *****************************************************************************
 //  purpose:	
 // *****************************************************************************
-#include "stdafx.h"
+
+#include "StdAfx.h"
+#include "BreakOutEntityFactory.h"
 #include "Paddle.h"
 
-using namespace Base;
 using namespace GameBase;
-
-const Base::cHashedString	cPaddle::m_Name = cHashedString("paddle");
+using namespace Base;
 
 // *****************************************************************************
-cPaddle::cPaddle()
+cBreakOutEntityFactory::cBreakOutEntityFactory()
+{
+	if(m_pInstance == NULL)
+		m_pInstance = this;
+}
+
+// *****************************************************************************
+cBreakOutEntityFactory::~cBreakOutEntityFactory()
 {
 }
 
 // *****************************************************************************
-cPaddle::~cPaddle()
+void cBreakOutEntityFactory::RegisterEntities()
 {
-	VCleanup();
+	m_EntityFactory.Register<cPaddle>(cPaddle::m_Name.GetHash());
 }
 
 // *****************************************************************************
-void cPaddle::VInitialize()
+IBaseEntity * cBreakOutEntityFactory::VCreateEntity(const cHashedString & Type)
 {
-	cBaseEntity::VInitialize();
-}
-
-// *****************************************************************************
-void cPaddle::VCleanup()
-{
-	cBaseEntity::VCleanup();
-}
-
-// *****************************************************************************
-cPaddle * cPaddle::CastToPaddle()
-{
-	return this;
-}
-
-// *****************************************************************************
-void cPaddle::VOnUpdate()
-{
+	IBaseEntity * pEntity = m_EntityFactory.Create(Type.GetHash());
+	pEntity->VInitialize();
+	return pEntity;
 }

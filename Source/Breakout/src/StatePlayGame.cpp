@@ -46,35 +46,34 @@ cStatePlayGame* cStatePlayGame::Instance()
 void cStatePlayGame::VOnEnter(cGame *pGame)
 {
 	IGameFlowStates::VOnEnter(pGame);
-	IBaseEntity * pPaddle = DEBUG_NEW cPaddle("paddle");
-	IEntityManager::GetInstance()->VRegisterEntity(pPaddle);
-	
-	cModelComponent * pModelComponent = DEBUG_NEW cModelComponent();
-	pModelComponent->m_strModelName = "cube";
-	IEntityManager::GetInstance()->VAddComponent(pPaddle, pModelComponent);
-
-	cVector3 vScreenBottomRightPos = IGraphicUtils::GetInstance()->ScreenToWorldSpace(cVector2(static_cast<float>(pGame->m_iDisplayWidth), static_cast<float>(pGame->m_iDisplayHeight)),
-		pGame->m_pHumanView->GetCamera());
-	cTransform3DComponent * pTransformComponent = DEBUG_NEW cTransform3DComponent();
-	pTransformComponent->m_vPosition = cVector3(0, vScreenBottomRightPos.y, 0.0f);
-	pTransformComponent->m_vScale = cVector3(2.0f, 0.25f, 1.0f);
-	IEntityManager::GetInstance()->VAddComponent(pPaddle, pTransformComponent);
-
-	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRender3DSystem()));
-
+	IEntityManager::GetInstance()->VRegisterEntity("paddle");
 	//
+	//cModelComponent * pModelComponent = DEBUG_NEW cModelComponent();
+	//pModelComponent->m_strModelName = "cube";
+	//IEntityManager::GetInstance()->VAddComponent(pPaddle, pModelComponent);
 
-	IBaseEntity * pPaddle1 = DEBUG_NEW cPaddle("paddle2");
-	IEntityManager::GetInstance()->VRegisterEntity(pPaddle1);
-	
-	cSpriteComponent * pSpriteComponent = DEBUG_NEW cSpriteComponent();
-	pSpriteComponent->m_strSpriteName = "cursor.png";
-	IEntityManager::GetInstance()->VAddComponent(pPaddle1, pSpriteComponent);
+	//cVector3 vScreenBottomRightPos = IGraphicUtils::GetInstance()->ScreenToWorldSpace(cVector2(static_cast<float>(pGame->m_iDisplayWidth), static_cast<float>(pGame->m_iDisplayHeight)),
+	//	pGame->m_pHumanView->GetCamera());
+	//cTransform3DComponent * pTransformComponent = DEBUG_NEW cTransform3DComponent();
+	//pTransformComponent->m_vPosition = cVector3(0, vScreenBottomRightPos.y, 0.0f);
+	//pTransformComponent->m_vScale = cVector3(2.0f, 0.25f, 1.0f);
+	//IEntityManager::GetInstance()->VAddComponent(pPaddle, pTransformComponent);
 
-	cTransform2DComponent * pTransform2DComponent = DEBUG_NEW cTransform2DComponent();
-	pTransform2DComponent->m_vPosition = cVector2(0, 0);
+	//m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRender3DSystem()));
+
+	////
+
+	//IBaseEntity * pPaddle1 = DEBUG_NEW cPaddle("paddle2");
+	//IEntityManager::GetInstance()->VRegisterEntity(pPaddle1);
+	//
+	//cSpriteComponent * pSpriteComponent = DEBUG_NEW cSpriteComponent();
+	//pSpriteComponent->m_strSpriteName = "cursor.png";
+	//IEntityManager::GetInstance()->VAddComponent(pPaddle1, pSpriteComponent);
+
+	//cTransform2DComponent * pTransform2DComponent = DEBUG_NEW cTransform2DComponent();
+	//pTransform2DComponent->m_vPosition = cVector2(0, 0);
 	//pTransform2DComponent->m_vSize = cVector2(100, 100);
-	IEntityManager::GetInstance()->VAddComponent(pPaddle1, pTransform2DComponent);
+	//IEntityManager::GetInstance()->VAddComponent(pPaddle1, pTransform2DComponent);
 
 	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRender2DSystem()));
 

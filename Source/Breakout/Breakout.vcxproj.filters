@@ -25,6 +25,7 @@
     <ClInclude Include="src\GameFlowStates.h">
       <Filter>States</Filter>
     </ClInclude>
+    <ClInclude Include="src\BreakoutEntityFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -37,5 +38,6 @@
     <ClCompile Include="src\StatePlayGame.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="src\BreakoutEntityFactory.cpp" />
   </ItemGroup>
 </Project>

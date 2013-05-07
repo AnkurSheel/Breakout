@@ -13,6 +13,7 @@
   <ItemGroup>
     <None Include="..\..\Debug\Options.ini" />
     <None Include="..\..\bin\Options.ini" />
+    <None Include="Sources.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
