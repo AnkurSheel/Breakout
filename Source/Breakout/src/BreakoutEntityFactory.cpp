@@ -10,6 +10,9 @@
 #include "XMLNode.hxx"
 #include "EntityManager.hxx"
 #include "BaseComponent.hxx"
+#include "..\src\GameDirectories.h"
+#include "ResCache.hxx"
+#include "ResourceManager.hxx"
 
 using namespace GameBase;
 using namespace Base;
@@ -36,10 +39,23 @@ void cBreakOutEntityFactory::RegisterEntities()
 // *****************************************************************************
 IBaseEntity * cBreakOutEntityFactory::VCreateEntity(const cHashedString & Type)
 {
-	IBaseEntity * pEntity = m_RegisteredEntities.Create(Type.GetHash());
+	cBaseEntity * pEntity = dynamic_cast<cBaseEntity *>(m_RegisteredEntities.Create(Type.GetHash()));
 	if(pEntity != NULL)
 	{
-		const shared_ptr<IXMLNode> pRoot = IXMLNode::Load("Paddle.xml");
+		IResource * pResource = IResource::CreateResource("paddle.xml");
+		shared_ptr<IResHandle> pXMLFile = IResourceManager::GetInstance()->VGetResourceCache()->GetHandle(*pResource);
+		shared_ptr<IXMLNode> pRoot;
+		SafeDelete(&pResource);
+		if(pXMLFile != NULL)
+		{
+			pRoot = shared_ptr<IXMLNode>(IXMLNode::Parse(pXMLFile->GetBuffer(), pXMLFile->GetSize()));
+		}
+
+		if (pRoot == NULL)
+		{
+			Log_Write(ILogger::LT_ERROR, 1, "Could not find Paddle.xml");
+			return NULL;
+		}
 		Log_Write(ILogger::LT_COMMENT, 1, "Element Name : " + pRoot->VGetName() );
 		Log_Write(ILogger::LT_COMMENT, 1, "Element Type : " + pRoot->VGetNodeAttribute("type"));
 
@@ -54,20 +70,8 @@ IBaseEntity * cBreakOutEntityFactory::VCreateEntity(const cHashedString & Type)
 			if(pComponent != NULL)
 			{
 				pComponent->VInitialize(pNode);
-				IEntityManager::GetInstance()->VAddComponent(pEntity, pComponent);
+				pEntity->AddComponent(pComponent);
 			}
-			//       if (pComponent)
-			//       {
-			//           pActor->AddComponent(pComponent);
-			//           pComponent->SetOwner(pActor);
-			//       }
-			//       else
-			//       {
-			//           // If an error occurs, we kill the actor and bail.  We could keep going, but the actor is will only be 
-			//           // partially complete so it's not worth it.  Note that the pActor instance will be destroyed because it
-			//           // will fall out of scope with nothing else pointing to it.
-			//           return StrongActorPtr();
-			//       }
 		}
 
 		pEntity->VInitialize();

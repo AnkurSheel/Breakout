@@ -12,6 +12,7 @@
 //#include "Transform2DComponent.h"
 #include "Game.h"
 #include "ProcessManager.hxx"
+#include "Render2DSystem.h"
 //#include "Render3DSystem.h"
 //#include "Render2DSystem.h"
 //#include "GraphicUtils.hxx"
@@ -73,7 +74,7 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 	//pTransform2DComponent->m_vSize = cVector2(100, 100);
 	//IEntityManager::GetInstance()->VAddComponent(pPaddle1, pTransform2DComponent);
 
-	//m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRender2DSystem()));
+	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRender2DSystem()));
 
 }
 
