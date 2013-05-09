@@ -10,7 +10,7 @@
 #include "XMLNode.hxx"
 #include "EntityManager.hxx"
 #include "BaseComponent.hxx"
-#include "..\src\GameDirectories.h"
+#include "GameDirectories.h"
 #include "ResCache.hxx"
 #include "ResourceManager.hxx"
 
@@ -42,7 +42,7 @@ IBaseEntity * cBreakOutEntityFactory::VCreateEntity(const cHashedString & Type)
 	cBaseEntity * pEntity = dynamic_cast<cBaseEntity *>(m_RegisteredEntities.Create(Type.GetHash()));
 	if(pEntity != NULL)
 	{
-		IResource * pResource = IResource::CreateResource("paddle.xml");
+		IResource * pResource = IResource::CreateResource(cGameDirectories::GetDefDirectory() + "Entities.xml");
 		shared_ptr<IResHandle> pXMLFile = IResourceManager::GetInstance()->VGetResourceCache()->GetHandle(*pResource);
 		shared_ptr<IXMLNode> pRoot;
 		SafeDelete(&pResource);
@@ -53,23 +53,24 @@ IBaseEntity * cBreakOutEntityFactory::VCreateEntity(const cHashedString & Type)
 
 		if (pRoot == NULL)
 		{
-			Log_Write(ILogger::LT_ERROR, 1, "Could not find Paddle.xml");
+			Log_Write(ILogger::LT_ERROR, 1, cGameDirectories::GetDefDirectory() + "Entities.xml");
 			return NULL;
 		}
-		Log_Write(ILogger::LT_COMMENT, 1, "Element Name : " + pRoot->VGetName() );
-		Log_Write(ILogger::LT_COMMENT, 1, "Element Type : " + pRoot->VGetNodeAttribute("type"));
+
+		shared_ptr<IXMLNode> pNode(pRoot->VGetChild(Type.GetString()));
+		Log_Write(ILogger::LT_COMMENT, 1, "Element Name : " + pNode->VGetName() );
 
 		IXMLNode::XMLNodeList List;
-		pRoot->VGetChildren(List);
+		pNode->VGetChildren(List);
 		IXMLNode::XMLNodeList::iterator Iter;
 		for (Iter = List.begin(); Iter != List.end(); Iter++)
 		{
-			IXMLNode * pNode = (*Iter).get();
+			pNode = (*Iter);
 			Log_Write(ILogger::LT_COMMENT, 1, "Element Name : " + pNode->VGetName() );
 			IBaseComponent * pComponent = m_RegisteredComponents.Create(cHashedString::CalculateHash(pNode->VGetName().GetInLowerCase()));
 			if(pComponent != NULL)
 			{
-				pComponent->VInitialize(pNode);
+				pComponent->VInitialize(pNode.get());
 				pEntity->AddComponent(pComponent);
 			}
 		}
