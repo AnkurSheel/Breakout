@@ -51,7 +51,6 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 	m_pStateMachine = DEBUG_NEW cGameFlowStateMachine(this);
 	m_pEntityFactory = DEBUG_NEW cBreakOutEntityFactory();
 	m_pEntityFactory->RegisterEntities();
-	m_pEntityFactory->RegisterComponents();
 
 	m_pStateMachine->SetCurrentState(cStatePlayGame::Instance());
 }

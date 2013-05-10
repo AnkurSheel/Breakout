@@ -19,6 +19,7 @@
 //#include "vector2.h"
 //#include "HumanView.h"
 //#include "SpriteComponent.h"
+#include "BreakOutConfig.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -45,6 +46,8 @@ cStatePlayGame* cStatePlayGame::Instance()
 void cStatePlayGame::VOnEnter(cGame *pGame)
 {
 	IGameFlowStates::VOnEnter(pGame);
+	cConfig * pConfig = DEBUG_NEW cBreakOutConfig();
+	pConfig->VInitialize("Entities");
 	IEntityManager::GetInstance()->VRegisterEntity("paddle");
 	//
 	//cModelComponent * pModelComponent = DEBUG_NEW cModelComponent();

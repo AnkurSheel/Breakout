@@ -26,6 +26,7 @@
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="src\BreakoutEntityFactory.h" />
+    <ClInclude Include="src\BreakOutConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -39,5 +40,6 @@
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="src\BreakoutEntityFactory.cpp" />
+    <ClCompile Include="src\BreakOutConfig.cpp" />
   </ItemGroup>
 </Project>
