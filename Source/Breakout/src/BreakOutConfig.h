@@ -9,21 +9,12 @@
 
 #include "Config.h"
 
-namespace GameBase
+class cBreakOutConfig
+	: public GameBase::cConfig
 {
-	class cEntityDef;
-}
-
-namespace GameBase
-{
-	class cBreakOutConfig
-		: public GameBase::cConfig
-	{
-	public:
-		cBreakOutConfig();
-		~cBreakOutConfig();
-		void VInitialize(const Base::cString & FileName);
-	};
-
-}
+public:
+	cBreakOutConfig();
+	~cBreakOutConfig();
+	void VInitialize(const Base::cString & FileName);
+};
 #endif // BreakOutConfig_h__

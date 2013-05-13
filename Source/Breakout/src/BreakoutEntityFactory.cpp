@@ -11,6 +11,7 @@
 #include "EntityManager.hxx"
 #include "BaseComponent.hxx"
 #include "Config.h"
+#include "Ball.h"
 
 using namespace GameBase;
 using namespace Base;
@@ -32,6 +33,7 @@ cBreakOutEntityFactory::~cBreakOutEntityFactory()
 void cBreakOutEntityFactory::RegisterEntities()
 {
 	m_RegisteredEntities.Register<cPaddle>(cPaddle::m_Name.GetHash());
+	m_RegisteredEntities.Register<cBall>(cBall::m_Name.GetHash());
 }
 
 // *****************************************************************************

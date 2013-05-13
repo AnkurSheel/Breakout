@@ -10,6 +10,7 @@
 #include "BaseControl.hxx"
 #include "StatePlayGame.h"
 #include "BreakoutEntityFactory.h"
+#include "BreakOutConfig.h"
 
 using namespace Graphics;
 using namespace Base;
@@ -21,6 +22,7 @@ cGame::cGame(const Base::cString & Name)
 	: cBaseApp(Name)
 	, m_pStateMachine(NULL)
 	, m_pEntityFactory(NULL)
+	, m_pConfig(NULL)
 {
 }
 
@@ -75,6 +77,7 @@ void cGame::VOnUpdate()
 void cGame::VCleanup()
 {
 	cBaseApp::VCleanup();
+	SafeDelete(&m_pConfig);
 	SafeDelete(&m_pStateMachine);
 	SafeDelete(&m_pEntityFactory);
 }

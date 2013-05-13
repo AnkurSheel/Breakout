@@ -46,9 +46,10 @@ cStatePlayGame* cStatePlayGame::Instance()
 void cStatePlayGame::VOnEnter(cGame *pGame)
 {
 	IGameFlowStates::VOnEnter(pGame);
-	cConfig * pConfig = DEBUG_NEW cBreakOutConfig();
-	pConfig->VInitialize("Entities");
+	pGame->m_pConfig = DEBUG_NEW cBreakOutConfig();
+	pGame->m_pConfig->VInitialize("Entities");
 	IEntityManager::GetInstance()->VRegisterEntity("paddle");
+	IEntityManager::GetInstance()->VRegisterEntity("ball");
 	//
 	//cModelComponent * pModelComponent = DEBUG_NEW cModelComponent();
 	//pModelComponent->m_strModelName = "cube";
