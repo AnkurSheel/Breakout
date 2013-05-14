@@ -10,10 +10,17 @@
 #include "ResCache.hxx"
 #include "ResourceManager.hxx"
 #include "ParamLoaders.hxx"
+#include "Config.h"
+#include "BaseEntity.h"
+#include "EntityManager.hxx"
+#include "GameOptions.h"
+#include "BaseBrick.h"
+#include "transform2dComponent.h"
 
 using namespace Base;
 using namespace Utilities;
 using namespace std;
+using namespace GameBase;
 
 cLevel cLevel::Level;
 
@@ -61,10 +68,45 @@ bool cLevel::Initialize(const cString & LevelName)
 	{
 		m_PaddleSpawnPoint = cVector2(vPaddleSpawnPoint[0], vPaddleSpawnPoint[1]);
 	}
-	else
+
+	vector<float> vBrickArea;
+	m_pParamLoader->VGetParameterValueAsFloatList("-BrickMapSize", vBrickArea);
+	if(!vBrickArea.empty() && vBrickArea.size() == 2)
 	{
-		Log_Write(ILogger::LT_ERROR, 1, "Paddle Swpawn Point is required");
-		return false;
+		m_BrickMapSize = cVector2(vBrickArea[0], vBrickArea[1]);
 	}
+	GenerateMap();
 	return true;
+}
+
+// *****************************************************************************
+void cLevel::GenerateMap()
+{
+	const cEntityDef * const pEntityDef = cConfig::GetEntityDef(cBaseBrick::m_Name);
+	cVector2 BrickScale;
+	BrickScale.x = cGameOptions::GameOptions().iWidth / m_BrickMapSize.x;
+	BrickScale.y = cGameOptions::GameOptions().iHeight * 0.3f / m_BrickMapSize.y;
+
+	cBaseBrick * pEntity = NULL; 
+	cVector2 curPos;
+
+	for(int i = 0; i < m_BrickMapSize.y; i++)
+	{
+		curPos.y = i * BrickScale.x + 20;
+		for(int j = 0; j < m_BrickMapSize.x; j++)
+		{
+			curPos.y = j * BrickScale.y + 20;
+			pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VRegisterEntity("basebrick"));
+			if (pEntity != NULL)
+			{
+				pEntity->VInitialize();
+				cTransform2DComponent * pTransFormComponent = dynamic_cast<cTransform2DComponent *>(pEntity->GetComponent(cTransform2DComponent::GetName().GetHash()));
+				if(pTransFormComponent != NULL)
+				{
+					pTransFormComponent->m_vPosition = curPos;
+					pTransFormComponent->m_vSize = BrickScale;
+				}
+			}
+		}
+	}
 }

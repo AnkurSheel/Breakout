@@ -13,6 +13,7 @@
 #include "Config.h"
 #include "Ball.h"
 #include "BaseBrick.h"
+#include "ComponentFactory.h"
 
 using namespace GameBase;
 using namespace Base;
@@ -50,13 +51,12 @@ IBaseEntity * cBreakOutEntityFactory::VCreateEntity(const cHashedString & Type)
 			ComponentMap::const_iterator Iter;
 			for (Iter = pEntityDef->m_Components.begin(); Iter != pEntityDef->m_Components.end(); Iter++)
 			{
-				IBaseComponent * pComponent = Iter->second;
+				IBaseComponent * pComponent = cComponentFactory::Instance()->GetDuplicateComponent(Iter->second);
 				if(pComponent != NULL)
 				{
 					pEntity->AddComponent(pComponent);
 				}
-		}
-
+			}
 		}
 		pEntity->VInitialize();
 	}

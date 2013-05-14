@@ -14,6 +14,7 @@ namespace GameBase
 	class cHumanView;
 	class cGameElementDef;
 	class cConfig;
+	class cComponentFactory;
 }
 
 namespace AI
@@ -44,11 +45,12 @@ private:
 	void VCreateHumanView();
 
 private:
-	int							m_iDisplayHeight;	/// the display height of the window
-	int							m_iDisplayWidth;	/// the display width of the window
-	cGameFlowStateMachine *		m_pStateMachine;	/// Pointer to the state machine
-	cBreakOutEntityFactory *	m_pEntityFactory;
-	GameBase::cConfig *			m_pConfig;
+	int								m_iDisplayHeight;	/// the display height of the window
+	int								m_iDisplayWidth;	/// the display width of the window
+	cGameFlowStateMachine *			m_pStateMachine;	/// Pointer to the state machine
+	cBreakOutEntityFactory *		m_pEntityFactory;
+	GameBase::cComponentFactory *	m_pComponentFactory;
+	GameBase::cConfig *				m_pConfig;
 
 private:
 	friend class cBreakoutView;

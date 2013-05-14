@@ -19,6 +19,7 @@ class cLevel
 public:
 	bool Initialize(const Base::cString & LevelName);
 	Base::cVector2 GetPaddleSpawnPoint() const { return m_PaddleSpawnPoint; }
+	Base::cVector2 GetBrickMapSize() const { return m_BrickMapSize; }
 
 public:
 	static cLevel Level;
@@ -26,10 +27,12 @@ public:
 private:
 	cLevel();
 	~cLevel();
+	void GenerateMap();
 
 private:
 	Base::cString				m_Background;
-	Base::cVector2				m_PaddleSpawnPoint;
 	Utilities::IParamLoader *	m_pParamLoader;
+	Base::cVector2				m_PaddleSpawnPoint;
+	Base::cVector2				m_BrickMapSize;
 };
 #endif // Level_h__

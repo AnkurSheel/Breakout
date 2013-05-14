@@ -78,7 +78,6 @@
     <ClInclude Include="Includes\GameDefines.h" />
     <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\BaseBrick.h" />
-    <ClInclude Include="src\BreakOutConfig.h" />
     <ClInclude Include="src\BreakoutEntityFactory.h" />
     <ClInclude Include="src\BreakoutView.h" />
     <ClInclude Include="src\Game.h" />
@@ -93,7 +92,6 @@
   <ItemGroup>
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\BaseBrick.cpp" />
-    <ClCompile Include="src\BreakOutConfig.cpp" />
     <ClCompile Include="src\BreakoutEntityFactory.cpp" />
     <ClCompile Include="src\BreakoutView.cpp" />
     <ClCompile Include="src\Game.cpp" />

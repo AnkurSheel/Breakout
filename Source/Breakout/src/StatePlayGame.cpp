@@ -19,7 +19,7 @@
 //#include "vector2.h"
 //#include "HumanView.h"
 //#include "SpriteComponent.h"
-#include "BreakOutConfig.h"
+#include "Config.h"
 #include "Level.h"
 
 using namespace Base;
@@ -47,13 +47,12 @@ cStatePlayGame* cStatePlayGame::Instance()
 void cStatePlayGame::VOnEnter(cGame *pGame)
 {
 	IGameFlowStates::VOnEnter(pGame);
-	pGame->m_pConfig = DEBUG_NEW cBreakOutConfig();
-	pGame->m_pConfig->VInitialize("Entities");
+	pGame->m_pConfig = DEBUG_NEW cConfig();
+	pGame->m_pConfig->Initialize("Entities");
 	cLevel::Level.Initialize("level1");
 
 	IEntityManager::GetInstance()->VRegisterEntity("paddle");
 	IEntityManager::GetInstance()->VRegisterEntity("ball");
-	IEntityManager::GetInstance()->VRegisterEntity("basebrick");
 	//
 	//cModelComponent * pModelComponent = DEBUG_NEW cModelComponent();
 	//pModelComponent->m_strModelName = "cube";
