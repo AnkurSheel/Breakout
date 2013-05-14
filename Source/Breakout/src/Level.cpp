@@ -83,19 +83,21 @@ bool cLevel::Initialize(const cString & LevelName)
 void cLevel::GenerateMap()
 {
 	const cEntityDef * const pEntityDef = cConfig::GetEntityDef(cBaseBrick::m_Name);
+	float MapHt = m_pParamLoader->VGetParameterValueAsFloat("-MapHtAsScreenFraction", 0.3f);
+	
 	cVector2 BrickScale;
-	BrickScale.x = cGameOptions::GameOptions().iWidth / m_BrickMapSize.x;
-	BrickScale.y = cGameOptions::GameOptions().iHeight * 0.3f / m_BrickMapSize.y;
+	BrickScale.x = cGameOptions::GameOptions().iWidth / m_BrickMapSize.y;
+	BrickScale.y = cGameOptions::GameOptions().iHeight * MapHt / m_BrickMapSize.x;
 
 	cBaseBrick * pEntity = NULL; 
 	cVector2 curPos;
 
 	for(int i = 0; i < m_BrickMapSize.y; i++)
 	{
-		curPos.y = i * BrickScale.x + 20;
+		curPos.x = i * BrickScale.x;
 		for(int j = 0; j < m_BrickMapSize.x; j++)
 		{
-			curPos.y = j * BrickScale.y + 20;
+			curPos.y = j * BrickScale.y;
 			pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VRegisterEntity("basebrick"));
 			if (pEntity != NULL)
 			{
