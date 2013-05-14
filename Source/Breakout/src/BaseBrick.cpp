@@ -1,54 +1,46 @@
 // *****************************************************************************
-//  Paddle   version:  1.0   Ankur Sheel  date: 2013/04/04
+//  BaseBrick   version:  1.0   Ankur Sheel  date: 2013/05/14
 // *****************************************************************************
 //  purpose:	
 // *****************************************************************************
 #include "stdafx.h"
-#include "Paddle.h"
-#include "transform2dComponent.h"
-#include "Level.h"
+#include "BaseBrick.h"
 
 using namespace Base;
 using namespace GameBase;
 
-const Base::cHashedString	cPaddle::m_Name = cHashedString("paddle");
+const Base::cHashedString	cBaseBrick::m_Name = cHashedString("basebrick");
 
 // *****************************************************************************
-cPaddle::cPaddle()
+cBaseBrick::cBaseBrick()
 {
 }
 
 // *****************************************************************************
-cPaddle::~cPaddle()
+cBaseBrick::~cBaseBrick()
 {
 	VCleanup();
 }
 
 // *****************************************************************************
-void cPaddle::VInitialize()
+void cBaseBrick::VInitialize()
 {
 	cBaseEntity::VInitialize();
-	cTransform2DComponent * pTransFormComponent = dynamic_cast<cTransform2DComponent *>(GetComponent(cTransform2DComponent::GetName().GetHash()));
-	if(pTransFormComponent != NULL)
-	{
-		pTransFormComponent->m_vPosition = cLevel::Level.GetPaddleSpawnPoint();
-	}
-	
 }
 
 // *****************************************************************************
-void cPaddle::VCleanup()
+void cBaseBrick::VCleanup()
 {
 	cBaseEntity::VCleanup();
 }
 
 // *****************************************************************************
-cPaddle * cPaddle::CastToPaddle()
+cBaseBrick * cBaseBrick::CastToBaseBrick()
 {
 	return this;
 }
 
 // *****************************************************************************
-void cPaddle::VOnUpdate()
+void cBaseBrick::VOnUpdate()
 {
 }

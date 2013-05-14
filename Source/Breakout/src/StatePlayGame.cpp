@@ -20,6 +20,7 @@
 //#include "HumanView.h"
 //#include "SpriteComponent.h"
 #include "BreakOutConfig.h"
+#include "Level.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -48,8 +49,11 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 	IGameFlowStates::VOnEnter(pGame);
 	pGame->m_pConfig = DEBUG_NEW cBreakOutConfig();
 	pGame->m_pConfig->VInitialize("Entities");
+	cLevel::Level.Initialize("level1");
+
 	IEntityManager::GetInstance()->VRegisterEntity("paddle");
 	IEntityManager::GetInstance()->VRegisterEntity("ball");
+	IEntityManager::GetInstance()->VRegisterEntity("basebrick");
 	//
 	//cModelComponent * pModelComponent = DEBUG_NEW cModelComponent();
 	//pModelComponent->m_strModelName = "cube";

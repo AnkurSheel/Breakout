@@ -77,12 +77,14 @@
     <ClInclude Include="Includes\Game.hxx" />
     <ClInclude Include="Includes\GameDefines.h" />
     <ClInclude Include="src\Ball.h" />
+    <ClInclude Include="src\BaseBrick.h" />
     <ClInclude Include="src\BreakOutConfig.h" />
     <ClInclude Include="src\BreakoutEntityFactory.h" />
     <ClInclude Include="src\BreakoutView.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameFlowStateMachine.h" />
     <ClInclude Include="src\GameFlowStates.h" />
+    <ClInclude Include="src\Level.h" />
     <ClInclude Include="src\Messages.h" />
     <ClInclude Include="src\Paddle.h" />
     <ClInclude Include="src\StatePlayGame.h" />
@@ -90,11 +92,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ball.cpp" />
+    <ClCompile Include="src\BaseBrick.cpp" />
     <ClCompile Include="src\BreakOutConfig.cpp" />
     <ClCompile Include="src\BreakoutEntityFactory.cpp" />
     <ClCompile Include="src\BreakoutView.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameFlowStateMachine.cpp" />
+    <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Paddle.cpp" />
     <ClCompile Include="src\StatePlayGame.cpp" />
     <ClCompile Include="stdafx.cpp">
