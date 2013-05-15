@@ -21,6 +21,7 @@
 //#include "SpriteComponent.h"
 #include "Config.h"
 #include "Level.h"
+#include "FSM\Telegram.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -98,7 +99,12 @@ void cStatePlayGame::VOnExit()
 }
 
 // *****************************************************************************
-bool cStatePlayGame::VOnMessage(const Telegram &msg)
+bool cStatePlayGame::VOnMessage(const Telegram & msg)
 {
+	if(msg.Msg == MSG_ESCAPE_PRESSED)
+	{
+		PostQuitMessage(0);
+		return true;
+	}
 	return false;
 }

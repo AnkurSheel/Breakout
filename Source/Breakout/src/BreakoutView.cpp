@@ -14,6 +14,7 @@
 #include "ProcessManager.hxx"
 #include "Render3DSystem.h"
 #include "Render2DSystem.h"
+#include "KeyboardController.hxx"
 
 using namespace Utilities;
 using namespace Graphics;
@@ -57,10 +58,11 @@ bool cBreakoutView::VOnMsgProc( const Base::AppMsg & msg )
 	{
 		if(msg.m_uMsg == WM_KEYDOWN)
 		{
-			if (msg.m_wParam == VK_ESCAPE  && !IsKeyLocked(VK_ESCAPE))
+			if (msg.m_wParam == VK_ESCAPE 
+				&& !IKeyboardController::Instance()->VIsKeyLocked(VK_ESCAPE))
 			{
 				// lock the ESC key
-				LockKey(VK_ESCAPE);
+				IKeyboardController::Instance()->VLockKey(VK_ESCAPE);
 				IMessageDispatchManager::GetInstance()->VDispatchMessage(0.0f,
 					IEntityManager::GetInstance()->VGetEntityID(m_pGame), 
 					IEntityManager::GetInstance()->VGetEntityID(m_pGame),
@@ -71,7 +73,7 @@ bool cBreakoutView::VOnMsgProc( const Base::AppMsg & msg )
 		{
 			if (msg.m_wParam == VK_ESCAPE)
 			{
-				UnlockKey(VK_ESCAPE);
+				IKeyboardController::Instance()->VUnlockKey(VK_ESCAPE);
 			}
 		}
 	}
