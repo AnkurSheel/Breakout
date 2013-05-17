@@ -60,5 +60,10 @@ IBaseEntity * cBreakOutEntityFactory::VCreateEntity(const cHashedString & Type)
 		}
 		pEntity->VInitialize();
 	}
+	else
+	{
+		Log_Write(ILogger::LT_ERROR, 1, "Entity not Registered: " + Type.GetString());
+	}
+
 	return pEntity;
 }

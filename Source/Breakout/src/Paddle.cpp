@@ -10,6 +10,7 @@
 
 using namespace Base;
 using namespace GameBase;
+using namespace Utilities;
 
 const Base::cHashedString	cPaddle::m_Name = cHashedString("paddle");
 
@@ -51,4 +52,18 @@ cPaddle * cPaddle::CastToPaddle()
 // *****************************************************************************
 void cPaddle::VOnUpdate()
 {
+}
+
+// *****************************************************************************
+void cPaddle::VHandleInput(const unsigned int CharID)
+{
+	if(CharID == VK_LEFT)
+	{
+		Log_Write(ILogger::LT_COMMENT, 1, "Left Pressed " + VGetName());
+	}
+	else if(CharID == VK_RIGHT)
+	{
+		Log_Write(ILogger::LT_COMMENT, 1, "Right Pressed " + VGetName());
+	}
+
 }

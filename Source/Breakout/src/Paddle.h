@@ -25,8 +25,9 @@ public:
 	cPaddle * CastToPaddle();
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
-
-	public:
+	void VHandleInput(const unsigned int CharID);
+	
+public:
 		static const Base::cHashedString	m_Name;	///< The component name
 
 private:
