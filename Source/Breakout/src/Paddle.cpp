@@ -7,6 +7,7 @@
 #include "Paddle.h"
 #include "transform2dComponent.h"
 #include "Level.h"
+#include "physicscomponent.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -16,6 +17,7 @@ const Base::cHashedString	cPaddle::m_Name = cHashedString("paddle");
 
 // *****************************************************************************
 cPaddle::cPaddle()
+	: m_pPhysicsComponent(NULL)
 {
 }
 
@@ -29,12 +31,12 @@ cPaddle::~cPaddle()
 void cPaddle::VInitialize()
 {
 	cBaseEntity::VInitialize();
-	cTransform2DComponent * pTransFormComponent = dynamic_cast<cTransform2DComponent *>(GetComponent(cTransform2DComponent::GetName().GetHash()));
-	if(pTransFormComponent != NULL)
+	m_pPhysicsComponent = dynamic_cast<cPhysicsComponent *>(GetComponent(cPhysicsComponent::GetName()));
+
+	if(m_pTransFormComponent != NULL)
 	{
-		pTransFormComponent->m_vPosition = cLevel::Level.GetPaddleSpawnPoint();
+		m_pTransFormComponent->m_Position = cLevel::Level.GetPaddleSpawnPoint();
 	}
-	
 }
 
 // *****************************************************************************
@@ -59,11 +61,16 @@ void cPaddle::VHandleInput(const unsigned int CharID)
 {
 	if(CharID == VK_LEFT)
 	{
-		Log_Write(ILogger::LT_COMMENT, 1, "Left Pressed " + VGetName());
+		if(m_pPhysicsComponent != NULL && m_pTransFormComponent != NULL)
+		{
+			m_pPhysicsComponent->m_CurrentAcceleration = m_pTransFormComponent->m_LookAt * -m_pPhysicsComponent->m_Acceleration;
+		}
 	}
 	else if(CharID == VK_RIGHT)
 	{
-		Log_Write(ILogger::LT_COMMENT, 1, "Right Pressed " + VGetName());
+		if(m_pPhysicsComponent != NULL && m_pTransFormComponent != NULL)
+		{
+			m_pPhysicsComponent->m_CurrentAcceleration = m_pTransFormComponent->m_LookAt * m_pPhysicsComponent->m_Acceleration;
+		}
 	}
-
 }

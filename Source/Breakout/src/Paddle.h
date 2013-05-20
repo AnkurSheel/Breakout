@@ -12,6 +12,8 @@ namespace GameBase
 {
 	template<class BaseType, class SubType> 
 	BaseType * GenericObjectCreationFunction();
+
+	class cPhysicsComponent;
 }
 
 class cPaddle 
@@ -33,6 +35,10 @@ public:
 private:
 	cPaddle();
 
+private:
+		GameBase::cPhysicsComponent * m_pPhysicsComponent;
+
+private:
 	template<class BaseType, class SubType> 
 	friend BaseType * GameBase::GenericObjectCreationFunction();
 };

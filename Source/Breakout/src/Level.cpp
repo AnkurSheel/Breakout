@@ -105,8 +105,8 @@ void cLevel::GenerateMap()
 				cTransform2DComponent * pTransFormComponent = dynamic_cast<cTransform2DComponent *>(pEntity->GetComponent(cTransform2DComponent::GetName().GetHash()));
 				if(pTransFormComponent != NULL)
 				{
-					pTransFormComponent->m_vPosition = curPos;
-					pTransFormComponent->m_vSize = BrickScale;
+					pTransFormComponent->m_Position = curPos;
+					pTransFormComponent->m_Size = BrickScale;
 				}
 			}
 		}
