@@ -15,7 +15,7 @@
 #include "EntityManager.hxx"
 #include "GameOptions.h"
 #include "BaseBrick.h"
-#include "transform2dComponent.h"
+#include "TransformComponent.h"
 
 using namespace Base;
 using namespace Utilities;
@@ -66,14 +66,14 @@ bool cLevel::Initialize(const cString & LevelName)
 	m_pParamLoader->VGetParameterValueAsFloatList("-PaddleSpawnPoint", vPaddleSpawnPoint);
 	if(!vPaddleSpawnPoint.empty() && vPaddleSpawnPoint.size() == 2)
 	{
-		m_PaddleSpawnPoint = cVector2(vPaddleSpawnPoint[0], vPaddleSpawnPoint[1]);
+		m_PaddleSpawnPoint = cVector3(vPaddleSpawnPoint[0], vPaddleSpawnPoint[1], 0.0f);
 	}
 
 	vector<float> vBrickArea;
 	m_pParamLoader->VGetParameterValueAsFloatList("-BrickMapSize", vBrickArea);
 	if(!vBrickArea.empty() && vBrickArea.size() == 2)
 	{
-		m_BrickMapSize = cVector2(vBrickArea[0], vBrickArea[1]);
+		m_BrickMapSize = cVector3(vBrickArea[0], vBrickArea[1], 0.0f);
 	}
 	GenerateMap();
 	return true;
@@ -85,12 +85,12 @@ void cLevel::GenerateMap()
 	const cEntityDef * const pEntityDef = cConfig::GetEntityDef(cBaseBrick::m_Name);
 	float MapHt = m_pParamLoader->VGetParameterValueAsFloat("-MapHtAsScreenFraction", 0.3f);
 	
-	cVector2 BrickScale;
+	cVector3 BrickScale;
 	BrickScale.x = cGameOptions::GameOptions().iWidth / m_BrickMapSize.y;
 	BrickScale.y = cGameOptions::GameOptions().iHeight * MapHt / m_BrickMapSize.x;
 
 	cBaseBrick * pEntity = NULL; 
-	cVector2 curPos;
+	cVector3 curPos;
 
 	for(int i = 0; i < m_BrickMapSize.y; i++)
 	{
@@ -102,7 +102,7 @@ void cLevel::GenerateMap()
 			if (pEntity != NULL)
 			{
 				pEntity->VInitialize();
-				cTransform2DComponent * pTransFormComponent = dynamic_cast<cTransform2DComponent *>(pEntity->GetComponent(cTransform2DComponent::GetName().GetHash()));
+				cTransformComponent * pTransFormComponent = dynamic_cast<cTransformComponent *>(pEntity->GetComponent(cTransformComponent::GetName().GetHash()));
 				if(pTransFormComponent != NULL)
 				{
 					pTransFormComponent->m_Position = curPos;

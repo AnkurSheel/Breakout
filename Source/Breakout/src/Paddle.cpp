@@ -5,7 +5,7 @@
 // *****************************************************************************
 #include "stdafx.h"
 #include "Paddle.h"
-#include "transform2dComponent.h"
+#include "TransformComponent.h"
 #include "Level.h"
 #include "physicscomponent.h"
 

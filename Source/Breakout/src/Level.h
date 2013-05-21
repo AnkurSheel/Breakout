@@ -6,7 +6,7 @@
 #ifndef Level_h__
 #define Level_h__
 
-#include "vector2.h"
+#include "vector3.h"
 
 namespace Utilities
 {
@@ -18,8 +18,8 @@ class cLevel
 {
 public:
 	bool Initialize(const Base::cString & LevelName);
-	Base::cVector2 GetPaddleSpawnPoint() const { return m_PaddleSpawnPoint; }
-	Base::cVector2 GetBrickMapSize() const { return m_BrickMapSize; }
+	Base::cVector3 GetPaddleSpawnPoint() const { return m_PaddleSpawnPoint; }
+	Base::cVector3 GetBrickMapSize() const { return m_BrickMapSize; }
 
 public:
 	static cLevel Level;
@@ -32,7 +32,7 @@ private:
 private:
 	Base::cString				m_Background;
 	Utilities::IParamLoader *	m_pParamLoader;
-	Base::cVector2				m_PaddleSpawnPoint;
-	Base::cVector2				m_BrickMapSize;
+	Base::cVector3				m_PaddleSpawnPoint;
+	Base::cVector3				m_BrickMapSize;
 };
 #endif // Level_h__
