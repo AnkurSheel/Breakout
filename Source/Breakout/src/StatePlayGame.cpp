@@ -8,7 +8,7 @@
 #include "EntityManager.hxx"
 #include "Game.h"
 #include "ProcessManager.hxx"
-#include "Render2DSystem.h"
+#include "RenderSystem.h"
 #include "PhysicsSystem.h"
 #include "InputSystem.h"
 #include "Config.h"
@@ -46,7 +46,7 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 
 	IEntityManager::GetInstance()->VRegisterEntity("paddle");
 	IEntityManager::GetInstance()->VRegisterEntity("ball");
-	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRender2DSystem()));
+	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRenderSystem()));
 	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cInputSystem()));
 	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cPhysicsSystem()));
 }

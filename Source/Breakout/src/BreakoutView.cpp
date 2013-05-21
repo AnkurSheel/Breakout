@@ -12,8 +12,7 @@
 #include "Messages.h"
 #include "EntityManager.hxx"
 #include "ProcessManager.hxx"
-#include "Render3DSystem.h"
-#include "Render2DSystem.h"
+#include "RenderSystem.h"
 #include "KeyboardController.hxx"
 
 using namespace Utilities;
@@ -87,20 +86,12 @@ bool cBreakoutView::VOnMsgProc( const Base::AppMsg & msg )
 void cBreakoutView::VRenderPrivate()
 {
 	ProcessList pProcessList;
-	m_pGame->VGetProcessManager()->VGetProcesses("Render3DSystem", pProcessList);
 	ProcessList::iterator curProcess;
-	for (curProcess = pProcessList.begin(); curProcess != pProcessList.end(); curProcess++)
-	{
-		shared_ptr<cRender3DSystem> p = dynamic_pointer_cast<cRender3DSystem>(*curProcess);
-		p->Render(m_pCamera);
-	}
-	
-	pProcessList.clear();
 
-	m_pGame->VGetProcessManager()->VGetProcesses("Render2DSystem", pProcessList);
+	m_pGame->VGetProcessManager()->VGetProcesses("RenderSystem", pProcessList);
 	for (curProcess = pProcessList.begin(); curProcess != pProcessList.end(); curProcess++)
 	{
-		shared_ptr<cRender2DSystem> p = dynamic_pointer_cast<cRender2DSystem>(*curProcess);
+		shared_ptr<cRenderSystem> p = dynamic_pointer_cast<cRenderSystem>(*curProcess);
 		p->Render(m_pCamera);
 	}
 }
