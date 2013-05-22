@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Breakout", "Breakout\Breakout.vcxproj", "{3E2C7E8C-0424-4275-93EE-00EE2070E242}"
 	ProjectSection(ProjectDependencies) = postProject
 		{74220F22-9039-453B-81F0-44BEA935E6D9} = {74220F22-9039-453B-81F0-44BEA935E6D9}
@@ -47,6 +47,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sound", "..\Engine\Source\S
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utilities", "..\Engine\Source\Utilities\Utilities.vcxproj", "{D04BBE9D-7B69-4A6E-83C5-DFA72B4DE76A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Physics", "..\Engine\Source\Physics\Physics.vcxproj", "{2E32B536-7150-4AB7-932A-E9ADEC9CFA87}"
+	ProjectSection(ProjectDependencies) = postProject
+		{74220F22-9039-453B-81F0-44BEA935E6D9} = {74220F22-9039-453B-81F0-44BEA935E6D9}
+		{D04BBE9D-7B69-4A6E-83C5-DFA72B4DE76A} = {D04BBE9D-7B69-4A6E-83C5-DFA72B4DE76A}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -85,6 +91,10 @@ Global
 		{D04BBE9D-7B69-4A6E-83C5-DFA72B4DE76A}.Debug|Win32.Build.0 = Debug|Win32
 		{D04BBE9D-7B69-4A6E-83C5-DFA72B4DE76A}.Release|Win32.ActiveCfg = Release|Win32
 		{D04BBE9D-7B69-4A6E-83C5-DFA72B4DE76A}.Release|Win32.Build.0 = Release|Win32
+		{2E32B536-7150-4AB7-932A-E9ADEC9CFA87}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2E32B536-7150-4AB7-932A-E9ADEC9CFA87}.Debug|Win32.Build.0 = Debug|Win32
+		{2E32B536-7150-4AB7-932A-E9ADEC9CFA87}.Release|Win32.ActiveCfg = Release|Win32
+		{2E32B536-7150-4AB7-932A-E9ADEC9CFA87}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
