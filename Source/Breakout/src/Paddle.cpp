@@ -63,14 +63,14 @@ void cPaddle::VHandleInput(const unsigned int CharID)
 	{
 		if(m_pPhysicsComponent != NULL && m_pTransFormComponent != NULL)
 		{
-			m_pPhysicsComponent->m_CurrentAcceleration = m_pTransFormComponent->m_LookAt * -m_pPhysicsComponent->m_Acceleration;
+			m_pPhysicsComponent->ApplyForce(m_pTransFormComponent->m_LookAt.GetReverse());
 		}
 	}
 	else if(CharID == VK_RIGHT)
 	{
 		if(m_pPhysicsComponent != NULL && m_pTransFormComponent != NULL)
 		{
-			m_pPhysicsComponent->m_CurrentAcceleration = m_pTransFormComponent->m_LookAt * m_pPhysicsComponent->m_Acceleration;
+			m_pPhysicsComponent->ApplyForce(m_pTransFormComponent->m_LookAt);
 		}
 	}
 }
