@@ -14,6 +14,8 @@
 #include "Config.h"
 #include "Level.h"
 #include "FSM\Telegram.h"
+#include "HumanView.h"
+#include "Timer.hxx"
 
 using namespace Base;
 using namespace GameBase;
@@ -54,7 +56,11 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 // *****************************************************************************
 void cStatePlayGame::VOnUpdate()
 {
-
+	IEntityManager::GetInstance()->VUpdate();
+	if(m_pOwner != NULL && m_pOwner->m_pGameTimer != NULL)
+	{
+		m_pOwner->m_pHumanView->VOnUpdate(m_pOwner->m_pGameTimer->VGetRunningTicks(), m_pOwner->m_pGameTimer->VGetDeltaTime());
+	}
 }
 
 // *****************************************************************************
