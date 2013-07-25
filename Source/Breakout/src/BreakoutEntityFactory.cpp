@@ -22,8 +22,6 @@ using namespace Utilities;
 // *****************************************************************************
 cBreakOutEntityFactory::cBreakOutEntityFactory()
 {
-	if(m_pInstance == NULL)
-		m_pInstance = this;
 }
 
 // *****************************************************************************
@@ -32,7 +30,7 @@ cBreakOutEntityFactory::~cBreakOutEntityFactory()
 }
 
 // *****************************************************************************
-void cBreakOutEntityFactory::RegisterEntities()
+void cBreakOutEntityFactory::VRegisterEntities()
 {
 	m_RegisteredEntities.Register<cPaddle>(cPaddle::m_Name.GetHash());
 	m_RegisteredEntities.Register<cBall>(cBall::m_Name.GetHash());

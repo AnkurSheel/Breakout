@@ -20,7 +20,7 @@ class cBreakOutEntityFactory
 public:
 	cBreakOutEntityFactory();
 	~cBreakOutEntityFactory();
-	void RegisterEntities();
+	void VRegisterEntities();
 	GameBase::IBaseEntity * VCreateEntity(const Base::cHashedString & Type);
 };
 
