@@ -35,8 +35,6 @@ public:
 
 private:
 	~cGame();
-	virtual void VInitialize();
-
 	void VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 		const Base::cString & strOptionsFile);
 	void VOnUpdate();

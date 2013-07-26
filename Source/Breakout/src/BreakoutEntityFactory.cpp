@@ -56,7 +56,6 @@ IBaseEntity * cBreakOutEntityFactory::VCreateEntity(const cHashedString & Type)
 				}
 			}
 		}
-		pEntity->VInitialize();
 	}
 	else
 	{

@@ -89,12 +89,6 @@ bool cGame::VOnHandleMessage(const AI::Telegram & telegram)
 }
 
 // *****************************************************************************
-void cGame::VInitialize()
-{
-	throw std::exception("The method or operation is not implemented.");
-}
-
-// *****************************************************************************
 IBaseApp * IGame::CreateGame(const cString strName)
 {
 	return DEBUG_NEW cGame(strName);
