@@ -35,7 +35,7 @@ void cPaddle::VInitialize()
 
 	if(m_pTransFormComponent != NULL)
 	{
-		m_pTransFormComponent->m_Position = cLevel::Level.GetPaddleSpawnPoint();
+		m_pTransFormComponent->SetPosition(cLevel::Level.GetPaddleSpawnPoint());
 	}
 }
 

@@ -105,7 +105,7 @@ void cLevel::GenerateMap()
 				cTransformComponent * pTransFormComponent = dynamic_cast<cTransformComponent *>(pEntity->GetComponent(cTransformComponent::GetName().GetHash()));
 				if(pTransFormComponent != NULL)
 				{
-					pTransFormComponent->m_Position = curPos;
+					pTransFormComponent->SetPosition(curPos);
 					pTransFormComponent->m_Size = BrickScale;
 				}
 			}
