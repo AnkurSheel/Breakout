@@ -75,7 +75,39 @@ bool cLevel::Initialize(const cString & LevelName)
 	{
 		m_BrickMapSize = cVector3(vBrickArea[0], vBrickArea[1], 0.0f);
 	}
-	GenerateMap();
+	//GenerateMap();
+
+	const cEntityDef * const pEntityDef = cConfig::GetEntityDef(cBaseBrick::m_Name);
+	
+	cVector3 BrickScale;
+	BrickScale.x = 20;
+	BrickScale.y = cGameOptions::GameOptions().iHeight;
+
+	cBaseBrick * pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VRegisterEntity("basebrick"));
+	if (pEntity != NULL)
+	{
+		cTransformComponent * pTransFormComponent = dynamic_cast<cTransformComponent *>(pEntity->GetComponent(cTransformComponent::GetName().GetHash()));
+		if(pTransFormComponent != NULL)
+		{
+			pTransFormComponent->SetPosition(cVector3(-15.0f, 0.0f, 0.0f));
+			pTransFormComponent->SetSize(BrickScale);
+			pEntity->VOnInitialized();
+		}
+	}
+
+	pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VRegisterEntity("basebrick"));
+	if (pEntity != NULL)
+	{
+		pEntity->VInitialize();
+		cTransformComponent * pTransFormComponent = dynamic_cast<cTransformComponent *>(pEntity->GetComponent(cTransformComponent::GetName().GetHash()));
+		if(pTransFormComponent != NULL)
+		{
+			pTransFormComponent->SetPosition(cVector3(cGameOptions::GameOptions().iWidth - 5.0f, 0.0f, 0.0f));
+			pTransFormComponent->SetSize(BrickScale);
+			pEntity->VOnInitialized();
+		}
+
+	}
 	return true;
 }
 
@@ -106,7 +138,7 @@ void cLevel::GenerateMap()
 				if(pTransFormComponent != NULL)
 				{
 					pTransFormComponent->SetPosition(curPos);
-					pTransFormComponent->m_Size = BrickScale;
+					pTransFormComponent->SetSize(BrickScale);
 				}
 			}
 		}

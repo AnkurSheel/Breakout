@@ -26,6 +26,7 @@ cBall::~cBall()
 void cBall::VInitialize()
 {
 	cBaseEntity::VInitialize();
+	VOnInitialized();
 }
 
 // *****************************************************************************
