@@ -50,8 +50,8 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 	pGame->m_pConfig->Initialize("Entities");
 	cLevel::Level.Initialize("level1");
 
-	IEntityManager::GetInstance()->VRegisterEntity("paddle");
-	IEntityManager::GetInstance()->VRegisterEntity("ball");
+	IEntityManager::GetInstance()->VAddEntity("paddle");
+	IEntityManager::GetInstance()->VAddEntity("ball");
 }
 
 // *****************************************************************************

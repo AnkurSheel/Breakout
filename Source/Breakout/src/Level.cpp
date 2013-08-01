@@ -83,7 +83,7 @@ bool cLevel::Initialize(const cString & LevelName)
 	BrickScale.x = 20;
 	BrickScale.y = cGameOptions::GameOptions().iHeight;
 
-	cBaseBrick * pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VRegisterEntity("basebrick"));
+	cBaseBrick * pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
 	if (pEntity != NULL)
 	{
 		cTransformComponent * pTransFormComponent = dynamic_cast<cTransformComponent *>(pEntity->GetComponent(cTransformComponent::GetName().GetHash()));
@@ -95,7 +95,7 @@ bool cLevel::Initialize(const cString & LevelName)
 		}
 	}
 
-	pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VRegisterEntity("basebrick"));
+	pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
 	if (pEntity != NULL)
 	{
 		pEntity->VInitialize();
@@ -130,7 +130,7 @@ void cLevel::GenerateMap()
 		for(int j = 0; j < m_BrickMapSize.x; j++)
 		{
 			curPos.y = j * BrickScale.y;
-			pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VRegisterEntity("basebrick"));
+			pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
 			if (pEntity != NULL)
 			{
 				pEntity->VInitialize();
