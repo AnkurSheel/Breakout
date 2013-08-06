@@ -5,6 +5,9 @@
 // *****************************************************************************
 #include "stdafx.h"
 #include "Ball.h"
+#include "vector3.h"
+#include "gameoptions.h"
+#include "transformcomponent.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -26,6 +29,10 @@ cBall::~cBall()
 void cBall::VInitialize()
 {
 	cBaseEntity::VInitialize();
+	if(m_pTransFormComponent != NULL)
+	{
+		//m_pTransFormComponent->SetPosition(cVector3(cGameOptions::GameOptions().iWidth/2.0f, cGameOptions::GameOptions().iHeight/2.0f, 0.0f));
+	}
 	VOnInitialized();
 }
 

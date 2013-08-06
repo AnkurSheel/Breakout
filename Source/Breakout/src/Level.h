@@ -19,7 +19,6 @@ class cLevel
 public:
 	bool Initialize(const Base::cString & LevelName);
 	Base::cVector3 GetPaddleSpawnPoint() const { return m_PaddleSpawnPoint; }
-	Base::cVector3 GetBrickMapSize() const { return m_BrickMapSize; }
 
 public:
 	static cLevel Level;
@@ -28,7 +27,7 @@ private:
 	cLevel();
 	~cLevel();
 	void GenerateMap();
-
+	void AddWalls();
 private:
 	Base::cString				m_Background;
 	Utilities::IParamLoader *	m_pParamLoader;
