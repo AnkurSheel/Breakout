@@ -9,6 +9,5 @@
 enum Messages
 {
 	MSG_NONE = -1,
-	MSG_ESCAPE_PRESSED,
 };
 #endif // Messages_h__

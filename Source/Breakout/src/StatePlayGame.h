@@ -8,6 +8,12 @@
 
 #include "GameFlowStates.h"
 
+namespace GameBase
+{
+	class IEventData;
+	typedef shared_ptr<IEventData> IEventDataPtr;
+}
+
 class cStatePlayGame 
 	: public IGameFlowStates
 {
@@ -18,9 +24,9 @@ public:
 	virtual void VOnUpdate();
 	virtual void VOnExit();
 	virtual bool VOnMessage(const AI::Telegram &msg);
+	void EscapePressedListener(GameBase::IEventDataPtr pEventData);
+
 private:
 	cStatePlayGame();
 };
-
-
 #endif // StatePlayGame_h__

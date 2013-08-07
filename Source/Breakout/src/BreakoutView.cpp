@@ -14,6 +14,8 @@
 #include "ProcessManager.hxx"
 #include "RenderSystem.h"
 #include "KeyboardController.hxx"
+#include "EventManager.hxx"
+#include "EscapePressedEventData.h"
 
 using namespace Utilities;
 using namespace Graphics;
@@ -65,10 +67,8 @@ bool cBreakoutView::VOnMsgProc( const Base::AppMsg & msg )
 				{
 					//// lock the ESC key
 					IKeyboardController::Instance()->VLockKey(VK_ESCAPE);
-					//IMessageDispatchManager::GetInstance()->VDispatchMessage(0.0f,
-					//	IEntityManager::GetInstance()->VGetEntityID(m_pGame), 
-					//	IEntityManager::GetInstance()->VGetEntityID(m_pGame),
-					//	MSG_ESCAPE_PRESSED, NULL);
+					shared_ptr<cEscapePressedEventData> pEvent(DEBUG_NEW cEscapePressedEventData());
+					IEventManager::Instance()->VTriggerEvent(pEvent);
 				}
 			}
 			

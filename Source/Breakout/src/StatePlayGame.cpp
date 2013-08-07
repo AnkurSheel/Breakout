@@ -16,6 +16,8 @@
 #include "FSM\Telegram.h"
 #include "HumanView.h"
 #include "Timer.hxx"
+#include "EventManager.hxx"
+#include "EscapePressedEventData.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -52,6 +54,9 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 
 	IEntityManager::GetInstance()->VAddEntity("paddle");
 	IEntityManager::GetInstance()->VAddEntity("ball");
+
+	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
+	IEventManager::Instance()->VAddListener(listener, cEscapePressedEventData::m_Name);
 }
 
 // *****************************************************************************
@@ -67,16 +72,18 @@ void cStatePlayGame::VOnUpdate()
 // *****************************************************************************
 void cStatePlayGame::VOnExit()
 {
-
+	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
+	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
 }
 
 // *****************************************************************************
 bool cStatePlayGame::VOnMessage(const Telegram & msg)
 {
-	if(msg.Msg == MSG_ESCAPE_PRESSED)
-	{
-		PostQuitMessage(0);
-		return true;
-	}
 	return false;
+}
+
+// *****************************************************************************
+void cStatePlayGame::EscapePressedListener(IEventDataPtr pEventData)
+{
+	PostQuitMessage(0);
 }

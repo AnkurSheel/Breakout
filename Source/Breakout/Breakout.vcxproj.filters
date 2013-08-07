@@ -7,6 +7,9 @@
     <Filter Include="States">
       <UniqueIdentifier>{b5bf78bb-9ac9-4471-a9da-3212340a776d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{93314232-7674-43b9-8423-c602f5dc1b1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BreakoutView.h" />
@@ -33,6 +36,9 @@
     <ClInclude Include="src\BaseBrick.h">
       <Filter>Elements</Filter>
     </ClInclude>
+    <ClInclude Include="src\EscapePressedEventData.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -52,6 +58,9 @@
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\BaseBrick.cpp">
       <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EscapePressedEventData.cpp">
+      <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
