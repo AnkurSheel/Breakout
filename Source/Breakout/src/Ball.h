@@ -20,7 +20,7 @@ class cBall
 public:
 	~cBall();
 	void VInitialize();
-	virtual void VOnUpdate();
+	virtual void VOnUpdate(const float deltaTime);
 	void VCleanup();
 	cBall * CastToBall();
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }

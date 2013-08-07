@@ -31,7 +31,7 @@ void cBall::VInitialize()
 	cBaseEntity::VInitialize();
 	if(m_pTransFormComponent != NULL)
 	{
-		//m_pTransFormComponent->SetPosition(cVector3(cGameOptions::GameOptions().iWidth/2.0f, cGameOptions::GameOptions().iHeight/2.0f, 0.0f));
+		m_pTransFormComponent->SetPosition(cVector3(cGameOptions::GameOptions().iWidth/2.0f, cGameOptions::GameOptions().iHeight/2.0f, 0.0f));
 	}
 	VOnInitialized();
 }
@@ -49,6 +49,6 @@ cBall * cBall::CastToBall()
 }
 
 // *****************************************************************************
-void cBall::VOnUpdate()
+void cBall::VOnUpdate(const float deltaTime)
 {
 }

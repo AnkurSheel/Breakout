@@ -7,6 +7,7 @@
 #define Paddle_h__
 
 #include "BaseEntity.h"
+#include "vector3.h"
 
 namespace GameBase
 {
@@ -22,21 +23,22 @@ class cPaddle
 public:
 	~cPaddle();
 	void VInitialize();
-	virtual void VOnUpdate();
+	virtual void VOnUpdate(const float deltaTime);
 	void VCleanup();
 	cPaddle * CastToPaddle();
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
-	void VHandleInput(const unsigned int CharID);
+	void VHandleInput(const unsigned int CharID, const float deltaTime);
 	
 public:
-		static const Base::cHashedString	m_Name;	///< The component name
+	static const Base::cHashedString	m_Name;	///< The component name
 
 private:
 	cPaddle();
 
 private:
-		GameBase::cPhysicsComponent * m_pPhysicsComponent;
+	Base::cVector3					m_ForceDorection;
+	GameBase::cPhysicsComponent *	m_pPhysicsComponent;
 
 private:
 	template<class BaseType, class SubType> 

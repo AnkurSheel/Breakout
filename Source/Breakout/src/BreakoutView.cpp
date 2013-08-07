@@ -63,12 +63,12 @@ bool cBreakoutView::VOnMsgProc( const Base::AppMsg & msg )
 				
 				if (msg.m_wParam == VK_ESCAPE)
 				{
-					// lock the ESC key
+					//// lock the ESC key
 					IKeyboardController::Instance()->VLockKey(VK_ESCAPE);
-					IMessageDispatchManager::GetInstance()->VDispatchMessage(0.0f,
-						IEntityManager::GetInstance()->VGetEntityID(m_pGame), 
-						IEntityManager::GetInstance()->VGetEntityID(m_pGame),
-						MSG_ESCAPE_PRESSED, NULL);
+					//IMessageDispatchManager::GetInstance()->VDispatchMessage(0.0f,
+					//	IEntityManager::GetInstance()->VGetEntityID(m_pGame), 
+					//	IEntityManager::GetInstance()->VGetEntityID(m_pGame),
+					//	MSG_ESCAPE_PRESSED, NULL);
 				}
 			}
 			

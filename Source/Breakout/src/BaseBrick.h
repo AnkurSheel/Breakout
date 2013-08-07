@@ -20,7 +20,7 @@ class cBaseBrick
 public:
 	~cBaseBrick();
 	void VInitialize();
-	virtual void VOnUpdate();
+	virtual void VOnUpdate(const float deltaTime);
 	void VCleanup();
 	cBaseBrick * CastToBaseBrick();
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }

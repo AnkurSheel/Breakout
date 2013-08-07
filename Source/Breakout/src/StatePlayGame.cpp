@@ -57,9 +57,9 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 // *****************************************************************************
 void cStatePlayGame::VOnUpdate()
 {
-	IEntityManager::GetInstance()->VUpdate();
 	if(m_pOwner != NULL && m_pOwner->m_pGameTimer != NULL)
 	{
+		IEntityManager::GetInstance()->VUpdate(m_pOwner->m_pGameTimer->VGetDeltaTime());
 		m_pOwner->m_pHumanView->VOnUpdate(m_pOwner->m_pGameTimer->VGetRunningTicks(), m_pOwner->m_pGameTimer->VGetDeltaTime());
 	}
 }

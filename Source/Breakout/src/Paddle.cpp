@@ -53,25 +53,30 @@ cPaddle * cPaddle::CastToPaddle()
 }
 
 // *****************************************************************************
-void cPaddle::VOnUpdate()
+void cPaddle::VOnUpdate(const float deltaTime)
 {
+	if(!m_ForceDorection.IsZero())
+	{
+		if(m_pPhysicsComponent != NULL)
+		{
+			m_pPhysicsComponent->ApplyForce(m_ForceDorection);
+		}
+		m_ForceDorection = cVector3::Zero();
+	}
 }
 
 // *****************************************************************************
-void cPaddle::VHandleInput(const unsigned int CharID)
+void cPaddle::VHandleInput(const unsigned int CharID, const float deltaTime)
 {
-	if(CharID == VK_LEFT)
+	if(m_pTransFormComponent != NULL)
 	{
-		if(m_pPhysicsComponent != NULL && m_pTransFormComponent != NULL)
+		if(CharID == VK_LEFT)
 		{
-			m_pPhysicsComponent->ApplyForce(m_pTransFormComponent->m_LookAt.GetReverse());
+			m_ForceDorection = m_pTransFormComponent->m_LookAt.GetReverse();
 		}
-	}
-	else if(CharID == VK_RIGHT)
-	{
-		if(m_pPhysicsComponent != NULL && m_pTransFormComponent != NULL)
+		else if(CharID == VK_RIGHT)
 		{
-			m_pPhysicsComponent->ApplyForce(m_pTransFormComponent->m_LookAt);
+			m_ForceDorection = m_pTransFormComponent->m_LookAt;
 		}
 	}
 }

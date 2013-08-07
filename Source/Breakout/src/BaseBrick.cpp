@@ -41,6 +41,6 @@ cBaseBrick * cBaseBrick::CastToBaseBrick()
 }
 
 // *****************************************************************************
-void cBaseBrick::VOnUpdate()
+void cBaseBrick::VOnUpdate(const float deltaTime)
 {
 }
