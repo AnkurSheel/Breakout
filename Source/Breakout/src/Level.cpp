@@ -146,7 +146,6 @@ void cLevel::AddWalls()
 			pTransFormComponent->SetSize(BrickScale);
 			pEntity->VOnInitialized();
 		}
-
 	}
 	
 	pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
@@ -160,6 +159,18 @@ void cLevel::AddWalls()
 			pTransFormComponent->SetSize(cVector3(cGameOptions::GameOptions().iWidth-15.0f, 20.0f, 0.0f));
 			pEntity->VOnInitialized();
 		}
+	}
 
+	pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
+	if (pEntity != NULL)
+	{
+		pEntity->VInitialize();
+		cTransformComponent * pTransFormComponent = dynamic_cast<cTransformComponent *>(pEntity->GetComponent(cTransformComponent::GetName().GetHash()));
+		if(pTransFormComponent != NULL)
+		{
+			pTransFormComponent->SetPosition(cVector3(7.0f, -15.0f, 0.0f));
+			pTransFormComponent->SetSize(cVector3(cGameOptions::GameOptions().iWidth-15.0f, 20.0f, 0.0f));
+			pEntity->VOnInitialized();
+		}
 	}
 }

@@ -55,13 +55,13 @@ cPaddle * cPaddle::CastToPaddle()
 // *****************************************************************************
 void cPaddle::VOnUpdate(const float deltaTime)
 {
-	if(!m_ForceDorection.IsZero())
+	if(!m_ForceDirection.IsZero())
 	{
 		if(m_pPhysicsComponent != NULL)
 		{
-			m_pPhysicsComponent->ApplyForce(m_ForceDorection);
+			m_pPhysicsComponent->ApplyForce(m_ForceDirection);
 		}
-		m_ForceDorection = cVector3::Zero();
+		m_ForceDirection = cVector3::Zero();
 	}
 }
 
@@ -72,11 +72,11 @@ void cPaddle::VHandleInput(const unsigned int CharID, const float deltaTime)
 	{
 		if(CharID == VK_LEFT)
 		{
-			m_ForceDorection = m_pTransFormComponent->m_LookAt.GetReverse();
+			m_ForceDirection = m_pTransFormComponent->m_LookAt.GetReverse();
 		}
 		else if(CharID == VK_RIGHT)
 		{
-			m_ForceDorection = m_pTransFormComponent->m_LookAt;
+			m_ForceDirection = m_pTransFormComponent->m_LookAt;
 		}
 	}
 }

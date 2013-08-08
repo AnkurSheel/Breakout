@@ -37,7 +37,7 @@ private:
 	cPaddle();
 
 private:
-	Base::cVector3					m_ForceDorection;
+	Base::cVector3					m_ForceDirection;
 	GameBase::cPhysicsComponent *	m_pPhysicsComponent;
 
 private:

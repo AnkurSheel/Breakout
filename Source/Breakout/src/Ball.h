@@ -12,6 +12,8 @@ namespace GameBase
 {
 	template<class BaseType, class SubType> 
 	BaseType * GenericObjectCreationFunction();
+
+	class cPhysicsComponent;
 }
 
 class cBall 
@@ -26,11 +28,14 @@ public:
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
 
-	public:
-		static const Base::cHashedString	m_Name;	///< The component name
+public:
+	static const Base::cHashedString	m_Name;	///< The component name
 
 private:
 	cBall();
+
+private:
+	GameBase::cPhysicsComponent *	m_pPhysicsComponent;
 
 	template<class BaseType, class SubType> 
 	friend BaseType * GameBase::GenericObjectCreationFunction();
