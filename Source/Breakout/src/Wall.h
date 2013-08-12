@@ -32,7 +32,7 @@ private:
 	Base::cHashedString VGetType() const { return m_Name; }
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
-	void VOnCollided(const Base::cHashedString & colliderType){}
+	void VOnCollided(IBaseEntity * const pEntityCollider){}
 
 private:
 	template<class BaseType, class SubType> 

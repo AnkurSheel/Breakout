@@ -49,6 +49,7 @@ void cBall::VInitialize()
 		cVector3 direction;
 		direction.x = m_pRandomGenerator->Random();
 		direction.y = m_pRandomGenerator->Random();
+		Clamp<float>(direction.y, 0.5f, 1.0f);
 		m_pPhysicsComponent->ApplyForce(direction);
 	}
 	VOnInitialized();
@@ -70,4 +71,13 @@ cBall * cBall::CastToBall()
 // *****************************************************************************
 void cBall::VOnUpdate(const float deltaTime)
 {
+}
+
+// *****************************************************************************
+void cBall::ApplyForce(const cVector3 & direction)
+{
+	if(m_pPhysicsComponent != NULL)
+	{
+		m_pPhysicsComponent->ApplyForce(direction);
+	}
 }

@@ -111,6 +111,7 @@ void cLevel::GenerateMap()
 				{
 					pTransFormComponent->SetPosition(curPos);
 					pTransFormComponent->SetSize(BrickScale);
+					pEntity->VOnInitialized();
 				}
 			}
 		}

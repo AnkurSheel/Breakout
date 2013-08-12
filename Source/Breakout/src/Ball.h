@@ -8,6 +8,11 @@
 
 #include "BaseEntity.h"
 
+namespace Base
+{
+	class cVector3;
+}
+
 namespace GameBase
 {
 	template<class BaseType, class SubType> 
@@ -26,6 +31,7 @@ class cBall
 {
 public:
 	~cBall();
+	void ApplyForce(const Base::cVector3 & direction);
 
 public:
 	static const Base::cHashedString	m_Name;	///< The component name
@@ -39,7 +45,7 @@ private:
 	Base::cHashedString VGetType() const { return m_Name; }
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
-	void VOnCollided(const Base::cHashedString & colliderType){}
+	void VOnCollided(IBaseEntity * const pEntityCollider){}
 
 private:
 	GameBase::cPhysicsComponent *	m_pPhysicsComponent;

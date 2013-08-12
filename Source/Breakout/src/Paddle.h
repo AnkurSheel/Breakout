@@ -36,7 +36,7 @@ private:
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
 	void VHandleInput(const unsigned int CharID, const float deltaTime);
-	void VOnCollided(const Base::cHashedString & colliderType){}
+	void VOnCollided(IBaseEntity * const pEntityCollider);
 
 private:
 	Base::cVector3					m_ForceDirection;

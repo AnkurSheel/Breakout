@@ -8,6 +8,7 @@
 #include "TransformComponent.h"
 #include "Level.h"
 #include "physicscomponent.h"
+#include "Ball.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -77,6 +78,19 @@ void cPaddle::VHandleInput(const unsigned int CharID, const float deltaTime)
 		else if(CharID == VK_RIGHT)
 		{
 			m_ForceDirection = m_pTransFormComponent->m_LookAt;
+		}
+	}
+}
+
+// *****************************************************************************
+void cPaddle::VOnCollided(IBaseEntity * const pEntityCollider)
+{
+	if(pEntityCollider->VGetType() == cBall::m_Name)
+	{
+		if(!m_ForceDirection.IsZero())
+		{
+			cBall * const pBall = dynamic_cast<cBall *>(pEntityCollider);
+			pBall->ApplyForce(m_ForceDirection * 0.5f);
 		}
 	}
 }

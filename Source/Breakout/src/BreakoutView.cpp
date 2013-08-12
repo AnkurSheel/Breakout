@@ -86,12 +86,11 @@ bool cBreakoutView::VOnMsgProc( const Base::AppMsg & msg )
 void cBreakoutView::VRenderPrivate()
 {
 	ProcessList pProcessList;
-	ProcessList::iterator curProcess;
-
 	m_pGame->VGetProcessManager()->VGetProcesses("RenderSystem", pProcessList);
-	for (curProcess = pProcessList.begin(); curProcess != pProcessList.end(); curProcess++)
+	for (auto curProcess = pProcessList.begin(); curProcess != pProcessList.end(); curProcess++)
 	{
 		shared_ptr<cRenderSystem> p = dynamic_pointer_cast<cRenderSystem>(*curProcess);
 		p->Render(m_pCamera);
 	}
+	cHumanView::VRenderPrivate();
 }
