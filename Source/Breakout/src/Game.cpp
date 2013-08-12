@@ -77,9 +77,9 @@ void cGame::VOnUpdate()
 // *****************************************************************************
 void cGame::VCleanup()
 {
-	cBaseApp::VCleanup();
 	SafeDelete(&m_pConfig);
 	SafeDelete(&m_pStateMachine);
+	cBaseApp::VCleanup();
 }
 
 // *****************************************************************************
