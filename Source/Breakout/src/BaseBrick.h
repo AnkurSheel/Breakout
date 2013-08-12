@@ -23,6 +23,7 @@ public:
 	virtual void VOnUpdate(const float deltaTime);
 	void VCleanup();
 	cBaseBrick * CastToBaseBrick();
+	Base::cHashedString VGetHashedName() const { return m_Name; }
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
 
