@@ -9,9 +9,11 @@
 #include "gameoptions.h"
 #include "transformcomponent.h"
 #include "physicscomponent.h"
+#include "RandomGenerator.hxx"
 
 using namespace Base;
 using namespace GameBase;
+using namespace Utilities;
 
 const Base::cHashedString	cBall::m_Name = cHashedString("ball");
 
@@ -32,13 +34,22 @@ void cBall::VInitialize()
 {
 	cBaseEntity::VInitialize();
 	m_pPhysicsComponent = dynamic_cast<cPhysicsComponent *>(GetComponent(cPhysicsComponent::GetName()));
+	m_pRandomGenerator = IRandomGenerator::CreateRandomGenerator();
+	if (m_pRandomGenerator)
+	{
+		Log_Write(ILogger::LT_DEBUG, 1, cString(100, "Random Generator created for Ball with seed %u", m_pRandomGenerator->GetRandomSeed()));
+	}
+
 	if(m_pTransFormComponent != NULL)
 	{
 		m_pTransFormComponent->SetPosition(cVector3(cGameOptions::GameOptions().iWidth/2.0f, cGameOptions::GameOptions().iHeight/2.0f, 0.0f));
 	}
 	if(m_pPhysicsComponent != NULL)
 	{
-		m_pPhysicsComponent->ApplyForce(cVector3(0,1,0));
+		cVector3 direction;
+		direction.x = m_pRandomGenerator->Random();
+		direction.y = m_pRandomGenerator->Random();
+		m_pPhysicsComponent->ApplyForce(direction);
 	}
 	VOnInitialized();
 }
@@ -47,6 +58,7 @@ void cBall::VInitialize()
 void cBall::VCleanup()
 {
 	cBaseEntity::VCleanup();
+	SafeDelete(&m_pRandomGenerator);
 }
 
 // *****************************************************************************

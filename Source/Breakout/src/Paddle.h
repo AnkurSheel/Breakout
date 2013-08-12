@@ -22,20 +22,21 @@ class cPaddle
 {
 public:
 	~cPaddle();
-	void VInitialize();
-	virtual void VOnUpdate(const float deltaTime);
-	void VCleanup();
-	cPaddle * CastToPaddle();
-	Base::cHashedString VGetHashedName() const { return m_Name; }
-	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
-	Base::cString VGetName() const { return m_Name.GetString(); }
-	void VHandleInput(const unsigned int CharID, const float deltaTime);
 
 public:
 	static const Base::cHashedString	m_Name;	///< The component name
 
 private:
 	cPaddle();
+	void VInitialize();
+	virtual void VOnUpdate(const float deltaTime);
+	void VCleanup();
+	cPaddle * CastToPaddle();
+	Base::cHashedString VGetType() const { return m_Name; }
+	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
+	Base::cString VGetName() const { return m_Name.GetString(); }
+	void VHandleInput(const unsigned int CharID, const float deltaTime);
+	void VOnCollided(const Base::cHashedString & colliderType){}
 
 private:
 	Base::cVector3					m_ForceDirection;

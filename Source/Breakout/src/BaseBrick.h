@@ -20,19 +20,21 @@ class cBaseBrick
 public:
 	~cBaseBrick();
 	void VInitialize();
-	virtual void VOnUpdate(const float deltaTime);
-	void VCleanup();
-	cBaseBrick * CastToBaseBrick();
-	Base::cHashedString VGetHashedName() const { return m_Name; }
-	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
-	Base::cString VGetName() const { return m_Name.GetString(); }
 
-	public:
-		static const Base::cHashedString	m_Name;	///< The component name
+public:
+	static const Base::cHashedString	m_Name;	///< The component name
 
 private:
 	cBaseBrick();
+	virtual void VOnUpdate(const float deltaTime);
+	void VCleanup();
+	cBaseBrick * CastToBaseBrick();
+	Base::cHashedString VGetType() const { return m_Name; }
+	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
+	Base::cString VGetName() const { return m_Name.GetString(); }
+	void VOnCollided(const Base::cHashedString & colliderType){}
 
+private:
 	template<class BaseType, class SubType> 
 	friend BaseType * GameBase::GenericObjectCreationFunction();
 };

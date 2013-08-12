@@ -13,6 +13,7 @@
 #include "Config.h"
 #include "Ball.h"
 #include "BaseBrick.h"
+#include "Wall.h"
 #include "ComponentFactory.h"
 
 using namespace GameBase;
@@ -35,6 +36,7 @@ void cBreakOutEntityFactory::VRegisterEntities()
 	m_RegisteredEntities.Register<cPaddle>(cPaddle::m_Name.GetHash());
 	m_RegisteredEntities.Register<cBall>(cBall::m_Name.GetHash());
 	m_RegisteredEntities.Register<cBaseBrick>(cBaseBrick::m_Name.GetHash());
+	m_RegisteredEntities.Register<cWall>(cWall::m_Name.GetHash());
 }
 
 // *****************************************************************************

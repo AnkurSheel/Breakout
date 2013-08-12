@@ -15,6 +15,7 @@
 #include "EntityManager.hxx"
 #include "GameOptions.h"
 #include "BaseBrick.h"
+#include "Wall.h"
 #include "TransformComponent.h"
 
 using namespace Base;
@@ -75,6 +76,7 @@ bool cLevel::Initialize(const cString & LevelName)
 	{
 		m_BrickMapSize = cVector3(vBrickArea[0], vBrickArea[1], 0.0f);
 	}
+	
 	AddWalls();
 	//GenerateMap();
 
@@ -123,7 +125,7 @@ void cLevel::AddWalls()
 	BrickScale.x = 20;
 	BrickScale.y = cGameOptions::GameOptions().iHeight;
 
-	cBaseBrick * pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
+	cWall * pEntity = dynamic_cast<cWall *>(IEntityManager::GetInstance()->VAddEntity("wall"));
 	if (pEntity != NULL)
 	{
 		cTransformComponent * pTransFormComponent = dynamic_cast<cTransformComponent *>(pEntity->GetComponent(cTransformComponent::GetName().GetHash()));
@@ -135,7 +137,7 @@ void cLevel::AddWalls()
 		}
 	}
 
-	pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
+	pEntity = dynamic_cast<cWall *>(IEntityManager::GetInstance()->VAddEntity("wall"));
 	if (pEntity != NULL)
 	{
 		pEntity->VInitialize();
@@ -148,7 +150,7 @@ void cLevel::AddWalls()
 		}
 	}
 	
-	pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
+	pEntity = dynamic_cast<cWall *>(IEntityManager::GetInstance()->VAddEntity("wall"));
 	if (pEntity != NULL)
 	{
 		pEntity->VInitialize();
@@ -161,7 +163,7 @@ void cLevel::AddWalls()
 		}
 	}
 
-	pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
+	pEntity = dynamic_cast<cWall *>(IEntityManager::GetInstance()->VAddEntity("wall"));
 	if (pEntity != NULL)
 	{
 		pEntity->VInitialize();
