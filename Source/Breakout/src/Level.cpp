@@ -78,7 +78,7 @@ bool cLevel::Initialize(const cString & LevelName)
 	}
 	
 	AddWalls();
-	//GenerateMap();
+	GenerateMap();
 
 	return true;
 }
