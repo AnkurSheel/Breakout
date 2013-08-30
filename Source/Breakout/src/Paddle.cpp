@@ -73,11 +73,11 @@ void cPaddle::VHandleInput(const unsigned int CharID, const float deltaTime)
 	{
 		if(CharID == VK_LEFT)
 		{
-			m_ForceDirection = m_pTransFormComponent->m_LookAt.GetReverse();
+			m_ForceDirection = m_pTransFormComponent->GetLookAt().GetReverse();
 		}
 		else if(CharID == VK_RIGHT)
 		{
-			m_ForceDirection = m_pTransFormComponent->m_LookAt;
+			m_ForceDirection = m_pTransFormComponent->GetLookAt();
 		}
 	}
 }
@@ -87,10 +87,12 @@ void cPaddle::VOnCollided(IBaseEntity * const pEntityCollider)
 {
 	if(pEntityCollider->VGetType() == cBall::m_Name)
 	{
+		cBall * const pBall = dynamic_cast<cBall *>(pEntityCollider);
+		pBall->ApplyForce(cVector3(0, -10.0f, 0.0f));
+
 		if(!m_ForceDirection.IsZero())
 		{
-			cBall * const pBall = dynamic_cast<cBall *>(pEntityCollider);
-			pBall->ApplyForce(m_ForceDirection * 0.5f);
+			pBall->ApplyForce(m_ForceDirection * 10.f);
 		}
 	}
 }
