@@ -5,6 +5,8 @@
 // *****************************************************************************
 #include "stdafx.h"
 #include "BaseBrick.h"
+#include "Ball.h"
+#include "EntityManager.hxx"
 
 using namespace Base;
 using namespace GameBase;
@@ -43,4 +45,14 @@ cBaseBrick * cBaseBrick::CastToBaseBrick()
 // *****************************************************************************
 void cBaseBrick::VOnUpdate(const float deltaTime)
 {
+}
+
+// *****************************************************************************
+void cBaseBrick::VOnCollided(IBaseEntity * const pEntityCollider)
+{
+	if(pEntityCollider->VGetType() == cBall::m_Name)
+	{
+		cBall * const pBall = dynamic_cast<cBall *>(pEntityCollider);
+		IEntityManager::GetInstance()->VDeleteEntity(this);
+	}
 }

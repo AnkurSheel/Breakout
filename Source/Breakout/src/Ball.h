@@ -45,7 +45,7 @@ private:
 	Base::cHashedString VGetType() const { return m_Name; }
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
-	void VOnCollided(IBaseEntity * const pEntityCollider){}
+	void VOnCollided(IBaseEntity * const pEntityCollider);
 
 private:
 	GameBase::cPhysicsComponent *	m_pPhysicsComponent;

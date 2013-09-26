@@ -92,7 +92,7 @@ void cPaddle::VOnCollided(IBaseEntity * const pEntityCollider)
 
 		if(!m_ForceDirection.IsZero())
 		{
-			pBall->ApplyForce(m_ForceDirection * 10.f);
+			pBall->ApplyForce(m_ForceDirection * 5.f);
 		}
 	}
 }

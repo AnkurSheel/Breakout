@@ -10,6 +10,8 @@
 #include "transformcomponent.h"
 #include "physicscomponent.h"
 #include "RandomGenerator.hxx"
+#include "BaseBrick.h"
+#include "entitymanager.hxx"
 
 using namespace Base;
 using namespace GameBase;
@@ -71,6 +73,7 @@ cBall * cBall::CastToBall()
 // *****************************************************************************
 void cBall::VOnUpdate(const float deltaTime)
 {
+	
 }
 
 // *****************************************************************************
@@ -80,4 +83,14 @@ void cBall::ApplyForce(const cVector3 & direction)
 	{
 		m_pPhysicsComponent->ApplyForce(direction);
 	}
+}
+
+// *****************************************************************************
+void cBall::VOnCollided(IBaseEntity * const pEntityCollider)
+{
+	if(pEntityCollider->VGetType() == cBaseBrick::m_Name)
+	{
+		ApplyForce(cVector3(0, 0.25f, 0.0f));
+	}
+
 }
