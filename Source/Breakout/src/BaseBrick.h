@@ -8,7 +8,7 @@
 
 #include "BaseEntity.h"
 
-namespace GameBase
+namespace Base
 {
 	template<class BaseType, class SubType> 
 	BaseType * GenericObjectCreationFunction();
@@ -36,6 +36,6 @@ private:
 
 private:
 	template<class BaseType, class SubType> 
-	friend BaseType * GameBase::GenericObjectCreationFunction();
+	friend BaseType * Base::GenericObjectCreationFunction();
 };
 #endif // BaseBrick_h__

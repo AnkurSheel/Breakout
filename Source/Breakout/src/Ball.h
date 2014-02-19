@@ -11,13 +11,13 @@
 namespace Base
 {
 	class cVector3;
+
+	template<class BaseType, class SubType> 
+	BaseType * GenericObjectCreationFunction();
 }
 
 namespace GameBase
 {
-	template<class BaseType, class SubType> 
-	BaseType * GenericObjectCreationFunction();
-
 	class cPhysicsComponent;
 }
 
@@ -52,6 +52,6 @@ private:
 	Utilities::IRandomGenerator *	m_pRandomGenerator;
 
 	template<class BaseType, class SubType> 
-	friend BaseType * GameBase::GenericObjectCreationFunction();
+	friend BaseType * Base::GenericObjectCreationFunction();
 };
 #endif // Ball_h__

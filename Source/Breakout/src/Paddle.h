@@ -9,11 +9,13 @@
 #include "BaseEntity.h"
 #include "vector3.h"
 
-namespace GameBase
+namespace Base
 {
 	template<class BaseType, class SubType> 
 	BaseType * GenericObjectCreationFunction();
-
+}
+namespace GameBase
+{
 	class cPhysicsComponent;
 }
 
@@ -44,6 +46,6 @@ private:
 
 private:
 	template<class BaseType, class SubType> 
-	friend BaseType * GameBase::GenericObjectCreationFunction();
+	friend BaseType * Base::GenericObjectCreationFunction();
 };
 #endif // Paddle_h__
