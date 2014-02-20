@@ -88,6 +88,7 @@
     <ClInclude Include="src\Messages.h" />
     <ClInclude Include="src\Paddle.h" />
     <ClInclude Include="src\StatePlayGame.h" />
+    <ClInclude Include="src\StateTitleScreen.h" />
     <ClInclude Include="src\Wall.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -102,6 +103,7 @@
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Paddle.cpp" />
     <ClCompile Include="src\StatePlayGame.cpp" />
+    <ClCompile Include="src\StateTitleScreen.cpp" />
     <ClCompile Include="src\Wall.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
