@@ -56,7 +56,7 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 	IEntityManager::GetInstance()->VInitializeComponentFactory(shared_ptr<cComponentFactory>(DEBUG_NEW cComponentFactory()));
 	IEventManager::Instance()->VInitializeEventFactory(shared_ptr<cEventFactory>(DEBUG_NEW cEventFactory()));
 
-	m_pStateMachine->SetCurrentState(cStatePlayGame::Instance());
+	m_pStateMachine->SetCurrentState(cStateTitleScreen::Instance());
 }
 
 void cGame::VCreateHumanView()

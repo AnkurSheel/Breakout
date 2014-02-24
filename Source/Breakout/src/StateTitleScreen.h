@@ -8,10 +8,17 @@
 
 #include "GameFlowStates.h"
 
+#include "vector2.h"
+
 namespace GameBase
 {
 	class IEventData;
 	typedef shared_ptr<IEventData> IEventDataPtr;
+}
+
+namespace Graphics
+{
+	class IBaseControl;
 }
 
 class cGame;
@@ -30,5 +37,10 @@ public:
 
 private:
 	cStateTitleScreen();
+
+private:
+	float	m_DelayTime;
+	Base::cVector2	m_Position;
+	shared_ptr<Graphics::IBaseControl>	m_pTitleScreen;
 };
 #endif // TitleScreen_h__
