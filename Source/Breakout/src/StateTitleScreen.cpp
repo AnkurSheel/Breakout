@@ -51,13 +51,16 @@ void cStateTitleScreen::VOnEnter(cGame *pGame)
 
 	EventListenerCallBackFn listener = bind(&cStateTitleScreen::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VAddListener(listener, cEscapePressedEventData::m_Name);
-
-	//IMessageDispatchManager::GetInstance()->VDispatchMessage(2.0f, pGame->VGetID(), pGame->VGetID(), MSG_SHOW_MENU, NULL);
 }
 
 //  *******************************************************************************************************************
-void cStateTitleScreen::VOnUpdate()
+void cStateTitleScreen::VOnUpdate(const TICK currentTick, const float deltaTime)
 {
+	//if(msg.Msg == MSG_SHOW_MENU)
+	//{
+	//	m_pOwner->m_pStateMachine->RequestChangeState(cStateMenuScreen::Instance());
+	//	return true;
+	//}
 }
 
 //  *******************************************************************************************************************
@@ -70,11 +73,6 @@ void cStateTitleScreen::VOnExit()
 //  *******************************************************************************************************************
 bool cStateTitleScreen::VOnMessage(const Telegram &msg)
 {
-	//if(msg.Msg == MSG_SHOW_MENU)
-	//{
-	//	m_pOwner->m_pStateMachine->RequestChangeState(cStateMenuScreen::Instance());
-	//	return true;
-	//}
 	return false;
 }
 

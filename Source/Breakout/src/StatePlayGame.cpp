@@ -1,8 +1,8 @@
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  StatePlayGame   version:  1.0   Ankur Sheel  date: 2013/03/20
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  purpose:	
-// *****************************************************************************
+//  *******************************************************************************************************************
 #include "stdafx.h"
 #include "StatePlayGame.h"
 #include "EntityManager.hxx"
@@ -23,24 +23,24 @@ using namespace Base;
 using namespace GameBase;
 using namespace AI;
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 cStatePlayGame::cStatePlayGame()
 {
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 cStatePlayGame::~cStatePlayGame()
 {
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 cStatePlayGame* cStatePlayGame::Instance()
 {
 	static cStatePlayGame instance;
 	return &instance;
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 void cStatePlayGame::VOnEnter(cGame *pGame)
 {
 	IGameFlowStates::VOnEnter(pGame);
@@ -59,30 +59,30 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 	IEventManager::Instance()->VAddListener(listener, cEscapePressedEventData::m_Name);
 }
 
-// *****************************************************************************
-void cStatePlayGame::VOnUpdate()
+//  *******************************************************************************************************************
+void cStatePlayGame::VOnUpdate(const TICK currentTick, const float deltaTime)
 {
 	if(m_pOwner != NULL && m_pOwner->m_pGameTimer != NULL)
 	{
-		IEntityManager::GetInstance()->VUpdate(m_pOwner->m_pGameTimer->VGetDeltaTime());
-		m_pOwner->m_pHumanView->VOnUpdate(m_pOwner->m_pGameTimer->VGetRunningTicks(), m_pOwner->m_pGameTimer->VGetDeltaTime());
+		IEntityManager::GetInstance()->VUpdate(deltaTime);
+		m_pOwner->m_pHumanView->VOnUpdate(currentTick, deltaTime);
 	}
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 void cStatePlayGame::VOnExit()
 {
 	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 bool cStatePlayGame::VOnMessage(const Telegram & msg)
 {
 	return false;
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 void cStatePlayGame::EscapePressedListener(IEventDataPtr pEventData)
 {
 	PostQuitMessage(0);

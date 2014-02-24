@@ -1,27 +1,28 @@
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  Game   version:  1.0   Ankur Sheel  date: 2013/04/02
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  purpose:	
-// *****************************************************************************
+//  *******************************************************************************************************************
 #include "stdafx.h"
 #include "Game.h"
 #include "GameFlowStateMachine.h"
 #include "BreakoutView.h"
 #include "BaseControl.hxx"
-#include "StatePlayGame.h"
+#include "StateTitleScreen.h"
 #include "BreakoutEntityFactory.h"
 #include "Config.h"
 #include "ComponentFactory.h"
 #include "EntityManager.hxx"
 #include "EventManager.hxx"
 #include "EventFactory.h"
+#include "Timer.hxx"
 
 using namespace Graphics;
 using namespace Base;
 using namespace GameBase;
 using namespace Utilities;
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 cGame::cGame(const Base::cString & Name) 
 	: cBaseApp(Name)
 	, m_pStateMachine(NULL)
@@ -29,13 +30,13 @@ cGame::cGame(const Base::cString & Name)
 {
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 cGame::~cGame()
 {
 	VCleanup();
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 							  const cString & strOptionsFile)
 {
@@ -63,7 +64,7 @@ void cGame::VCreateHumanView()
 	m_pHumanView = DEBUG_NEW cBreakoutView();
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 void cGame::VOnUpdate()
 {
 	if(m_Quitting)
@@ -71,10 +72,13 @@ void cGame::VOnUpdate()
 		return;
 	}
 	cBaseApp::VOnUpdate();
-	m_pStateMachine->Update();
+	if(m_pGameTimer != NULL && m_pStateMachine != NULL)
+	{
+		m_pStateMachine->Update(m_pGameTimer->VGetRunningTicks(), m_pGameTimer->VGetDeltaTime());
+	}
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 void cGame::VCleanup()
 {
 	SafeDelete(&m_pConfig);
@@ -82,15 +86,14 @@ void cGame::VCleanup()
 	cBaseApp::VCleanup();
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 bool cGame::VOnHandleMessage(const AI::Telegram & telegram)
 {
 	return m_pStateMachine->HandleMessage(telegram);
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 IBaseApp * IGame::CreateGame(const cString strName)
 {
 	return DEBUG_NEW cGame(strName);
 }
-

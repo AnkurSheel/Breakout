@@ -23,13 +23,12 @@ public:
 	~cStateTitleScreen();
 	static cStateTitleScreen *Instance();
 	void VOnEnter(cGame *pGame);
-	void VOnUpdate();
+	void VOnUpdate(const TICK currentTick, const float deltaTime);
 	void VOnExit();
 	bool VOnMessage(const AI::Telegram &msg);
 	void EscapePressedListener(GameBase::IEventDataPtr pEventData);
 
 private:
 	cStateTitleScreen();
-
 };
 #endif // TitleScreen_h__
