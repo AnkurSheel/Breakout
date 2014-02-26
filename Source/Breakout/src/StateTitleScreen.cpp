@@ -77,7 +77,10 @@ void cStateTitleScreen::VOnUpdate(const TICK currentTick, const float deltaTime)
 void cStateTitleScreen::VOnExit()
 {
 	m_pTitleScreen.reset();
-	m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("TitleScreen");
+	if (m_pOwner->m_pHumanView->m_pAppWindowControl != NULL)
+	{
+		m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("TitleScreen");
+	}
 	EventListenerCallBackFn listener = bind(&cStateTitleScreen::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
 }

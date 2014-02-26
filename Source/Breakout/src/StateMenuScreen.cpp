@@ -11,10 +11,9 @@
 #include "BaseControl.hxx"
 //#include "FSM\Telegram.h"
 #include "GameFlowStateMachine.h"
-//#include "AsteroidView.h"
 #include "StatePlayGame.h"
 //#include "HelpScreen.h"
-//#include "OptionScreen.h"
+#include "StateOptionScreen.h"
 //#include "HighScoreScreen.h"
 //#include "RedefineControlsScreen.h"
 #include "EventManager.hxx"
@@ -52,37 +51,37 @@ void cStateMenuScreen::VOnEnter(cGame *pGame)
 
 	if (pGame->m_pHumanView->m_pAppWindowControl != NULL)
 	{
-		shared_ptr<Graphics::IBaseControl> pMenuScreen = IUiManager::GetInstance()->VCreateUI("menuscreen");
-		pGame->m_pHumanView->m_pAppWindowControl->VAddChildControl(pMenuScreen);
+		m_pMenuScreen = IUiManager::GetInstance()->VCreateUI("menuscreen");
+		pGame->m_pHumanView->m_pAppWindowControl->VAddChildControl(m_pMenuScreen);
 
-		shared_ptr<Graphics::IBaseControl> pPlayButton = pMenuScreen->VFindChildControl("btnPlay");
+		shared_ptr<Graphics::IBaseControl> pPlayButton = m_pMenuScreen->VFindChildControl("btnPlay");
 		if(pPlayButton != NULL)
 		{
 			UIEventCallBackFn callbackPlayBtn = bind(&cStateMenuScreen::PlayButtonPressed, this, _1);
 			pPlayButton->VRegisterCallBack(UIET_BTNRELEASED, callbackPlayBtn);
 		}
 		
-		shared_ptr<Graphics::IBaseControl> pOptionsButton = pMenuScreen->VFindChildControl("btnOption");
+		shared_ptr<Graphics::IBaseControl> pOptionsButton = m_pMenuScreen->VFindChildControl("btnOption");
 		if(pOptionsButton != NULL)
 		{
 			UIEventCallBackFn callbackOptionsBtn = bind(&cStateMenuScreen::OptionsButtonPressed, this, _1);
 			pOptionsButton->VRegisterCallBack(UIET_BTNRELEASED, callbackOptionsBtn);
 		}
 
-		shared_ptr<Graphics::IBaseControl> pRedefineControlsButton = pMenuScreen->VFindChildControl("btnControls");
+		shared_ptr<Graphics::IBaseControl> pRedefineControlsButton = m_pMenuScreen->VFindChildControl("btnControls");
 		if(pRedefineControlsButton != NULL)
 		{
 			UIEventCallBackFn callbackRedefineControlsBtn = bind(&cStateMenuScreen::ControlsButtonPressed, this, _1);
 			pRedefineControlsButton->VRegisterCallBack(UIET_BTNRELEASED, callbackRedefineControlsBtn);
 		}
 
-		shared_ptr<Graphics::IBaseControl> pHighScoreButton = pMenuScreen->VFindChildControl("btnHighScore");
+		shared_ptr<Graphics::IBaseControl> pHighScoreButton = m_pMenuScreen->VFindChildControl("btnHighScore");
 		if(pHighScoreButton != NULL)
 		{
 			UIEventCallBackFn callbackHighScoreBtn = bind(&cStateMenuScreen::HighScoreButtonPressed, this, _1);
 			pHighScoreButton->VRegisterCallBack(UIET_BTNRELEASED, callbackHighScoreBtn);
 		}
-		shared_ptr<Graphics::IBaseControl> pQuitButton = pMenuScreen->VFindChildControl("btnQuit");
+		shared_ptr<Graphics::IBaseControl> pQuitButton = m_pMenuScreen->VFindChildControl("btnQuit");
 		if(pQuitButton != NULL)
 		{
 			UIEventCallBackFn callbackQuitBtn = bind(&cStateMenuScreen::QuitButtonPressed, this, _1);
@@ -102,6 +101,7 @@ void cStateMenuScreen::VOnUpdate(const TICK currentTick, const float deltaTime)
 //  *******************************************************************************************************************
 void cStateMenuScreen::VOnExit()
 {
+	m_pMenuScreen.reset();
 	if (m_pOwner->m_pHumanView->m_pAppWindowControl != NULL)
 	{
 		m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("menuscreen");
@@ -135,7 +135,7 @@ void cStateMenuScreen::PlayButtonPressed(const stUIEventCallbackParam & params)
 {
 	if (m_pOwner && m_pOwner->m_pStateMachine)
 	{
-		//m_pOwner->m_pStateMachine->RequestChangeState(cStatePlayGame::Instance());
+		m_pOwner->m_pStateMachine->RequestChangeState(cStatePlayGame::Instance());
 	}
 }
 
@@ -153,7 +153,7 @@ void cStateMenuScreen::OptionsButtonPressed(const stUIEventCallbackParam & param
 {
 	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
 	{
-		//m_pOwner->m_pStateMachine->RequestPushState(cStateOptionsScreen::Instance());
+		m_pOwner->m_pStateMachine->RequestPushState(cStateOptionsScreen::Instance());
 	}
 }
 

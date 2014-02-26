@@ -3,8 +3,8 @@
 //  *******************************************************************************************************************
 //  purpose:	
 //  *******************************************************************************************************************
-#ifndef MenuScreen_h__
-#define MenuScreen_h__
+#ifndef StateMenuScreen_h__
+#define StateMenuScreen_h__
 
 #include "GameFlowStates.h"
 
@@ -37,7 +37,7 @@ private:
 	void QuitButtonPressed(const Graphics::stUIEventCallbackParam& params);
 
 private:
-	Graphics::IBaseControl * m_pMenuScreen;
+	shared_ptr<Graphics::IBaseControl>	m_pMenuScreen;
 };
 
-#endif // MenuScreen_h__
+#endif // StateMenuScreen_h__

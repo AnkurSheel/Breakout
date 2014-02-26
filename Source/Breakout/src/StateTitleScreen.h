@@ -3,8 +3,8 @@
 //  *******************************************************************************************************************
 //  purpose:	
 //  *******************************************************************************************************************
-#ifndef TitleScreen_h__
-#define TitleScreen_h__
+#ifndef StateTitleScreen_h__
+#define StateTitleScreen_h__
 
 #include "GameFlowStates.h"
 
@@ -35,4 +35,4 @@ private:
 	Base::cVector2	m_Position;
 	shared_ptr<Graphics::IBaseControl>	m_pTitleScreen;
 };
-#endif // TitleScreen_h__
+#endif // StateTitleScreen_h__
