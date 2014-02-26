@@ -12,5 +12,8 @@ using namespace GameBase;
 //  *******************************************************************************************************************
 void cGameFlowStates::EscapePressedListener(IEventDataPtr pEventData)
 {
-	PostQuitMessage(0);
+	if(!m_IsPaused)
+	{
+		PostQuitMessage(0);
+	}
 }
