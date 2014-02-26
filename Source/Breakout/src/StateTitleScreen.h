@@ -1,5 +1,5 @@
 //  *******************************************************************************************************************
-//  TitleScreen   version:  1.0   Ankur Sheel  date: 2013/03/20
+//  StateTitleScreen   version:  1.0   Ankur Sheel  date: 2013/03/20
 //  *******************************************************************************************************************
 //  purpose:	
 //  *******************************************************************************************************************
@@ -10,12 +10,6 @@
 
 #include "vector2.h"
 
-namespace GameBase
-{
-	class IEventData;
-	typedef shared_ptr<IEventData> IEventDataPtr;
-}
-
 namespace Graphics
 {
 	class IBaseControl;
@@ -24,7 +18,7 @@ namespace Graphics
 class cGame;
 
 class cStateTitleScreen 
-	: public IGameFlowStates
+	: public cGameFlowStates
 {
 public:
 	~cStateTitleScreen();
@@ -32,8 +26,6 @@ public:
 	void VOnEnter(cGame *pGame);
 	void VOnUpdate(const TICK currentTick, const float deltaTime);
 	void VOnExit();
-	bool VOnMessage(const AI::Telegram &msg);
-	void EscapePressedListener(GameBase::IEventDataPtr pEventData);
 
 private:
 	cStateTitleScreen();

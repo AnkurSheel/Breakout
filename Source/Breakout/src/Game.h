@@ -50,7 +50,8 @@ private:
 
 private:
 	friend class cBreakoutView;
-	friend class cStatePlayGame;
 	friend class cStateTitleScreen;
+	friend class cStateMenuScreen;
+	friend class cStatePlayGame;
 };
 #endif // Game_h__

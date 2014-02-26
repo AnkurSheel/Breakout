@@ -1,5 +1,5 @@
 //  *******************************************************************************************************************
-//  TitleScreen   version:  1.0   Ankur Sheel  date: 2013/03/20
+//  StateTitleScreen   version:  1.0   Ankur Sheel  date: 2013/03/20
 //  *******************************************************************************************************************
 //  purpose:	
 //  *******************************************************************************************************************
@@ -15,7 +15,7 @@
 #include "EscapePressedEventData.h"
 #include "UiManager.hxx"
 #include "GameFlowStateMachine.h"
-#include "StatePlayGame.h"
+#include "StateMenuScreen.h"
 
 using namespace Base;
 using namespace Graphics;
@@ -44,7 +44,7 @@ cStateTitleScreen* cStateTitleScreen::Instance()
 //  *******************************************************************************************************************
 void cStateTitleScreen::VOnEnter(cGame *pGame)
 {
-	IGameFlowStates::VOnEnter(pGame);
+	cGameFlowStates::VOnEnter(pGame);
 
 	if (pGame->m_pHumanView->m_pAppWindowControl != NULL)
 	{
@@ -68,7 +68,7 @@ void cStateTitleScreen::VOnUpdate(const TICK currentTick, const float deltaTime)
 
 		if(m_DelayTime <= 0.0f)
 		{
-			m_pOwner->m_pStateMachine->RequestChangeState(cStatePlayGame::Instance());
+			m_pOwner->m_pStateMachine->RequestChangeState(cStateMenuScreen::Instance());
 		}
 	}
 }
@@ -80,17 +80,4 @@ void cStateTitleScreen::VOnExit()
 	m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("TitleScreen");
 	EventListenerCallBackFn listener = bind(&cStateTitleScreen::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
-}
-
-//  *******************************************************************************************************************
-bool cStateTitleScreen::VOnMessage(const Telegram &msg)
-{
-	return false;
-}
-
-//  *******************************************************************************************************************
-void cStateTitleScreen::EscapePressedListener(IEventDataPtr pEventData)
-{
-	m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("TitleScreen");
-	PostQuitMessage(0);
 }

@@ -3,25 +3,14 @@
 //  *******************************************************************************************************************
 //  purpose:	
 //  *******************************************************************************************************************
-#ifndef GameFlowStates_h__
-#define GameFlowStates_h__
+#include "stdafx.h"
+#include "GameFlowStates.h"
+#include "EventManager.hxx"
 
-#include "fsm/State.h"
+using namespace GameBase;
 
-namespace GameBase
+//  *******************************************************************************************************************
+void cGameFlowStates::EscapePressedListener(IEventDataPtr pEventData)
 {
-	class IEventData;
-	typedef shared_ptr<IEventData> IEventDataPtr;
+	PostQuitMessage(0);
 }
-
-class cGame;
-
-class cGameFlowStates
-	: public AI::cState<cGame>
-{
-protected:
-	bool VOnMessage(const AI::Telegram &msg) { return false; }
-	void EscapePressedListener(GameBase::IEventDataPtr pEventData);
-};
-
-#endif // GameFlowStates_h__

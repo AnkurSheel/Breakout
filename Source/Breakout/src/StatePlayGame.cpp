@@ -43,7 +43,7 @@ cStatePlayGame* cStatePlayGame::Instance()
 //  *******************************************************************************************************************
 void cStatePlayGame::VOnEnter(cGame *pGame)
 {
-	IGameFlowStates::VOnEnter(pGame);
+	cGameFlowStates::VOnEnter(pGame);
 	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRenderSystem()));
 	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cInputSystem()));
 	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cPhysicsSystem()));
@@ -74,16 +74,4 @@ void cStatePlayGame::VOnExit()
 {
 	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
-}
-
-//  *******************************************************************************************************************
-bool cStatePlayGame::VOnMessage(const Telegram & msg)
-{
-	return false;
-}
-
-//  *******************************************************************************************************************
-void cStatePlayGame::EscapePressedListener(IEventDataPtr pEventData)
-{
-	PostQuitMessage(0);
 }

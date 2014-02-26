@@ -85,6 +85,7 @@
     <ClInclude Include="src\GameFlowStateMachine.h" />
     <ClInclude Include="src\GameFlowStates.h" />
     <ClInclude Include="src\Level.h" />
+    <ClInclude Include="src\StateMenuScreen.h" />
     <ClInclude Include="src\Messages.h" />
     <ClInclude Include="src\Paddle.h" />
     <ClInclude Include="src\StatePlayGame.h" />
@@ -93,6 +94,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameFlowStates.cpp" />
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\BaseBrick.cpp" />
     <ClCompile Include="src\BreakoutEntityFactory.cpp" />
@@ -101,6 +103,7 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameFlowStateMachine.cpp" />
     <ClCompile Include="src\Level.cpp" />
+    <ClCompile Include="src\StateMenuScreen.cpp" />
     <ClCompile Include="src\Paddle.cpp" />
     <ClCompile Include="src\StatePlayGame.cpp" />
     <ClCompile Include="src\StateTitleScreen.cpp" />

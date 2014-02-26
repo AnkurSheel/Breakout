@@ -45,6 +45,9 @@
     <ClInclude Include="src\StateTitleScreen.h">
       <Filter>States</Filter>
     </ClInclude>
+    <ClInclude Include="src\StateMenuScreen.h">
+      <Filter>States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -72,6 +75,12 @@
       <Filter>Elements</Filter>
     </ClCompile>
     <ClCompile Include="src\StateTitleScreen.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StateMenuScreen.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFlowStates.cpp">
       <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>

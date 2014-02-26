@@ -15,7 +15,7 @@ namespace GameBase
 }
 
 class cStatePlayGame 
-	: public IGameFlowStates
+	: public cGameFlowStates
 {
 public:
 	virtual ~cStatePlayGame();
@@ -23,8 +23,6 @@ public:
 	virtual void VOnEnter(cGame *pGame);
 	virtual void VOnUpdate(const TICK currentTick, const float deltaTime);
 	virtual void VOnExit();
-	virtual bool VOnMessage(const AI::Telegram &msg);
-	void EscapePressedListener(GameBase::IEventDataPtr pEventData);
 
 private:
 	cStatePlayGame();
