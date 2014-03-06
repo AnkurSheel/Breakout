@@ -51,6 +51,9 @@
     <ClInclude Include="src\StateOptionScreen.h">
       <Filter>States</Filter>
     </ClInclude>
+    <ClInclude Include="src\StatePauseScreen.h">
+      <Filter>States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -87,6 +90,9 @@
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="src\StateOptionScreen.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatePauseScreen.cpp">
       <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>

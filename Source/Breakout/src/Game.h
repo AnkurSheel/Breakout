@@ -54,5 +54,6 @@ private:
 	friend class cStateMenuScreen;
 	friend class cStatePlayGame;
 	friend class cStateOptionsScreen;
+	friend class cStatePauseScreen;
 };
 #endif // Game_h__

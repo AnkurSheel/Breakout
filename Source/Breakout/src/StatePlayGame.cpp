@@ -13,7 +13,6 @@
 #include "InputSystem.h"
 #include "Config.h"
 #include "Level.h"
-#include "FSM\Telegram.h"
 #include "HumanView.h"
 #include "Timer.hxx"
 #include "EventManager.hxx"
@@ -21,6 +20,8 @@
 #include "UiManager.hxx"
 #include "BaseControl.hxx"
 #include "Timer.hxx"
+#include "StatePauseScreen.h"
+#include "GameFlowStateMachine.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -130,7 +131,10 @@ void cStatePlayGame::VOnResume()
 //  *******************************************************************************************************************
 void cStatePlayGame::EscapePressedListener(IEventDataPtr pEventData)
 {
-	cGameFlowStates::EscapePressedListener(pEventData);
+	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
+	{
+		m_pOwner->m_pStateMachine->RequestPushState(cStatePauseScreen::Instance());
+	}
 }
 
 //  *******************************************************************************************************************

@@ -89,6 +89,7 @@
     <ClInclude Include="src\Messages.h" />
     <ClInclude Include="src\Paddle.h" />
     <ClInclude Include="src\StateOptionScreen.h" />
+    <ClInclude Include="src\StatePauseScreen.h" />
     <ClInclude Include="src\StatePlayGame.h" />
     <ClInclude Include="src\StateTitleScreen.h" />
     <ClInclude Include="src\Wall.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="src\StateMenuScreen.cpp" />
     <ClCompile Include="src\Paddle.cpp" />
     <ClCompile Include="src\StateOptionScreen.cpp" />
+    <ClCompile Include="src\StatePauseScreen.cpp" />
     <ClCompile Include="src\StatePlayGame.cpp" />
     <ClCompile Include="src\StateTitleScreen.cpp" />
     <ClCompile Include="src\Wall.cpp" />
