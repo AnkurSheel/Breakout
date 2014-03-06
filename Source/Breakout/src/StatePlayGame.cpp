@@ -20,14 +20,17 @@
 #include "EscapePressedEventData.h"
 #include "UiManager.hxx"
 #include "BaseControl.hxx"
+#include "Timer.hxx"
 
 using namespace Base;
 using namespace GameBase;
 using namespace AI;
 using namespace Graphics;
+using namespace Utilities;
 
 //  *******************************************************************************************************************
 cStatePlayGame::cStatePlayGame()
+	: m_pGameTimer(NULL)
 {
 }
 
@@ -62,7 +65,11 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 	{
 		m_pHUDScreen = IUiManager::GetInstance()->VCreateUI("HUD");
 		pGame->m_pHumanView->m_pAppWindowControl->VAddChildControl(m_pHUDScreen);
+		m_pTimerLabel = m_pHUDScreen->VFindChildControl("TimerLabel");
 	}
+
+	m_pGameTimer = ITimer::CreateTimer();
+	m_pGameTimer->VStartTimer();
 
 	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VAddListener(listener, cEscapePressedEventData::m_Name);
@@ -71,10 +78,16 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 //  *******************************************************************************************************************
 void cStatePlayGame::VOnUpdate(const TICK currentTick, const float deltaTime)
 {
-	if(m_pOwner != NULL && m_pOwner->m_pGameTimer != NULL)
+	if(m_pOwner != NULL)
 	{
 		IEntityManager::GetInstance()->VUpdate(deltaTime);
 		m_pOwner->m_pHumanView->VOnUpdate(currentTick, deltaTime);
+	}
+
+	if(m_pGameTimer != NULL)
+	{
+		m_pGameTimer->VOnUpdate();
+		DisplayTimerOnHUD();
 	}
 }
 
@@ -82,10 +95,54 @@ void cStatePlayGame::VOnUpdate(const TICK currentTick, const float deltaTime)
 void cStatePlayGame::VOnExit()
 {
 	m_pHUDScreen.reset();
+	m_pTimerLabel.reset();
 	if (m_pOwner->m_pHumanView->m_pAppWindowControl != NULL)
 	{
 		m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("HUD");
 	}
+
+	SafeDelete(&m_pGameTimer);
+
 	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
+}
+
+//  *******************************************************************************************************************
+void cStatePlayGame::VOnPause()
+{
+	cGameFlowStates::VOnPause();
+	if(m_pGameTimer != NULL)
+	{
+		m_pGameTimer->VStopTimer();
+	}
+}
+
+//  *******************************************************************************************************************
+void cStatePlayGame::VOnResume()
+{
+	cGameFlowStates::VOnResume();
+	if(m_pGameTimer != NULL)
+	{
+		m_pGameTimer->VStartTimer();
+	}
+}
+
+//  *******************************************************************************************************************
+void cStatePlayGame::EscapePressedListener(IEventDataPtr pEventData)
+{
+	cGameFlowStates::EscapePressedListener(pEventData);
+}
+
+//  *******************************************************************************************************************
+void cStatePlayGame::DisplayTimerOnHUD()
+{
+	if(m_pTimerLabel != NULL)
+	{
+		int time = static_cast<int>(m_pGameTimer->VGetRunningTime());
+		int hour = time / 3600;
+		time = time % 3600;
+		int min = time / 60;
+		int sec = time % 60;
+		m_pTimerLabel->VSetText(cString(30, "%02d:%02d:%02d", hour, min, sec));
+	}
 }

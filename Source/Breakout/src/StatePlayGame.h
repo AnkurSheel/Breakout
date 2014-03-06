@@ -11,7 +11,11 @@
 namespace Graphics
 {
 	class IBaseControl;
-	struct stUIEventCallbackParam;
+}
+
+namespace Utilities
+{
+	class ITimer;
 }
 
 class cStatePlayGame 
@@ -26,8 +30,13 @@ public:
 
 private:
 	cStatePlayGame();
-
+	void DisplayTimerOnHUD();
+	void EscapePressedListener(GameBase::IEventDataPtr pEventData);
+	void VOnPause();
+	void VOnResume();
 private:
-	shared_ptr<Graphics::IBaseControl>		m_pHUDScreen;
+	shared_ptr<Graphics::IBaseControl>	m_pHUDScreen;
+	shared_ptr<Graphics::IBaseControl>	m_pTimerLabel;
+	Utilities::ITimer *	m_pGameTimer;
 };
 #endif // StatePlayGame_h__
