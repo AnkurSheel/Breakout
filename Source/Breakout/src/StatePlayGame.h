@@ -8,10 +8,10 @@
 
 #include "GameFlowStates.h"
 
-namespace GameBase
+namespace Graphics
 {
-	class IEventData;
-	typedef shared_ptr<IEventData> IEventDataPtr;
+	class IBaseControl;
+	struct stUIEventCallbackParam;
 }
 
 class cStatePlayGame 
@@ -26,5 +26,8 @@ public:
 
 private:
 	cStatePlayGame();
+
+private:
+	shared_ptr<Graphics::IBaseControl>		m_pHUDScreen;
 };
 #endif // StatePlayGame_h__

@@ -18,10 +18,13 @@
 #include "Timer.hxx"
 #include "EventManager.hxx"
 #include "EscapePressedEventData.h"
+#include "UiManager.hxx"
+#include "BaseControl.hxx"
 
 using namespace Base;
 using namespace GameBase;
 using namespace AI;
+using namespace Graphics;
 
 //  *******************************************************************************************************************
 cStatePlayGame::cStatePlayGame()
@@ -55,6 +58,12 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 	IEntityManager::GetInstance()->VAddEntity("paddle");
 	IEntityManager::GetInstance()->VAddEntity("ball");
 
+	if (pGame->m_pHumanView->m_pAppWindowControl != NULL)
+	{
+		m_pHUDScreen = IUiManager::GetInstance()->VCreateUI("HUD");
+		pGame->m_pHumanView->m_pAppWindowControl->VAddChildControl(m_pHUDScreen);
+	}
+
 	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VAddListener(listener, cEscapePressedEventData::m_Name);
 }
@@ -72,6 +81,11 @@ void cStatePlayGame::VOnUpdate(const TICK currentTick, const float deltaTime)
 //  *******************************************************************************************************************
 void cStatePlayGame::VOnExit()
 {
+	m_pHUDScreen.reset();
+	if (m_pOwner->m_pHumanView->m_pAppWindowControl != NULL)
+	{
+		m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("HUD");
+	}
 	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
 }
