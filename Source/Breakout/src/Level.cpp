@@ -1,8 +1,8 @@
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  Level   version:  1.0   Ankur Sheel  date: 2013/05/14
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  purpose:	
-// *****************************************************************************
+//  *******************************************************************************************************************
 #include "stdafx.h"
 #include "Level.h"
 #include "XMLNode.hxx"
@@ -14,9 +14,9 @@
 #include "BaseEntity.h"
 #include "EntityManager.hxx"
 #include "GameOptions.h"
-#include "BaseBrick.h"
-#include "Wall.h"
 #include "TransformComponent.h"
+#include "PhysicsComponent.h"
+#include "BaseEntity.h"
 
 using namespace Base;
 using namespace Utilities;
@@ -25,19 +25,19 @@ using namespace GameBase;
 
 cLevel cLevel::Level;
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 cLevel::cLevel()
 	: m_pParamLoader(NULL)
 {
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 cLevel::~cLevel()
 {
 	SafeDelete(&m_pParamLoader);
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 bool cLevel::Initialize(const cString & LevelName)
 {
 	if (LevelName.IsEmpty())
@@ -83,17 +83,16 @@ bool cLevel::Initialize(const cString & LevelName)
 	return true;
 }
 
-// *****************************************************************************
+//  *******************************************************************************************************************
 void cLevel::GenerateMap()
 {
-	const cEntityDef * const pEntityDef = cConfig::GetEntityDef(cBaseBrick::m_Name);
 	float MapHt = m_pParamLoader->VGetParameterValueAsFloat("-MapHtAsScreenFraction", 0.3f);
 	
 	cVector3 BrickScale;
 	BrickScale.x = cGameOptions::GameOptions().iWidth / m_BrickMapSize.y;
 	BrickScale.y = cGameOptions::GameOptions().iHeight * MapHt / m_BrickMapSize.x;
 
-	cBaseBrick * pEntity = NULL; 
+	cBaseEntity * pEntity = NULL; 
 	cVector3 curPos;
 
 	for(int i = 0; i < m_BrickMapSize.y; i++)
@@ -102,7 +101,7 @@ void cLevel::GenerateMap()
 		for(int j = 0; j < m_BrickMapSize.x; j++)
 		{
 			curPos.y = j * BrickScale.y;
-			pEntity = dynamic_cast<cBaseBrick *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
+			pEntity = dynamic_cast<cBaseEntity *>(IEntityManager::GetInstance()->VAddEntity("basebrick"));
 			if (pEntity != NULL)
 			{
 				pEntity->VInitialize();
@@ -111,22 +110,22 @@ void cLevel::GenerateMap()
 				{
 					pTransFormComponent->SetPosition(curPos);
 					pTransFormComponent->SetSize(BrickScale);
-					pEntity->VOnInitialized();
 				}
+				pEntity->VOnInitialized();
 			}
 		}
 	}
 }
 
+//  *******************************************************************************************************************
 void cLevel::AddWalls()
 {
-	const cEntityDef * const pEntityDef = cConfig::GetEntityDef(cBaseBrick::m_Name);
-	
 	cVector3 BrickScale;
 	BrickScale.x = 20;
 	BrickScale.y = cGameOptions::GameOptions().iHeight;
 
-	cWall * pEntity = dynamic_cast<cWall *>(IEntityManager::GetInstance()->VAddEntity("wall"));
+	// left wall
+	cBaseEntity * pEntity = dynamic_cast<cBaseEntity *>(IEntityManager::GetInstance()->VAddEntity("wall"));
 	if (pEntity != NULL)
 	{
 		cTransformComponent * pTransFormComponent = dynamic_cast<cTransformComponent *>(pEntity->GetComponent(cTransformComponent::GetName().GetHash()));
@@ -134,11 +133,12 @@ void cLevel::AddWalls()
 		{
 			pTransFormComponent->SetPosition(cVector3(-15.0f, 0.0f, 0.0f));
 			pTransFormComponent->SetSize(BrickScale);
-			pEntity->VOnInitialized();
 		}
+		pEntity->VOnInitialized();
 	}
 
-	pEntity = dynamic_cast<cWall *>(IEntityManager::GetInstance()->VAddEntity("wall"));
+	// right wall
+	pEntity = dynamic_cast<cBaseEntity *>(IEntityManager::GetInstance()->VAddEntity("wall"));
 	if (pEntity != NULL)
 	{
 		pEntity->VInitialize();
@@ -147,11 +147,12 @@ void cLevel::AddWalls()
 		{
 			pTransFormComponent->SetPosition(cVector3(cGameOptions::GameOptions().iWidth - 5.0f, 0.0f, 0.0f));
 			pTransFormComponent->SetSize(BrickScale);
-			pEntity->VOnInitialized();
 		}
+		pEntity->VOnInitialized();
 	}
-	
-	pEntity = dynamic_cast<cWall *>(IEntityManager::GetInstance()->VAddEntity("wall"));
+
+	//bottom wall
+	pEntity = dynamic_cast<cBaseEntity *>(IEntityManager::GetInstance()->VAddEntity("wall"));
 	if (pEntity != NULL)
 	{
 		pEntity->VInitialize();
@@ -160,11 +161,18 @@ void cLevel::AddWalls()
 		{
 			pTransFormComponent->SetPosition(cVector3(7.0f, cGameOptions::GameOptions().iHeight-5.0f, 0.0f));
 			pTransFormComponent->SetSize(cVector3(cGameOptions::GameOptions().iWidth-15.0f, 20.0f, 0.0f));
-			pEntity->VOnInitialized();
 		}
+
+		cPhysicsComponent * pPhysicsComponent = dynamic_cast<cPhysicsComponent *>(pEntity->GetComponent(cPhysicsComponent::GetName().GetHash()));
+		if(pTransFormComponent != NULL)
+		{
+			pPhysicsComponent->SetAsTrigger(true);
+		}
+		pEntity->VOnInitialized();
 	}
 
-	pEntity = dynamic_cast<cWall *>(IEntityManager::GetInstance()->VAddEntity("wall"));
+	//top wall
+	pEntity = dynamic_cast<cBaseEntity *>(IEntityManager::GetInstance()->VAddEntity("wall"));
 	if (pEntity != NULL)
 	{
 		pEntity->VInitialize();
@@ -173,7 +181,7 @@ void cLevel::AddWalls()
 		{
 			pTransFormComponent->SetPosition(cVector3(7.0f, -15.0f, 0.0f));
 			pTransFormComponent->SetSize(cVector3(cGameOptions::GameOptions().iWidth-15.0f, 20.0f, 0.0f));
-			pEntity->VOnInitialized();
 		}
+		pEntity->VOnInitialized();
 	}
 }
