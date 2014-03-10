@@ -54,6 +54,9 @@
     <ClInclude Include="src\StatePauseScreen.h">
       <Filter>States</Filter>
     </ClInclude>
+    <ClInclude Include="src\LifeLostEventData.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -94,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="src\StatePauseScreen.cpp">
       <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LifeLostEventData.cpp">
+      <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

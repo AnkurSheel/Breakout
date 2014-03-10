@@ -13,6 +13,8 @@
 #include "BaseBrick.h"
 #include "entitymanager.hxx"
 #include "Wall.h"
+#include "LifeLostEventData.h"
+#include "EventManager.hxx"
 
 using namespace Base;
 using namespace GameBase;
@@ -100,5 +102,7 @@ void cBall::VOnEnteredTrigger(IBaseEntity * const pTrigger)
 {
 	if(pTrigger->VGetType() == cWall::m_Name)
 	{
+		shared_ptr<cLifeLostEventData> pEvent(DEBUG_NEW cLifeLostEventData());
+		IEventManager::Instance()->VTriggerEvent(pEvent);
 	}
 }
