@@ -1,8 +1,8 @@
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  BaseBrick   version:  1.0   Ankur Sheel  date: 2013/05/14
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  purpose:	
-// *****************************************************************************
+//  *******************************************************************************************************************
 #ifndef BaseBrick_h__
 #define BaseBrick_h__
 
@@ -33,6 +33,7 @@ private:
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
 	void VOnCollided(IBaseEntity * const pEntityCollider);
+	void VOnEnteredTrigger(IBaseEntity * const pTrigger){}
 
 private:
 	template<class BaseType, class SubType> 

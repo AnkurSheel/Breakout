@@ -1,8 +1,8 @@
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  Paddle   version:  1.0   Ankur Sheel  date: 2013/04/04
-// *****************************************************************************
+//  *******************************************************************************************************************
 //  purpose:	
-// *****************************************************************************
+//  *******************************************************************************************************************
 #ifndef Paddle_h__
 #define Paddle_h__
 
@@ -39,6 +39,7 @@ private:
 	Base::cString VGetName() const { return m_Name.GetString(); }
 	void VHandleInput(const unsigned int CharID, const float deltaTime);
 	void VOnCollided(IBaseEntity * const pEntityCollider);
+	void VOnEnteredTrigger(IBaseEntity * const pTrigger){}
 
 private:
 	Base::cVector3					m_ForceDirection;
