@@ -22,6 +22,7 @@
 #include "Timer.hxx"
 #include "StatePauseScreen.h"
 #include "GameFlowStateMachine.h"
+#include "LifeLostEventData.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -74,6 +75,9 @@ void cStatePlayGame::VOnEnter(cGame *pGame)
 
 	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VAddListener(listener, cEscapePressedEventData::m_Name);
+
+	EventListenerCallBackFn onLifeLostlistener = bind(&cStatePlayGame::OnLifeLost, this, _1);
+	IEventManager::Instance()->VAddListener(onLifeLostlistener, cLifeLostEventData::m_Name);
 }
 
 //  *******************************************************************************************************************
@@ -106,6 +110,9 @@ void cStatePlayGame::VOnExit()
 
 	EventListenerCallBackFn listener = bind(&cStatePlayGame::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
+
+	EventListenerCallBackFn onLifeLostlistener = bind(&cStatePlayGame::OnLifeLost, this, _1);
+	IEventManager::Instance()->VRemoveListener(onLifeLostlistener, cLifeLostEventData::m_Name);
 }
 
 //  *******************************************************************************************************************
@@ -116,6 +123,8 @@ void cStatePlayGame::VOnPause()
 	{
 		m_pGameTimer->VStopTimer();
 	}
+	m_pOwner->VGetProcessManager()->VSetProcessesPaused("PhysicsSystem", true);
+	m_pOwner->VGetProcessManager()->VSetProcessesPaused("InputSystem", true);
 }
 
 //  *******************************************************************************************************************
@@ -126,10 +135,21 @@ void cStatePlayGame::VOnResume()
 	{
 		m_pGameTimer->VStartTimer();
 	}
+	m_pOwner->VGetProcessManager()->VSetProcessesPaused("PhysicsSystem", false);
+	m_pOwner->VGetProcessManager()->VSetProcessesPaused("InputSystem", false);
 }
 
 //  *******************************************************************************************************************
 void cStatePlayGame::EscapePressedListener(IEventDataPtr pEventData)
+{
+	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
+	{
+		m_pOwner->m_pStateMachine->RequestPushState(cStatePauseScreen::Instance());
+	}
+}
+
+//  *******************************************************************************************************************
+void cStatePlayGame::OnLifeLost(IEventDataPtr pEventData)
 {
 	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
 	{

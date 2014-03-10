@@ -32,8 +32,10 @@ private:
 	cStatePlayGame();
 	void DisplayTimerOnHUD();
 	void EscapePressedListener(GameBase::IEventDataPtr pEventData);
+	void OnLifeLost(GameBase::IEventDataPtr pEventData);
 	void VOnPause();
 	void VOnResume();
+
 private:
 	shared_ptr<Graphics::IBaseControl>	m_pHUDScreen;
 	shared_ptr<Graphics::IBaseControl>	m_pTimerLabel;
