@@ -78,6 +78,7 @@
     <ClInclude Include="Includes\GameDefines.h" />
     <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\BaseBrick.h" />
+    <ClInclude Include="src\BreakoutConfig.h" />
     <ClInclude Include="src\BreakoutEntityFactory.h" />
     <ClInclude Include="src\BreakoutView.h" />
     <ClInclude Include="src\EscapePressedEventData.h" />
@@ -100,6 +101,7 @@
     <ClCompile Include="GameFlowStates.cpp" />
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\BaseBrick.cpp" />
+    <ClCompile Include="src\BreakoutConfig.cpp" />
     <ClCompile Include="src\BreakoutEntityFactory.cpp" />
     <ClCompile Include="src\BreakoutView.cpp" />
     <ClCompile Include="src\EscapePressedEventData.cpp" />

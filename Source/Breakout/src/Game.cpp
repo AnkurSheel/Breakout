@@ -10,7 +10,7 @@
 #include "BaseControl.hxx"
 #include "StateTitleScreen.h"
 #include "BreakoutEntityFactory.h"
-#include "Config.h"
+#include "BreakOutConfig.h"
 #include "ComponentFactory.h"
 #include "EntityManager.hxx"
 #include "EventManager.hxx"
@@ -37,18 +37,17 @@ cGame::~cGame()
 }
 
 //  *******************************************************************************************************************
-void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
-							  const cString & strOptionsFile)
+void cGame::VOnInitialization(const HINSTANCE & hInstance, const int CmdShow, const cString & OptionsFile)
 {
-	cBaseApp::VOnInitialization(hInstance, nCmdShow, strOptionsFile);
+	cBaseApp::VOnInitialization(hInstance, CmdShow, OptionsFile);
 
 	if(m_Quitting)
 	{
 		return;
 	}
 
-	m_iDisplayHeight = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetHeight());
-	m_iDisplayWidth = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetWidth());
+	m_DisplayHeight = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetHeight());
+	m_DisplayWidth = static_cast<int>(m_pHumanView->m_pAppWindowControl->VGetWidth());
 
 	m_pStateMachine = DEBUG_NEW cGameFlowStateMachine(this);
 	
@@ -57,6 +56,9 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int nCmdShow,
 	IEventManager::Instance()->VInitializeEventFactory(shared_ptr<cEventFactory>(DEBUG_NEW cEventFactory()));
 
 	m_pStateMachine->SetCurrentState(cStateTitleScreen::Instance());
+
+	m_pConfig = DEBUG_NEW cBreakoutConfig();
+	m_pConfig->VInitialize("GameConfig");
 }
 
 void cGame::VCreateHumanView()
@@ -93,7 +95,7 @@ bool cGame::VOnHandleMessage(const AI::Telegram & telegram)
 }
 
 //  *******************************************************************************************************************
-IBaseApp * IGame::CreateGame(const cString strName)
+IBaseApp * IGame::CreateGame(const cString Name)
 {
-	return DEBUG_NEW cGame(strName);
+	return DEBUG_NEW cGame(Name);
 }

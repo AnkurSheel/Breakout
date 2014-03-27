@@ -49,15 +49,13 @@ cStatePlayGame* cStatePlayGame::Instance()
 }
 
 //  *******************************************************************************************************************
-void cStatePlayGame::VOnEnter(cGame *pGame)
+void cStatePlayGame::VOnEnter(cGame * pGame)
 {
 	cGameFlowStates::VOnEnter(pGame);
 	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cRenderSystem()));
 	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cInputSystem()));
 	m_pOwner->VGetProcessManager()->VAttachProcess(shared_ptr<Utilities::cProcess>(DEBUG_NEW cPhysicsSystem()));
 
-	pGame->m_pConfig = DEBUG_NEW cConfig();
-	pGame->m_pConfig->Initialize("Entities");
 	cLevel::Level.Initialize("level1");
 
 	IEntityManager::GetInstance()->VAddEntity("paddle");

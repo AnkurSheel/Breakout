@@ -1,23 +1,31 @@
 //  *******************************************************************************************************************
-//  Game   version:  1.0   Ankur Sheel  date: 2013/04/02
+//  BreakoutConfig   version:  1.0   Ankur Sheel  date: 2014/03/27
 //  *******************************************************************************************************************
 //  purpose:	
 //  *******************************************************************************************************************
-#ifndef Game_hxx__
-#define Game_hxx__
+#ifndef BreakoutConfig_h__
+#define BreakoutConfig_h__
 
-#include "GameDefines.h"
-#include "Vector3.h"
+#include "Config.h"
+
+class cGame;
 
 namespace GameBase
 {
 	class IBaseApp;
 }
 
-class IGame 
+class cBreakoutConfig 
+	: public GameBase::cConfig
 {
 public:
-	virtual ~IGame(){}
-	BREAKOUT_API static GameBase::IBaseApp * CreateGame(const Base::cString Name);
+	cBreakoutConfig();
+	~cBreakoutConfig();
+
+private:
+	void VInitialize(const Base::cString & FileName);
+
+private:
+	int	m_Lives;
 };
-#endif // Game_hxx__
+#endif // BreakoutConfig_h__

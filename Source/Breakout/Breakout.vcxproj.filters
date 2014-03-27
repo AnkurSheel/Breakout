@@ -57,6 +57,7 @@
     <ClInclude Include="src\LifeLostEventData.h">
       <Filter>Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\BreakoutConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -101,5 +102,6 @@
     <ClCompile Include="src\LifeLostEventData.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="src\BreakoutConfig.cpp" />
   </ItemGroup>
 </Project>

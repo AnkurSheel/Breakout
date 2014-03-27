@@ -50,7 +50,7 @@ void cStateTitleScreen::VOnEnter(cGame *pGame)
 	{
 		m_pTitleScreen = IUiManager::GetInstance()->VCreateUI("titlescreen");
 		pGame->m_pHumanView->m_pAppWindowControl->VAddChildControl(m_pTitleScreen);
-		m_Position = cVector2(0.0f, m_pOwner->m_iDisplayHeight);
+		m_Position = cVector2(0.0f, m_pOwner->m_DisplayHeight);
 	}
 
 	EventListenerCallBackFn listener = bind(&cStateTitleScreen::EscapePressedListener, this, _1);
