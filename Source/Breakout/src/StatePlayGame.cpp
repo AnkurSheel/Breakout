@@ -23,6 +23,8 @@
 #include "StatePauseScreen.h"
 #include "GameFlowStateMachine.h"
 #include "LifeLostEventData.h"
+#include "KeyboardController.hxx"
+#include "BaseEntity.hxx"
 
 using namespace Base;
 using namespace GameBase;
@@ -33,6 +35,9 @@ using namespace Utilities;
 //  *******************************************************************************************************************
 cStatePlayGame::cStatePlayGame()
 	: m_pGameTimer(NULL)
+	, m_WaitingToStart(false)
+	, m_pPaddle(NULL)
+	, m_pBall(NULL)
 {
 }
 
@@ -58,14 +63,22 @@ void cStatePlayGame::VOnEnter(cGame * pGame)
 
 	cLevel::Level.Initialize("level1");
 
-	IEntityManager::GetInstance()->VAddEntity("paddle");
-	IEntityManager::GetInstance()->VAddEntity("ball");
+	m_pPaddle = IEntityManager::GetInstance()->VAddEntity("paddle");
+	m_pBall = IEntityManager::GetInstance()->VAddEntity("ball");
 
 	if (pGame->m_pHumanView->m_pAppWindowControl != NULL)
 	{
 		m_pHUDScreen = IUiManager::GetInstance()->VCreateUI("HUD");
 		pGame->m_pHumanView->m_pAppWindowControl->VAddChildControl(m_pHUDScreen);
 		m_pTimerLabel = m_pHUDScreen->VFindChildControl("TimerLabel");
+		m_pLivesLabel = m_pHUDScreen->VFindChildControl("LivesLabel");
+		m_pBeginLabel = m_pHUDScreen->VFindChildControl("StartGame");
+		m_pGameOverLabel = m_pHUDScreen->VFindChildControl("GameOver");
+
+		if(m_pLivesLabel != NULL)
+		{
+			m_pLivesLabel->VSetText(cString(20, "%01d", m_pOwner->m_CurrentLives));
+		}
 	}
 
 	m_pGameTimer = ITimer::CreateTimer();
@@ -76,21 +89,43 @@ void cStatePlayGame::VOnEnter(cGame * pGame)
 
 	EventListenerCallBackFn onLifeLostlistener = bind(&cStatePlayGame::OnLifeLost, this, _1);
 	IEventManager::Instance()->VAddListener(onLifeLostlistener, cLifeLostEventData::m_Name);
+
+	WaitToStart(true);
 }
 
 //  *******************************************************************************************************************
 void cStatePlayGame::VOnUpdate(const TICK currentTick, const float deltaTime)
 {
-	if(m_pOwner != NULL)
+	if(m_WaitingToStart)
 	{
-		IEntityManager::GetInstance()->VUpdate(deltaTime);
-		m_pOwner->m_pHumanView->VOnUpdate(currentTick, deltaTime);
+		if(IKeyboardController::Instance()->VIsKeyPressed(VK_SPACE))
+		{
+			m_WaitingToStart = false;
+			if(m_pBeginLabel != NULL)
+			{
+				m_pBeginLabel->VSetVisible(false);
+			}
+			if(m_pGameTimer != NULL)
+			{
+				m_pGameTimer->VStartTimer();
+			}
+			m_pOwner->VGetProcessManager()->VSetProcessesPaused("PhysicsSystem", false);
+			m_pOwner->VGetProcessManager()->VSetProcessesPaused("InputSystem", false);
+		}
 	}
-
-	if(m_pGameTimer != NULL)
+	else
 	{
-		m_pGameTimer->VOnUpdate();
-		DisplayTimerOnHUD();
+		if(m_pOwner != NULL)
+		{
+			IEntityManager::GetInstance()->VUpdate(deltaTime);
+			m_pOwner->m_pHumanView->VOnUpdate(currentTick, deltaTime);
+		}
+
+		if(m_pGameTimer != NULL)
+		{
+			m_pGameTimer->VOnUpdate();
+			DisplayTimerOnHUD();
+		}
 	}
 }
 
@@ -99,6 +134,10 @@ void cStatePlayGame::VOnExit()
 {
 	m_pHUDScreen.reset();
 	m_pTimerLabel.reset();
+	m_pLivesLabel.reset();
+	m_pBeginLabel.reset();
+	m_pGameOverLabel.reset();
+
 	if (m_pOwner->m_pHumanView->m_pAppWindowControl != NULL)
 	{
 		m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("HUD");
@@ -117,24 +156,14 @@ void cStatePlayGame::VOnExit()
 void cStatePlayGame::VOnPause()
 {
 	cGameFlowStates::VOnPause();
-	if(m_pGameTimer != NULL)
-	{
-		m_pGameTimer->VStopTimer();
-	}
-	m_pOwner->VGetProcessManager()->VSetProcessesPaused("PhysicsSystem", true);
-	m_pOwner->VGetProcessManager()->VSetProcessesPaused("InputSystem", true);
+	WaitToStart(true);
 }
 
 //  *******************************************************************************************************************
 void cStatePlayGame::VOnResume()
 {
 	cGameFlowStates::VOnResume();
-	if(m_pGameTimer != NULL)
-	{
-		m_pGameTimer->VStartTimer();
-	}
-	m_pOwner->VGetProcessManager()->VSetProcessesPaused("PhysicsSystem", false);
-	m_pOwner->VGetProcessManager()->VSetProcessesPaused("InputSystem", false);
+	WaitToStart(false);
 }
 
 //  *******************************************************************************************************************
@@ -149,16 +178,44 @@ void cStatePlayGame::EscapePressedListener(IEventDataPtr pEventData)
 //  *******************************************************************************************************************
 void cStatePlayGame::OnLifeLost(IEventDataPtr pEventData)
 {
-	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
+	WaitToStart(true);
+
+	m_pOwner->m_CurrentLives--;
+	if(m_pLivesLabel != NULL)
 	{
-		m_pOwner->m_pStateMachine->RequestPushState(cStatePauseScreen::Instance());
+		m_pLivesLabel->VSetText(cString(20, "%01d", m_pOwner->m_CurrentLives));
+	}
+
+	if(m_pPaddle != NULL)
+	{
+		m_pPaddle->VOnRestart();
+	}
+
+	if(m_pBall != NULL)
+	{
+		m_pBall->VOnRestart();
+	}
+
+	if(m_pOwner->m_CurrentLives > 0)
+	{
+		if(m_pBeginLabel != NULL)
+		{
+			m_pBeginLabel->VSetVisible(true);
+		}
+	}
+	else
+	{
+		if(m_pGameOverLabel!= NULL)
+		{
+			m_pGameOverLabel->VSetVisible(true);
+		}
 	}
 }
 
 //  *******************************************************************************************************************
 void cStatePlayGame::DisplayTimerOnHUD()
 {
-	if(m_pTimerLabel != NULL)
+	if(m_pTimerLabel != NULL && m_pGameTimer != NULL)
 	{
 		int time = static_cast<int>(m_pGameTimer->VGetRunningTime());
 		int hour = time / 3600;
@@ -167,4 +224,26 @@ void cStatePlayGame::DisplayTimerOnHUD()
 		int sec = time % 60;
 		m_pTimerLabel->VSetText(cString(30, "%02d:%02d:%02d", hour, min, sec));
 	}
+}
+
+//  *******************************************************************************************************************
+void cStatePlayGame::WaitToStart(bool Wait)
+{
+	m_WaitingToStart = Wait;
+	
+	if(m_pGameTimer != NULL)
+	{
+		if(Wait)
+		{
+			m_pGameTimer->VStopTimer();
+		}
+		else
+		{
+			m_pGameTimer->VStartTimer();
+		}
+	}
+	m_pOwner->VGetProcessManager()->VSetProcessesPaused("PhysicsSystem", Wait);
+	m_pOwner->VGetProcessManager()->VSetProcessesPaused("InputSystem", Wait);
+
+
 }

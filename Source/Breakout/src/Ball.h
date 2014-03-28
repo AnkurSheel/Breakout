@@ -47,6 +47,7 @@ private:
 	Base::cString VGetName() const { return m_Name.GetString(); }
 	void VOnCollided(IBaseEntity * const pEntityCollider);
 	void VOnEnteredTrigger(IBaseEntity * const pTrigger);
+	void VOnRestart();
 
 private:
 	GameBase::cPhysicsComponent *	m_pPhysicsComponent;

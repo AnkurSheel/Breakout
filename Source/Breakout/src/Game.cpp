@@ -27,6 +27,7 @@ cGame::cGame(const Base::cString & Name)
 	: cBaseApp(Name)
 	, m_pStateMachine(NULL)
 	, m_pConfig(NULL)
+	, m_CurrentLives(1)
 {
 }
 
@@ -59,8 +60,11 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int CmdShow, co
 
 	m_pConfig = DEBUG_NEW cBreakoutConfig();
 	m_pConfig->VInitialize("GameConfig");
+
+	m_CurrentLives = m_pConfig->GetLives();
 }
 
+//  *******************************************************************************************************************
 void cGame::VCreateHumanView()
 {
 	m_pHumanView = DEBUG_NEW cBreakoutView();

@@ -39,7 +39,7 @@ private:
 	Base::cString VGetName() const { return m_Name.GetString(); }
 	void VHandleInput(const unsigned int CharID, const float deltaTime);
 	void VOnCollided(IBaseEntity * const pEntityCollider);
-	void VOnEnteredTrigger(IBaseEntity * const pTrigger){}
+	void VOnRestart();
 
 private:
 	Base::cVector3					m_ForceDirection;

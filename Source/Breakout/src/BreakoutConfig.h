@@ -21,9 +21,8 @@ class cBreakoutConfig
 public:
 	cBreakoutConfig();
 	~cBreakoutConfig();
-
-private:
 	void VInitialize(const Base::cString & FileName);
+	int GetLives() const { return m_Lives; }
 
 private:
 	int	m_Lives;

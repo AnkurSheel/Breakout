@@ -49,6 +49,7 @@ void cBall::VInitialize()
 	{
 		m_pTransFormComponent->SetPosition(cVector3(cGameOptions::GameOptions().iWidth/2.0f, cGameOptions::GameOptions().iHeight/2.0f, 0.0f));
 	}
+
 	if(m_pPhysicsComponent != NULL)
 	{
 		cVector3 direction;
@@ -57,6 +58,7 @@ void cBall::VInitialize()
 		Clamp<float>(direction.y, 0.5f, 1.0f);
 		m_pPhysicsComponent->ApplyForce(direction);
 	}
+
 	VOnInitialized();
 }
 
@@ -76,7 +78,7 @@ cBall * cBall::CastToBall()
 //  *******************************************************************************************************************
 void cBall::VOnUpdate(const float deltaTime)
 {
-	
+
 }
 
 //  *******************************************************************************************************************
@@ -105,4 +107,25 @@ void cBall::VOnEnteredTrigger(IBaseEntity * const pTrigger)
 		shared_ptr<cLifeLostEventData> pEvent(DEBUG_NEW cLifeLostEventData());
 		IEventManager::Instance()->VTriggerEvent(pEvent);
 	}
+}
+
+//  *******************************************************************************************************************
+void cBall::VOnRestart()
+{
+	if(m_pTransFormComponent != NULL)
+	{
+		m_pTransFormComponent->SetPosition(cVector3(cGameOptions::GameOptions().iWidth/2.0f, cGameOptions::GameOptions().iHeight/2.0f, 0.0f));
+	}
+
+	if(m_pPhysicsComponent != NULL)
+	{
+		cVector3 direction;
+		direction.x = m_pRandomGenerator->Random();
+		direction.y = m_pRandomGenerator->Random();
+		Clamp<float>(direction.y, 0.5f, 1.0f);
+		m_pPhysicsComponent->ApplyForce(direction);
+	}
+
+	cBaseEntity::VOnRestart();
+
 }

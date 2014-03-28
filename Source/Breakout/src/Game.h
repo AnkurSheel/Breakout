@@ -13,7 +13,6 @@ namespace GameBase
 {
 	class cHumanView;
 	class cGameElementDef;
-	class cConfig;
 	class cComponentFactory;
 }
 
@@ -24,7 +23,7 @@ namespace AI
 
 class cGameFlowStateMachine;
 class cBreakOutEntityFactory;
-
+class cBreakoutConfig;
 
 class cGame 
 	: public IGame
@@ -44,9 +43,10 @@ private:
 private:
 	int	m_DisplayHeight;	/// the display height of the window
 	int	m_DisplayWidth;	/// the display width of the window
+	int	m_CurrentLives;
 	cGameFlowStateMachine *	m_pStateMachine;	/// Pointer to the state machine
-	GameBase::cConfig *	m_pConfig;
-
+	cBreakoutConfig *	m_pConfig;
+	
 private:
 	friend class cBreakoutView;
 	friend class cStateTitleScreen;

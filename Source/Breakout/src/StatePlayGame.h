@@ -8,6 +8,11 @@
 
 #include "GameFlowStates.h"
 
+namespace GameBase
+{
+	class IBaseEntity;
+}
+
 namespace Graphics
 {
 	class IBaseControl;
@@ -35,10 +40,17 @@ private:
 	void OnLifeLost(GameBase::IEventDataPtr pEventData);
 	void VOnPause();
 	void VOnResume();
+	void WaitToStart(bool Wait);
 
 private:
 	shared_ptr<Graphics::IBaseControl>	m_pHUDScreen;
 	shared_ptr<Graphics::IBaseControl>	m_pTimerLabel;
+	shared_ptr<Graphics::IBaseControl>	m_pLivesLabel;
+	shared_ptr<Graphics::IBaseControl>	m_pBeginLabel;
+	shared_ptr<Graphics::IBaseControl>	m_pGameOverLabel;
+	GameBase::IBaseEntity * m_pPaddle;
+	GameBase::IBaseEntity * m_pBall;
 	Utilities::ITimer *	m_pGameTimer;
+	bool	m_WaitingToStart;
 };
 #endif // StatePlayGame_h__

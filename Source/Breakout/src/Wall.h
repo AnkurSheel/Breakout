@@ -32,8 +32,6 @@ private:
 	Base::cHashedString VGetType() const { return m_Name; }
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	Base::cString VGetName() const { return m_Name.GetString(); }
-	void VOnCollided(IBaseEntity * const pEntityCollider){}
-	void VOnEnteredTrigger(IBaseEntity * const pTrigger){}
 
 private:
 	template<class BaseType, class SubType> 
