@@ -6,7 +6,8 @@
 #include "stdafx.h"
 #include "BaseBrick.h"
 #include "Ball.h"
-#include "EntityManager.hxx"
+#include "EventManager.hxx"
+#include "BrickDestroyedEventData.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -52,7 +53,8 @@ void cBaseBrick::VOnCollided(IBaseEntity * const pEntityCollider)
 {
 	if(pEntityCollider->VGetType() == cBall::m_Name)
 	{
-		cBall * const pBall = dynamic_cast<cBall *>(pEntityCollider);
-		IEntityManager::GetInstance()->VDeleteEntity(this);
+		shared_ptr<cBrickDestroyedEventData> pEvent(DEBUG_NEW cBrickDestroyedEventData());
+		pEvent->m_pDestroyedEntity = this;
+		IEventManager::Instance()->VTriggerEvent(pEvent);
 	}
 }

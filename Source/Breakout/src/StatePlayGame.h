@@ -38,6 +38,7 @@ private:
 	void DisplayTimerOnHUD();
 	void EscapePressedListener(GameBase::IEventDataPtr pEventData);
 	void OnLifeLost(GameBase::IEventDataPtr pEventData);
+	void OnBrickDestroyed(GameBase::IEventDataPtr pEventData);
 	void VOnPause();
 	void VOnResume();
 	void WaitToStart(bool Wait);
@@ -51,6 +52,7 @@ private:
 	GameBase::IBaseEntity * m_pPaddle;
 	GameBase::IBaseEntity * m_pBall;
 	Utilities::ITimer *	m_pGameTimer;
+	int	m_RemainingBricks;
 	bool	m_WaitingToStart;
 };
 #endif // StatePlayGame_h__

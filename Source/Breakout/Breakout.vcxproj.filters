@@ -58,6 +58,9 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="src\BreakoutConfig.h" />
+    <ClInclude Include="src\BrickDestroyedEventData.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -103,5 +106,8 @@
       <Filter>Events</Filter>
     </ClCompile>
     <ClCompile Include="src\BreakoutConfig.cpp" />
+    <ClCompile Include="src\BrickDestroyedEventData.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

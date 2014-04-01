@@ -56,6 +56,8 @@ void cStateTitleScreen::VOnEnter(cGame *pGame)
 	EventListenerCallBackFn listener = bind(&cStateTitleScreen::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VAddListener(listener, cEscapePressedEventData::m_Name);
 	m_DelayTime = 2.0f;
+
+	m_pOwner->m_GameOver = false;
 }
 
 //  *******************************************************************************************************************

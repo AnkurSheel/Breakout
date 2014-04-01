@@ -39,6 +39,7 @@ private:
 	void VCleanup();
 	bool VOnHandleMessage(const AI::Telegram & telegram);
 	void VCreateHumanView();
+	void OnGameOver();
 
 private:
 	int	m_DisplayHeight;	/// the display height of the window
@@ -46,7 +47,8 @@ private:
 	int	m_CurrentLives;
 	cGameFlowStateMachine *	m_pStateMachine;	/// Pointer to the state machine
 	cBreakoutConfig *	m_pConfig;
-	
+	bool	m_GameOver;
+
 private:
 	friend class cBreakoutView;
 	friend class cStateTitleScreen;

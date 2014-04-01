@@ -1,23 +1,30 @@
 //  *******************************************************************************************************************
-//  LifeLostEventData version:  1.0   Ankur Sheel  date: 2013/08/07
+//  BrickDestroyedEventData version:  1.0   Ankur Sheel  date: 2014/04/01
 //  *******************************************************************************************************************
 //  purpose:	
 //  *******************************************************************************************************************
-#ifndef LifeLostEventData_h__
-#define LifeLostEventData_h__
+#ifndef BrickDestroyedEventData_h__
+#define BrickDestroyedEventData_h__
 
 #include "BaseEventData.h"
 
-class cLifeLostEventData
+namespace GameBase
+{
+	class IBaseEntity;
+}
+
+class cBrickDestroyedEventData
 	: public GameBase::cBaseEventData
 {
 public:
-	cLifeLostEventData();
-	~cLifeLostEventData();
+	cBrickDestroyedEventData();
+	~cBrickDestroyedEventData();
 	unsigned long VGetHashedID() const { return m_Name.GetHash(); }
 	virtual Base::cString VGetName() const { return m_Name.GetString(); }
 
 public:
 	static Base::cHashedString m_Name;
+	GameBase::IBaseEntity * m_pDestroyedEntity;
 };
-#endif //LifeLostEventData_h__
+
+#endif //BrickDestroyedEventData_h__

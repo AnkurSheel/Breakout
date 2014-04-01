@@ -25,6 +25,8 @@
 #include "LifeLostEventData.h"
 #include "KeyboardController.hxx"
 #include "BaseEntity.hxx"
+#include "StateTitleScreen.h"
+#include "BrickDestroyedEventData.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -63,6 +65,8 @@ void cStatePlayGame::VOnEnter(cGame * pGame)
 
 	cLevel::Level.Initialize("level1");
 
+	m_RemainingBricks = cLevel::Level.GetTotalNoOfBricks();
+
 	m_pPaddle = IEntityManager::GetInstance()->VAddEntity("paddle");
 	m_pBall = IEntityManager::GetInstance()->VAddEntity("ball");
 
@@ -90,6 +94,9 @@ void cStatePlayGame::VOnEnter(cGame * pGame)
 	EventListenerCallBackFn onLifeLostlistener = bind(&cStatePlayGame::OnLifeLost, this, _1);
 	IEventManager::Instance()->VAddListener(onLifeLostlistener, cLifeLostEventData::m_Name);
 
+	EventListenerCallBackFn onBrickDestroyedlistener = bind(&cStatePlayGame::OnBrickDestroyed, this, _1);
+	IEventManager::Instance()->VAddListener(onBrickDestroyedlistener, cBrickDestroyedEventData::m_Name);
+
 	WaitToStart(true);
 }
 
@@ -98,22 +105,28 @@ void cStatePlayGame::VOnUpdate(const TICK currentTick, const float deltaTime)
 {
 	if(m_WaitingToStart)
 	{
-		if(IKeyboardController::Instance()->VIsKeyPressed(VK_SPACE))
+		if(!IKeyboardController::Instance()->VIsKeyLocked(VK_SPACE) && IKeyboardController::Instance()->VIsKeyPressed(VK_SPACE))
 		{
-			m_WaitingToStart = false;
-			if(m_pBeginLabel != NULL)
+			IKeyboardController::Instance()->VLockKey(VK_SPACE);
+			if(m_pOwner->m_GameOver)
 			{
-				m_pBeginLabel->VSetVisible(false);
+				if (m_pOwner && m_pOwner->m_pStateMachine)
+				{
+					m_pOwner->m_pStateMachine->RequestChangeState(cStateTitleScreen::Instance());
+				}
 			}
-			if(m_pGameTimer != NULL)
+			else
 			{
-				m_pGameTimer->VStartTimer();
+				m_WaitingToStart = false;
+				if(m_pBeginLabel != NULL)
+				{
+					m_pBeginLabel->VSetVisible(false);
+				}
+				WaitToStart(false);
 			}
-			m_pOwner->VGetProcessManager()->VSetProcessesPaused("PhysicsSystem", false);
-			m_pOwner->VGetProcessManager()->VSetProcessesPaused("InputSystem", false);
 		}
 	}
-	else
+	else 
 	{
 		if(m_pOwner != NULL)
 		{
@@ -138,6 +151,10 @@ void cStatePlayGame::VOnExit()
 	m_pBeginLabel.reset();
 	m_pGameOverLabel.reset();
 
+//	m_pOwner->VGetProcessManager()->VDetachProcesses(cRenderSystem::m_strType);
+//	m_pOwner->VGetProcessManager()->VDetachProcesses(shared_ptr<Utilities::cProcess>(DEBUG_NEW cInputSystem()));
+//	m_pOwner->VGetProcessManager()->VDetachProcesses(shared_ptr<Utilities::cProcess>(DEBUG_NEW cPhysicsSystem()))
+
 	if (m_pOwner->m_pHumanView->m_pAppWindowControl != NULL)
 	{
 		m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("HUD");
@@ -150,6 +167,12 @@ void cStatePlayGame::VOnExit()
 
 	EventListenerCallBackFn onLifeLostlistener = bind(&cStatePlayGame::OnLifeLost, this, _1);
 	IEventManager::Instance()->VRemoveListener(onLifeLostlistener, cLifeLostEventData::m_Name);
+
+	EventListenerCallBackFn onBrickDestroyedlistener = bind(&cStatePlayGame::OnBrickDestroyed, this, _1);
+	IEventManager::Instance()->VRemoveListener(onBrickDestroyedlistener, cBrickDestroyedEventData::m_Name);
+
+
+	IEntityManager::GetInstance()->VDeleteAllEntities();
 }
 
 //  *******************************************************************************************************************
@@ -196,18 +219,39 @@ void cStatePlayGame::OnLifeLost(IEventDataPtr pEventData)
 		m_pBall->VOnRestart();
 	}
 
-	if(m_pOwner->m_CurrentLives > 0)
+	if(m_pBeginLabel != NULL)
 	{
-		if(m_pBeginLabel != NULL)
-		{
-			m_pBeginLabel->VSetVisible(true);
-		}
+		m_pBeginLabel->VSetVisible(true);
 	}
-	else
+
+	if(m_pOwner->m_CurrentLives == 0)
 	{
+		m_pOwner->OnGameOver();
 		if(m_pGameOverLabel!= NULL)
 		{
 			m_pGameOverLabel->VSetVisible(true);
+		}
+	}
+}
+
+//  *******************************************************************************************************************
+void cStatePlayGame::OnBrickDestroyed(IEventDataPtr pEventData)
+{
+	m_RemainingBricks--;
+	shared_ptr<cBrickDestroyedEventData> pCastEventData = static_pointer_cast<cBrickDestroyedEventData>(pEventData);
+	IEntityManager::GetInstance()->VDeleteEntity(pCastEventData->m_pDestroyedEntity);
+	if(m_RemainingBricks == 0)
+	{
+		WaitToStart(true);
+		
+		m_pOwner->OnGameOver();
+		if(m_pGameOverLabel!= NULL)
+		{
+			m_pGameOverLabel->VSetVisible(true);
+		}
+		if(m_pBeginLabel != NULL)
+		{
+			m_pBeginLabel->VSetVisible(true);
 		}
 	}
 }
@@ -244,6 +288,4 @@ void cStatePlayGame::WaitToStart(bool Wait)
 	}
 	m_pOwner->VGetProcessManager()->VSetProcessesPaused("PhysicsSystem", Wait);
 	m_pOwner->VGetProcessManager()->VSetProcessesPaused("InputSystem", Wait);
-
-
 }

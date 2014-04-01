@@ -28,6 +28,7 @@ cLevel cLevel::Level;
 //  *******************************************************************************************************************
 cLevel::cLevel()
 	: m_pParamLoader(NULL)
+	, m_TotalBricks(0)
 {
 }
 
@@ -62,6 +63,9 @@ bool cLevel::Initialize(const cString & LevelName)
 	{
 		return false;
 	}
+
+
+	m_TotalBricks = 0;
 
 	vector<float> vPaddleSpawnPoint;
 	m_pParamLoader->VGetParameterValueAsFloatList("-PaddleSpawnPoint", vPaddleSpawnPoint);
@@ -112,6 +116,7 @@ void cLevel::GenerateMap()
 					pTransFormComponent->SetSize(BrickScale);
 				}
 				pEntity->VOnInitialized();
+				m_TotalBricks++;
 			}
 		}
 	}

@@ -28,6 +28,7 @@ cGame::cGame(const Base::cString & Name)
 	, m_pStateMachine(NULL)
 	, m_pConfig(NULL)
 	, m_CurrentLives(1)
+	, m_GameOver(false)
 {
 }
 
@@ -99,7 +100,16 @@ bool cGame::VOnHandleMessage(const AI::Telegram & telegram)
 }
 
 //  *******************************************************************************************************************
+void cGame::OnGameOver()
+{
+	m_GameOver = true;
+	m_CurrentLives = m_pConfig->GetLives();
+}
+
+//  *******************************************************************************************************************
 IBaseApp * IGame::CreateGame(const cString Name)
 {
 	return DEBUG_NEW cGame(Name);
 }
+
+
