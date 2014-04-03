@@ -151,9 +151,9 @@ void cStatePlayGame::VOnExit()
 	m_pBeginLabel.reset();
 	m_pGameOverLabel.reset();
 
-//	m_pOwner->VGetProcessManager()->VDetachProcesses(cRenderSystem::m_strType);
-//	m_pOwner->VGetProcessManager()->VDetachProcesses(shared_ptr<Utilities::cProcess>(DEBUG_NEW cInputSystem()));
-//	m_pOwner->VGetProcessManager()->VDetachProcesses(shared_ptr<Utilities::cProcess>(DEBUG_NEW cPhysicsSystem()))
+	m_pOwner->VGetProcessManager()->VDetachProcess(cRenderSystem::m_Type);
+	m_pOwner->VGetProcessManager()->VDetachProcess(cInputSystem::m_Type);
+	m_pOwner->VGetProcessManager()->VDetachProcess(cPhysicsSystem::m_Type);
 
 	if (m_pOwner->m_pHumanView->m_pAppWindowControl != NULL)
 	{
@@ -286,6 +286,6 @@ void cStatePlayGame::WaitToStart(bool Wait)
 			m_pGameTimer->VStartTimer();
 		}
 	}
-	m_pOwner->VGetProcessManager()->VSetProcessesPaused("PhysicsSystem", Wait);
-	m_pOwner->VGetProcessManager()->VSetProcessesPaused("InputSystem", Wait);
+	m_pOwner->VGetProcessManager()->VSetProcessesPaused(cPhysicsSystem::m_Type, Wait);
+	m_pOwner->VGetProcessManager()->VSetProcessesPaused(cInputSystem::m_Type, Wait);
 }
