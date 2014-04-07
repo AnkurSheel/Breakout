@@ -53,6 +53,7 @@ private:
 	friend class cBreakoutView;
 	friend class cStateTitleScreen;
 	friend class cStateMenuScreen;
+	friend class cStateHelpScreen;
 	friend class cStatePlayGame;
 	friend class cStateOptionsScreen;
 	friend class cStatePauseScreen;

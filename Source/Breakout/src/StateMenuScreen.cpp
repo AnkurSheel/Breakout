@@ -9,10 +9,9 @@
 #include "HumanView.h"
 #include "ControlStructures.h"
 #include "BaseControl.hxx"
-//#include "FSM\Telegram.h"
 #include "GameFlowStateMachine.h"
 #include "StatePlayGame.h"
-//#include "HelpScreen.h"
+#include "StateHelpScreen.h"
 #include "StateOptionScreen.h"
 //#include "HighScoreScreen.h"
 //#include "RedefineControlsScreen.h"
@@ -59,6 +58,13 @@ void cStateMenuScreen::VOnEnter(cGame *pGame)
 		{
 			UIEventCallBackFn callbackPlayBtn = bind(&cStateMenuScreen::PlayButtonPressed, this, _1);
 			pPlayButton->VRegisterCallBack(UIET_BTNRELEASED, callbackPlayBtn);
+		}
+
+		shared_ptr<Graphics::IBaseControl> pHelpButton = m_pMenuScreen->VFindChildControl("btnHelp");
+		if(pHelpButton != NULL)
+		{
+			UIEventCallBackFn callbackHelpBtn = bind(&cStateMenuScreen::HelpButtonPressed, this, _1);
+			pHelpButton->VRegisterCallBack(UIET_BTNRELEASED, callbackHelpBtn);
 		}
 		
 		shared_ptr<Graphics::IBaseControl> pOptionsButton = m_pMenuScreen->VFindChildControl("btnOption");
@@ -145,6 +151,15 @@ void cStateMenuScreen::ControlsButtonPressed(const stUIEventCallbackParam & para
 	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
 	{
 		//m_pOwner->m_pStateMachine->RequestPushState(cStateRedefineControlsScreen::Instance());
+	}
+}
+
+//  *******************************************************************************************************************
+void cStateMenuScreen::HelpButtonPressed(const stUIEventCallbackParam & params)
+{
+	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
+	{
+		m_pOwner->m_pStateMachine->RequestPushState(cStateHelpScreen::Instance());
 	}
 }
 

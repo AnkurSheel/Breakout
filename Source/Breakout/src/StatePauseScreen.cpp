@@ -9,12 +9,11 @@
 #include "HumanView.h"
 #include "UiManager.hxx"
 #include "BaseControl.hxx"
-//#include "OptionScreen.h"
-//#include "HelpScreen.h"
 #include "EventManager.hxx"
 #include "EscapePressedEventData.h"
 #include "GameFlowStateMachine.h"
 #include "StateOptionScreen.h"
+#include "StateHelpScreen.h"
 
 using namespace Base;
 using namespace Graphics;
@@ -132,6 +131,7 @@ void cStatePauseScreen::BackButtonPressed(const stUIEventCallbackParam & params)
 		}
 	}
 }
+
 //  *******************************************************************************************************************
 void cStatePauseScreen::OptionsButtonPressed(const Graphics::stUIEventCallbackParam& params)
 {
@@ -146,7 +146,7 @@ void cStatePauseScreen::HelpButtonPressed(const Graphics::stUIEventCallbackParam
 {
 	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
 	{
-		//m_pOwner->m_pStateMachine->RequestPushState(cStateHelpScreen::Instance());
+		m_pOwner->m_pStateMachine->RequestPushState(cStateHelpScreen::Instance());
 	}
 }
 
