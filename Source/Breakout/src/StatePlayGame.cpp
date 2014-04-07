@@ -219,17 +219,19 @@ void cStatePlayGame::OnLifeLost(IEventDataPtr pEventData)
 		m_pBall->VOnRestart();
 	}
 
-	if(m_pBeginLabel != NULL)
-	{
-		m_pBeginLabel->VSetVisible(true);
-	}
-
 	if(m_pOwner->m_CurrentLives == 0)
 	{
 		m_pOwner->OnGameOver();
 		if(m_pGameOverLabel!= NULL)
 		{
 			m_pGameOverLabel->VSetVisible(true);
+		}
+	}
+	else
+	{
+		if(m_pBeginLabel != NULL)
+		{
+			m_pBeginLabel->VSetVisible(true);
 		}
 	}
 }
