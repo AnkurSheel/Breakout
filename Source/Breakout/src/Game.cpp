@@ -16,6 +16,7 @@
 #include "EventManager.hxx"
 #include "EventFactory.h"
 #include "Timer.hxx"
+#include "HighScoreTable.hxx"
 
 using namespace Graphics;
 using namespace Base;
@@ -29,6 +30,7 @@ cGame::cGame(const Base::cString & Name)
 	, m_pConfig(NULL)
 	, m_CurrentLives(1)
 	, m_GameOver(false)
+	, m_pHighScoreTable(NULL)
 {
 }
 
@@ -61,6 +63,15 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int CmdShow, co
 
 	m_pConfig = DEBUG_NEW cBreakoutConfig();
 	m_pConfig->VInitialize("GameConfig");
+	
+	stHighScoreTableDef def;
+	def.m_FileName = "scr";
+	def.m_NumberOfRecords = 10;
+	def.m_StoreInAscendingOrder = true;
+	def.m_DefaultScore = 20000;
+	def.m_StepMultiplier = 4;
+	def.m_DefaultPlayerName = "Speedrun";
+	m_pHighScoreTable = IHighScoreTable::CreateHighScoreTable(def);
 
 	m_CurrentLives = m_pConfig->GetLives();
 }
@@ -89,6 +100,7 @@ void cGame::VOnUpdate()
 void cGame::VCleanup()
 {
 	SafeDelete(&m_pConfig);
+	SafeDelete(&m_pHighScoreTable);
 	SafeDelete(&m_pStateMachine);
 	cBaseApp::VCleanup();
 }

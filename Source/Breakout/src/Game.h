@@ -14,6 +14,7 @@ namespace GameBase
 	class cHumanView;
 	class cGameElementDef;
 	class cComponentFactory;
+	class IHighScoreTable;
 }
 
 namespace AI
@@ -47,6 +48,7 @@ private:
 	int	m_CurrentLives;
 	cGameFlowStateMachine *	m_pStateMachine;	/// Pointer to the state machine
 	cBreakoutConfig *	m_pConfig;
+	GameBase::IHighScoreTable * m_pHighScoreTable;
 	bool	m_GameOver;
 
 private:
@@ -57,5 +59,6 @@ private:
 	friend class cStatePlayGame;
 	friend class cStateOptionsScreen;
 	friend class cStatePauseScreen;
+	friend class cStateHighScoreScreen;
 };
 #endif // Game_h__

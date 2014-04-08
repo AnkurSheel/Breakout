@@ -89,6 +89,7 @@
     <ClInclude Include="src\StateHelpScreen.h" />
     <ClInclude Include="src\Level.h" />
     <ClInclude Include="src\LifeLostEventData.h" />
+    <ClInclude Include="src\StateHighScoreScreen.h" />
     <ClInclude Include="src\StateMenuScreen.h" />
     <ClInclude Include="src\Messages.h" />
     <ClInclude Include="src\Paddle.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="src\StateHelpScreen.cpp" />
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\LifeLostEventData.cpp" />
+    <ClCompile Include="src\StateHighScoreScreen.cpp" />
     <ClCompile Include="src\StateMenuScreen.cpp" />
     <ClCompile Include="src\Paddle.cpp" />
     <ClCompile Include="src\StateOptionScreen.cpp" />

@@ -13,7 +13,7 @@
 #include "StatePlayGame.h"
 #include "StateHelpScreen.h"
 #include "StateOptionScreen.h"
-//#include "HighScoreScreen.h"
+#include "StateHighScoreScreen.h"
 //#include "RedefineControlsScreen.h"
 #include "EventManager.hxx"
 #include "UiManager.hxx"
@@ -177,7 +177,7 @@ void cStateMenuScreen::HighScoreButtonPressed(const stUIEventCallbackParam & par
 {
 	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
 	{
-		//m_pOwner->m_pStateMachine->RequestPushState(cStateHighScoreScreen::Instance());
+		m_pOwner->m_pStateMachine->RequestPushState(cStateHighScoreScreen::Instance());
 	}
 }
 
