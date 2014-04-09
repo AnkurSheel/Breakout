@@ -14,6 +14,11 @@ namespace Graphics
 	struct stUIEventCallbackParam;
 }
 
+namespace GameBase
+{
+	class cScore;
+}
+
 class cGame;
 
 class cStateHighScoreScreen 
@@ -28,6 +33,7 @@ public:
 
 private:
 	cStateHighScoreScreen();
+	void DisplayScore(const shared_ptr<const GameBase::cScore> pScore, const int Index);
 	void BackButtonPressed(const Graphics::stUIEventCallbackParam& params);
 	void EscapePressedListener(GameBase::IEventDataPtr pEventData);
 

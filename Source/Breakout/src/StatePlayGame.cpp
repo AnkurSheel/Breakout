@@ -264,11 +264,9 @@ void cStatePlayGame::DisplayTimerOnHUD()
 	if(m_pTimerLabel != NULL && m_pGameTimer != NULL)
 	{
 		int time = static_cast<int>(m_pGameTimer->VGetRunningTime());
-		int hour = time / 3600;
-		time = time % 3600;
-		int min = time / 60;
-		int sec = time % 60;
-		m_pTimerLabel->VSetText(cString(30, "%02d:%02d:%02d", hour, min, sec));
+		int hour, minutes, seconds;
+		GetTimeAsHHMMSS(time, hour, minutes, seconds);
+		m_pTimerLabel->VSetText(cString(30, "%02d:%02d:%02d", hour, minutes, seconds));
 	}
 }
 

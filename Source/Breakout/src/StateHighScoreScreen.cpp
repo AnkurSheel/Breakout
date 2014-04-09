@@ -13,6 +13,7 @@
 #include "EscapePressedEventData.h"
 #include "GameFlowStateMachine.h"
 #include "HighScoreTable.hxx"
+#include "Score.h"
 
 using namespace Base;
 using namespace Graphics;
@@ -47,32 +48,27 @@ void cStateHighScoreScreen::VOnEnter(cGame *pGame)
 		pGame->m_pHumanView->m_pAppWindowControl->VAddChildControl(m_pHighScoreScreen);
 		pGame->m_pHumanView->m_pAppWindowControl->VMoveToFront(m_pHighScoreScreen.get());
 
+		shared_ptr<Graphics::IBaseControl> pLabelNameTemplate = m_pHighScoreScreen->VFindChildControl("LabelNameTemplate");
+		shared_ptr<Graphics::IBaseControl> pScoreNameTemplate = m_pHighScoreScreen->VFindChildControl("LabelScoreTemplate");
+
 		IHighScoreTable::ScoreSet highScores = pGame->m_pHighScoreTable->VGetScores();
-		IHighScoreTable::ScoreSet::iterator iter;
-		int i = 0;
-		int currentPosY = 220;
-		for(iter = highScores.begin(); iter != highScores.end(); iter++)
+		int index = 0;
+		
+		if(pGame->m_pHighScoreTable->VIsAscendingOrder())
 		{
-			shared_ptr<cScore> pScore = (*iter);
-
-			//def.strControlName = cString(100, "Name%d", i);
-			//def.strFont = "licorice"; 
-			//def.textColor = cColor::BLUE;
-			//def.strText = pScore->GetPlayerName();
-			//def.fTextHeight = 30;
-			//def.vPosition = cVector2(0.0f, currentPosY);
-			//def.vSize = cVector2(200.0f, 30.0f);
-			//IBaseControl * pNameControl = IBaseControl::CreateLabelControl(def);
-			//pHighScoreScreen->VAddChildControl(shared_ptr<IBaseControl>(pNameControl));
-
-			//def.strControlName = cString(100, "Score%d", i);
-			//def.strText = cString(50, "%d",pScore->GetScore());
-			//def.vPosition = cVector2(250.0f, currentPosY);
-			//IBaseControl * pScoreControl = IBaseControl::CreateLabelControl(def);
-			//pHighScoreScreen->VAddChildControl(shared_ptr<IBaseControl>(pScoreControl));
-
-			//i++;
-			//currentPosY += 40;
+			for(IHighScoreTable::ScoreSet::reverse_iterator iter = highScores.rbegin(); iter != highScores.rend(); iter++)
+			{
+				DisplayScore(*iter, index);
+				index++;
+			}
+		}
+		else
+		{
+			for(IHighScoreTable::ScoreSet::iterator iter = highScores.begin(); iter != highScores.end(); iter++)
+			{
+				DisplayScore(*iter, index);
+				index++;
+			}
 		}
 	}
 
@@ -105,6 +101,32 @@ void cStateHighScoreScreen::VOnExit()
 	EventListenerCallBackFn listener = bind(&cStateHighScoreScreen::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
 }
+
+//  *******************************************************************************************************************
+void cStateHighScoreScreen::DisplayScore(const shared_ptr<const cScore> pScore, const int Index)
+{
+	int posY = 220 + (40 * Index);
+
+	cLabelControlDef def;
+	def.strControlName = cString(50, "Name%d", Index);
+	def.strFont = "licorice"; 
+	def.textColor = cColor::TURQUOISE;
+	def.strText = pScore->GetPlayerName();
+	def.fTextHeight = 30;
+	def.vPosition = cVector2(0.0f, posY);
+	def.vSize = cVector2(200.0f, 30.0f);
+	IBaseControl * pNameControl = IBaseControl::CreateLabelControl(def);
+	m_pHighScoreScreen->VAddChildControl(shared_ptr<IBaseControl>(pNameControl));
+
+	def.strControlName = cString(50, "Score%d", Index);
+	int hour, minutes, seconds;
+	GetTimeAsHHMMSS(pScore->GetScore(), hour, minutes, seconds);
+	def.strText = cString(30, "%02d : %02d : %02d", hour, minutes, seconds);
+	def.vPosition = cVector2(250.0f, posY);
+	IBaseControl * pScoreControl = IBaseControl::CreateLabelControl(def);
+	m_pHighScoreScreen->VAddChildControl(shared_ptr<IBaseControl>(pScoreControl));
+}
+
 
 //  *******************************************************************************************************************
 void cStateHighScoreScreen::BackButtonPressed(const stUIEventCallbackParam & params)
