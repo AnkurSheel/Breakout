@@ -60,5 +60,6 @@ private:
 	friend class cStateOptionsScreen;
 	friend class cStatePauseScreen;
 	friend class cStateHighScoreScreen;
+	friend class cStateEnterNameScreen;
 };
 #endif // Game_h__

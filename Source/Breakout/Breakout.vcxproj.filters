@@ -67,6 +67,9 @@
     <ClInclude Include="src\StateHighScoreScreen.h">
       <Filter>States</Filter>
     </ClInclude>
+    <ClInclude Include="src\StateEnterNameScreen.h">
+      <Filter>States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakoutView.cpp" />
@@ -119,6 +122,9 @@
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="src\StateHighScoreScreen.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StateEnterNameScreen.cpp">
       <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>

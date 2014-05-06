@@ -59,8 +59,6 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int CmdShow, co
 	IEntityManager::GetInstance()->VInitializeComponentFactory(shared_ptr<cComponentFactory>(DEBUG_NEW cComponentFactory()));
 	IEventManager::Instance()->VInitializeEventFactory(shared_ptr<cEventFactory>(DEBUG_NEW cEventFactory()));
 
-	m_pStateMachine->SetCurrentState(cStateTitleScreen::Instance());
-
 	m_pConfig = DEBUG_NEW cBreakoutConfig();
 	m_pConfig->VInitialize("GameConfig");
 	
@@ -74,6 +72,8 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int CmdShow, co
 	m_pHighScoreTable = IHighScoreTable::CreateHighScoreTable(def);
 
 	m_CurrentLives = m_pConfig->GetLives();
+
+	m_pStateMachine->SetCurrentState(cStateTitleScreen::Instance());
 }
 
 //  *******************************************************************************************************************

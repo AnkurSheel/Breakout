@@ -27,6 +27,9 @@
 #include "BaseEntity.hxx"
 #include "StateTitleScreen.h"
 #include "BrickDestroyedEventData.h"
+#include "Optional.h"
+#include "HighScoreTable.hxx"
+#include "StateEnterNameScreen.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -78,6 +81,7 @@ void cStatePlayGame::VOnEnter(cGame * pGame)
 		m_pLivesLabel = m_pHUDScreen->VFindChildControl("LivesLabel");
 		m_pBeginLabel = m_pHUDScreen->VFindChildControl("StartGame");
 		m_pGameOverLabel = m_pHUDScreen->VFindChildControl("GameOver");
+		m_pHighScoreLabel = m_pHUDScreen->VFindChildControl("HighScore");
 
 		if(m_pLivesLabel != NULL)
 		{
@@ -112,7 +116,7 @@ void cStatePlayGame::VOnUpdate(const TICK currentTick, const float deltaTime)
 			{
 				if (m_pOwner && m_pOwner->m_pStateMachine)
 				{
-					m_pOwner->m_pStateMachine->RequestChangeState(cStateTitleScreen::Instance());
+					m_pOwner->m_pStateMachine->RequestChangeState(cStateEnterNameScreen::Instance());
 				}
 			}
 			else
@@ -150,6 +154,7 @@ void cStatePlayGame::VOnExit()
 	m_pLivesLabel.reset();
 	m_pBeginLabel.reset();
 	m_pGameOverLabel.reset();
+	m_pHighScoreLabel.reset();
 
 	m_pOwner->VGetProcessManager()->VDetachProcess(cRenderSystem::m_Type);
 	m_pOwner->VGetProcessManager()->VDetachProcess(cInputSystem::m_Type);
@@ -247,13 +252,23 @@ void cStatePlayGame::OnBrickDestroyed(IEventDataPtr pEventData)
 		WaitToStart(true);
 		
 		m_pOwner->OnGameOver();
-		if(m_pGameOverLabel!= NULL)
+		tOptional<int> scorePos = m_pOwner->m_pHighScoreTable->VIsHighScore(m_pGameTimer->VGetRunningTime());
+		if(scorePos.IsValid())
 		{
-			m_pGameOverLabel->VSetVisible(true);
+			if (m_pHighScoreLabel != NULL)
+			{
+				m_pHighScoreLabel->VSetVisible(true);
+			}
+			shared_ptr<int> pPos(DEBUG_NEW int(*scorePos));
+			cStateEnterNameScreen::Instance()->SetNewScorePos(*scorePos);
+			cStateEnterNameScreen::Instance()->SetNewScore(m_pGameTimer->VGetRunningTime());
 		}
-		if(m_pBeginLabel != NULL)
+		else 
 		{
-			m_pBeginLabel->VSetVisible(true);
+			if(m_pGameOverLabel!= NULL)
+			{
+				m_pGameOverLabel->VSetVisible(true);
+			}
 		}
 	}
 }

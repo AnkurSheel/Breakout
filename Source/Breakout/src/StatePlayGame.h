@@ -49,6 +49,7 @@ private:
 	shared_ptr<Graphics::IBaseControl>	m_pLivesLabel;
 	shared_ptr<Graphics::IBaseControl>	m_pBeginLabel;
 	shared_ptr<Graphics::IBaseControl>	m_pGameOverLabel;
+	shared_ptr<Graphics::IBaseControl>	m_pHighScoreLabel;
 	GameBase::IBaseEntity * m_pPaddle;
 	GameBase::IBaseEntity * m_pBall;
 	Utilities::ITimer *	m_pGameTimer;
