@@ -79,6 +79,7 @@
     <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\BaseBrick.h" />
     <ClInclude Include="src\BreakoutConfig.h" />
+    <ClInclude Include="src\BreakoutControls.h" />
     <ClInclude Include="src\BreakoutEntityFactory.h" />
     <ClInclude Include="src\BreakoutView.h" />
     <ClInclude Include="src\BrickDestroyedEventData.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="src\StateOptionScreen.h" />
     <ClInclude Include="src\StatePauseScreen.h" />
     <ClInclude Include="src\StatePlayGame.h" />
+    <ClInclude Include="src\StateRedefineControlsScreen.h" />
     <ClInclude Include="src\StateTitleScreen.h" />
     <ClInclude Include="src\Wall.h" />
     <ClInclude Include="stdafx.h" />
@@ -106,6 +108,7 @@
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\BaseBrick.cpp" />
     <ClCompile Include="src\BreakoutConfig.cpp" />
+    <ClCompile Include="src\BreakoutControls.cpp" />
     <ClCompile Include="src\BreakoutEntityFactory.cpp" />
     <ClCompile Include="src\BreakoutView.cpp" />
     <ClCompile Include="src\BrickDestroyedEventData.cpp" />
@@ -122,6 +125,7 @@
     <ClCompile Include="src\StateOptionScreen.cpp" />
     <ClCompile Include="src\StatePauseScreen.cpp" />
     <ClCompile Include="src\StatePlayGame.cpp" />
+    <ClCompile Include="src\StateRedefineControlsScreen.cpp" />
     <ClCompile Include="src\StateTitleScreen.cpp" />
     <ClCompile Include="src\Wall.cpp" />
     <ClCompile Include="stdafx.cpp">

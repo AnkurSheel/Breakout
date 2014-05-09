@@ -17,6 +17,7 @@
 #include "EventFactory.h"
 #include "Timer.hxx"
 #include "HighScoreTable.hxx"
+#include "BreakoutControls.h"
 
 using namespace Graphics;
 using namespace Base;
@@ -72,6 +73,9 @@ void cGame::VOnInitialization(const HINSTANCE & hInstance, const int CmdShow, co
 	m_pHighScoreTable = IHighScoreTable::CreateHighScoreTable(def);
 
 	m_CurrentLives = m_pConfig->GetLives();
+
+	m_pGameControls = DEBUG_NEW cBreakoutControls("controls");
+	m_pGameControls->Load();
 
 	m_pStateMachine->SetCurrentState(cStateTitleScreen::Instance());
 }

@@ -17,7 +17,8 @@ namespace BreakoutControls
 class cBreakoutControls
 	: public GameBase::cGameControls
 {
+public:
 	cBreakoutControls(const Base::cString & inFileName);
 	~cBreakoutControls();
-	virtual void VSetDefaults();
+	void VSetDefaults();
 };

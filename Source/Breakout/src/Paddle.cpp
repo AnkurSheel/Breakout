@@ -9,12 +9,14 @@
 #include "Level.h"
 #include "physicscomponent.h"
 #include "Ball.h"
+#include "BreakoutControls.h"
+#include "BaseApp.hxx"
 
 using namespace Base;
 using namespace GameBase;
 using namespace Utilities;
 
-const Base::cHashedString	cPaddle::m_Name = cHashedString("paddle");
+const Base::cHashedString cPaddle::m_Name = cHashedString("paddle");
 
 //  *******************************************************************************************************************
 cPaddle::cPaddle()
@@ -68,15 +70,15 @@ void cPaddle::VOnUpdate(const float deltaTime)
 }
 
 //  *******************************************************************************************************************
-void cPaddle::VHandleInput(const unsigned int CharID, const float deltaTime)
+void cPaddle::VHandleInput(const unsigned int inCharID, const float inDeltaTime)
 {
 	if(m_pTransFormComponent != NULL)
 	{
-		if(CharID == VK_LEFT)
+		if(inCharID == IBaseApp::GetInstance()->VGetGameControls()->GetKeyCode(BreakoutControls::MOVE_LEFT))
 		{
 			m_ForceDirection = m_pTransFormComponent->GetLookAt().GetReverse();
 		}
-		else if(CharID == VK_RIGHT)
+		if(inCharID == IBaseApp::GetInstance()->VGetGameControls()->GetKeyCode(BreakoutControls::MOVE_RIGHT))
 		{
 			m_ForceDirection = m_pTransFormComponent->GetLookAt();
 		}
