@@ -48,8 +48,8 @@ void cStateHighScoreScreen::VOnEnter(cGame *pGame)
 		pGame->m_pHumanView->m_pAppWindowControl->VAddChildControl(m_pHighScoreScreen);
 		pGame->m_pHumanView->m_pAppWindowControl->VMoveToFront(m_pHighScoreScreen.get());
 
-		shared_ptr<Graphics::IBaseControl> pLabelNameTemplate = m_pHighScoreScreen->VFindChildControl("LabelNameTemplate");
-		shared_ptr<Graphics::IBaseControl> pScoreNameTemplate = m_pHighScoreScreen->VFindChildControl("LabelScoreTemplate");
+		m_pLabelNameTemplate = m_pHighScoreScreen->VFindChildControl("LabelNameTemplate");
+		m_pLabelScoreTemplate = m_pHighScoreScreen->VFindChildControl("LabelScoreTemplate");
 
 		IHighScoreTable::ScoreSet highScores = pGame->m_pHighScoreTable->VGetScores();
 		int index = 0;
@@ -107,26 +107,22 @@ void cStateHighScoreScreen::DisplayScore(const shared_ptr<const cScore> pScore, 
 {
 	int posY = 220 + (40 * Index);
 
-	cLabelControlDef def;
-	def.strControlName = cString(50, "Name%d", Index);
-	def.strFont = "licorice"; 
-	def.textColor = cColor::TURQUOISE;
-	def.strText = pScore->GetPlayerName();
-	def.fTextHeight = 30;
-	def.vPosition = cVector2(0.0f, posY);
-	def.vSize = cVector2(200.0f, 30.0f);
-	IBaseControl * pNameControl = IBaseControl::CreateLabelControl(def);
-	m_pHighScoreScreen->VAddChildControl(shared_ptr<IBaseControl>(pNameControl));
+	shared_ptr<IBaseControl> pNameControl = m_pLabelNameTemplate->VDuplicate();
+	pNameControl->VSetControlName(cString(50, "Name%d", Index));
+	pNameControl->VSetText(pScore->GetPlayerName());
+	pNameControl->VSetPosition(cVector2(0.0f, posY));
+	pNameControl->VSetVisible(true);
+	m_pHighScoreScreen->VAddChildControl(pNameControl);
 
-	def.strControlName = cString(50, "Score%d", Index);
+	shared_ptr<IBaseControl> pScoreControl = m_pLabelScoreTemplate->VDuplicate();
+	pScoreControl->VSetControlName(cString(50, "Score%d", Index));
 	int hour, minutes, seconds;
 	GetTimeAsHHMMSS(pScore->GetScore(), hour, minutes, seconds);
-	def.strText = cString(30, "%02d : %02d : %02d", hour, minutes, seconds);
-	def.vPosition = cVector2(250.0f, posY);
-	IBaseControl * pScoreControl = IBaseControl::CreateLabelControl(def);
-	m_pHighScoreScreen->VAddChildControl(shared_ptr<IBaseControl>(pScoreControl));
+	pScoreControl->VSetText(cString(30, "%02d : %02d : %02d", hour, minutes, seconds));
+	pScoreControl->VSetPosition(cVector2(250.0f, posY));
+	pScoreControl->VSetVisible(true);
+	m_pHighScoreScreen->VAddChildControl(pScoreControl);
 }
-
 
 //  *******************************************************************************************************************
 void cStateHighScoreScreen::BackButtonPressed(const stUIEventCallbackParam & params)

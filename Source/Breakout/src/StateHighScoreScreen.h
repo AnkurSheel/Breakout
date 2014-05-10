@@ -39,6 +39,8 @@ private:
 
 private:
 	shared_ptr<Graphics::IBaseControl>	m_pHighScoreScreen;
+	shared_ptr<Graphics::IBaseControl>	m_pLabelNameTemplate;
+	shared_ptr<Graphics::IBaseControl>	m_pLabelScoreTemplate;
 };
 
 #endif // StateHighScoreScreen_h__
