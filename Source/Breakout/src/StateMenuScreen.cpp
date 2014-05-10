@@ -18,6 +18,7 @@
 #include "EventManager.hxx"
 #include "UiManager.hxx"
 #include "EscapePressedEventData.h"
+#include "StateRedefineControlsScreen.h"
 
 
 using namespace Base;
@@ -150,7 +151,7 @@ void cStateMenuScreen::ControlsButtonPressed(const stUIEventCallbackParam & para
 {
 	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
 	{
-		//m_pOwner->m_pStateMachine->RequestPushState(cStateRedefineControlsScreen::Instance());
+		m_pOwner->m_pStateMachine->RequestPushState(cStateRedefineControlsScreen::Instance());
 	}
 }
 
