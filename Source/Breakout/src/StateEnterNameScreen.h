@@ -7,6 +7,7 @@
 #define StateEnterNameScreen_h__
 
 #include "GameFlowStates.h"
+#include "Optional.h"
 
 namespace Graphics
 {
@@ -43,8 +44,8 @@ private:
 	void AddScoreLabel(const int index, const Base::cString & score, const int posY);
 
 private:
-	int	m_NewScorePos;
 	int	m_NewScore;
+	Base::tOptional<int>	m_NewScorePos;
 	Base::cString	m_PlayerName;
 	shared_ptr<Graphics::IBaseControl>	m_pEnterNameScreen;
 };

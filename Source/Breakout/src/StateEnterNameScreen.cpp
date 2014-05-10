@@ -18,8 +18,7 @@ using namespace AI;
 
 // ***********************************************************************************************************************************************************
 cStateEnterNameScreen::cStateEnterNameScreen()
-	: m_NewScorePos(11)
-	, m_NewScore(0)
+	: m_NewScore(0)
 {
 }
 
@@ -97,14 +96,16 @@ void cStateEnterNameScreen::VOnExit()
 }
 
 // ********************************************************************************************************************
-void cStateEnterNameScreen::BackButtonPressed(const Graphics::stUIEventCallbackParam& params)
+void cStateEnterNameScreen::BackButtonPressed(const Graphics::stUIEventCallbackParam & params)
 {
-	shared_ptr<cScore> pScore(DEBUG_NEW cScore());
-	pScore->SetPlayerName(m_PlayerName);
-	pScore->SetScore(m_NewScore);
-	m_pOwner->m_pHighScoreTable->VAddNewScore(pScore);
-	m_pOwner->m_pHighScoreTable->VSave();
-
+	if(m_NewScorePos.IsValid())
+	{
+		shared_ptr<cScore> pScore(DEBUG_NEW cScore());
+		pScore->SetPlayerName(m_PlayerName);
+		pScore->SetScore(m_NewScore);
+		m_pOwner->m_pHighScoreTable->VAddNewScore(pScore);
+		m_pOwner->m_pHighScoreTable->VSave();
+	}
 	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
 	{
 		m_pOwner->m_pStateMachine->RequestChangeState(cStateTitleScreen::Instance());
@@ -129,7 +130,7 @@ void cStateEnterNameScreen::DisplayScore(const shared_ptr<const cScore> pScore, 
 {
 	int posY = 220 + (40 * index);
 
-	if (index == m_NewScorePos)
+	if (m_NewScorePos.IsValid() && index == *m_NewScorePos)
 	{
 		shared_ptr<Graphics::IBaseControl> ptbNewHighScoreName = m_pEnterNameScreen->VFindChildControl("tbNewHighScoreName");
 		ptbNewHighScoreName->VSetPosition(cVector2(0.0f, posY));
