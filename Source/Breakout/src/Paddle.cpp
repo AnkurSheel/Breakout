@@ -11,6 +11,7 @@
 #include "Ball.h"
 #include "BreakoutControls.h"
 #include "BaseApp.hxx"
+#include "KeyboardController.hxx"
 
 using namespace Base;
 using namespace GameBase;
@@ -70,15 +71,15 @@ void cPaddle::VOnUpdate(const float deltaTime)
 }
 
 //  *******************************************************************************************************************
-void cPaddle::VHandleInput(const unsigned int inCharID, const float inDeltaTime)
+void cPaddle::VHandleInput(const float inDeltaTime)
 {
 	if(m_pTransFormComponent != NULL)
 	{
-		if(inCharID == IBaseApp::GetInstance()->VGetGameControls()->GetKeyCode(BreakoutControls::MOVE_LEFT))
+		if(IKeyboardController::Instance()->VIsKeyPressed(IBaseApp::GetInstance()->VGetGameControls()->GetKeyCode(BreakoutControls::MOVE_LEFT)))
 		{
 			m_ForceDirection = m_pTransFormComponent->GetLookAt().GetReverse();
 		}
-		if(inCharID == IBaseApp::GetInstance()->VGetGameControls()->GetKeyCode(BreakoutControls::MOVE_RIGHT))
+		if(IKeyboardController::Instance()->VIsKeyPressed(IBaseApp::GetInstance()->VGetGameControls()->GetKeyCode(BreakoutControls::MOVE_RIGHT)))
 		{
 			m_ForceDirection = m_pTransFormComponent->GetLookAt();
 		}
