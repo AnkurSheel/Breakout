@@ -178,7 +178,7 @@ void cStateMenuScreen::HighScoreButtonPressed(const stUIEventCallbackParam & par
 {
 	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
 	{
-		m_pOwner->m_pStateMachine->RequestPushState(cStateHighScoreScreen::Instance());
+		m_pOwner->m_pStateMachine->RequestChangeState(cStateHighScoreScreen::Instance());
 	}
 }
 

@@ -14,6 +14,7 @@
 #include "GameFlowStateMachine.h"
 #include "HighScoreTable.hxx"
 #include "Score.h"
+#include "StateTitleScreen.h"
 
 using namespace Base;
 using namespace Graphics;
@@ -51,9 +52,17 @@ void cStateHighScoreScreen::VOnEnter(cGame *pGame)
 		m_pLabelNameTemplate = m_pHighScoreScreen->VFindChildControl("LabelNameTemplate");
 		m_pLabelScoreTemplate = m_pHighScoreScreen->VFindChildControl("LabelScoreTemplate");
 
+		if(m_NewScore.IsValid())
+		{
+			m_NewScorePos.clear();
+			tOptional<int> scorePos = m_pOwner->m_pHighScoreTable->VGetScorePositionInTable(*m_NewScore);
+			if(scorePos.IsValid())
+			{
+				SetNewScorePos(*scorePos);
+			}
+		}
 		IHighScoreTable::ScoreSet highScores = pGame->m_pHighScoreTable->VGetScores();
 		int index = 0;
-		
 		if(pGame->m_pHighScoreTable->VIsAscendingOrder())
 		{
 			for(IHighScoreTable::ScoreSet::reverse_iterator iter = highScores.rbegin(); iter != highScores.rend(); iter++)
@@ -100,39 +109,51 @@ void cStateHighScoreScreen::VOnExit()
 
 	EventListenerCallBackFn listener = bind(&cStateHighScoreScreen::EscapePressedListener, this, _1);
 	IEventManager::Instance()->VRemoveListener(listener, cEscapePressedEventData::m_Name);
+	m_NewScorePos.clear();
+	m_NewScore.clear();
 }
 
 //  *******************************************************************************************************************
-void cStateHighScoreScreen::DisplayScore(const shared_ptr<const cScore> pScore, const int Index)
+void cStateHighScoreScreen::DisplayScore(const shared_ptr<const cScore> pScore, const int inIndex)
 {
-	int posY = 220 + (40 * Index);
+	int posY = 220 + (40 * inIndex);
+	if (m_NewScorePos.IsValid() && inIndex == *m_NewScorePos)
+	{
+		shared_ptr<Graphics::IBaseControl> ptbNewHighScoreName = m_pHighScoreScreen->VFindChildControl("tbNewHighScoreName");
+		ptbNewHighScoreName->VSetPosition(cVector2(0.0f, posY));
+		ptbNewHighScoreName->VSetVisible(true);
+		UIEventCallBackFn callBackTextBox;
+		callBackTextBox = bind(&cStateHighScoreScreen::OnNameEntered, this, _1);
+		ptbNewHighScoreName->VRegisterCallBack(UIET_FOCUSLOST, callBackTextBox);
+		AddScoreLabel(inIndex, *m_NewScore, posY);
+	}
+	else
+	{
+		shared_ptr<IBaseControl> pNameControl = m_pLabelNameTemplate->VDuplicate();
+		pNameControl->VSetControlName(cString(50, "Name%d", inIndex));
+		pNameControl->VSetText(pScore->GetPlayerName());
+		pNameControl->VSetPosition(cVector2(0.0f, posY));
+		pNameControl->VSetVisible(true);
+		m_pHighScoreScreen->VAddChildControl(pNameControl);
+		AddScoreLabel(inIndex, pScore->GetScore(), posY);
 
-	shared_ptr<IBaseControl> pNameControl = m_pLabelNameTemplate->VDuplicate();
-	pNameControl->VSetControlName(cString(50, "Name%d", Index));
-	pNameControl->VSetText(pScore->GetPlayerName());
-	pNameControl->VSetPosition(cVector2(0.0f, posY));
-	pNameControl->VSetVisible(true);
-	m_pHighScoreScreen->VAddChildControl(pNameControl);
-
-	shared_ptr<IBaseControl> pScoreControl = m_pLabelScoreTemplate->VDuplicate();
-	pScoreControl->VSetControlName(cString(50, "Score%d", Index));
-	int hour, minutes, seconds;
-	GetTimeAsHHMMSS(pScore->GetScore(), hour, minutes, seconds);
-	pScoreControl->VSetText(cString(30, "%02d : %02d : %02d", hour, minutes, seconds));
-	pScoreControl->VSetPosition(cVector2(250.0f, posY));
-	pScoreControl->VSetVisible(true);
-	m_pHighScoreScreen->VAddChildControl(pScoreControl);
+	}
 }
 
 //  *******************************************************************************************************************
 void cStateHighScoreScreen::BackButtonPressed(const stUIEventCallbackParam & params)
 {
-	if(m_pOwner != NULL)
+	if(m_pOwner != NULL && m_pOwner->m_pStateMachine != NULL)
 	{
-		if(m_pOwner->m_pStateMachine != NULL)
+		if(m_NewScorePos.IsValid())
 		{
-			m_pOwner->m_pStateMachine->RequestPopState();
+			shared_ptr<cScore> pScore(DEBUG_NEW cScore());
+			pScore->SetPlayerName(m_PlayerName);
+			pScore->SetScore(*m_NewScore);
+			m_pOwner->m_pHighScoreTable->VAddNewScore(pScore);
+			m_pOwner->m_pHighScoreTable->VSave();
 		}
+		m_pOwner->m_pStateMachine->RequestChangeState(cStateTitleScreen::Instance());
 	}
 }
 
@@ -141,4 +162,23 @@ void cStateHighScoreScreen::EscapePressedListener(IEventDataPtr pEventData)
 {
 	stUIEventCallbackParam params;
 	BackButtonPressed(params);
+}
+
+//  *******************************************************************************************************************
+void cStateHighScoreScreen::OnNameEntered(const Graphics::stUIEventCallbackParam & params)
+{
+	m_PlayerName = params.strText;
+}
+
+//  *******************************************************************************************************************
+void cStateHighScoreScreen::AddScoreLabel(const int inIndex, const int inScore, const int posY)
+{
+	shared_ptr<IBaseControl> pScoreControl = m_pLabelScoreTemplate->VDuplicate();
+	pScoreControl->VSetControlName(cString(50, "Score%d", inIndex));
+	int hour, minutes, seconds;
+	GetTimeAsHHMMSS(inScore, hour, minutes, seconds);
+	pScoreControl->VSetText(cString(30, "%02d : %02d : %02d", hour, minutes, seconds));
+	pScoreControl->VSetPosition(cVector2(250.0f, posY));
+	pScoreControl->VSetVisible(true);
+	m_pHighScoreScreen->VAddChildControl(pScoreControl);
 }

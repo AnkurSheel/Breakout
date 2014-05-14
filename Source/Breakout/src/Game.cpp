@@ -18,6 +18,7 @@
 #include "Timer.hxx"
 #include "HighScoreTable.hxx"
 #include "BreakoutControls.h"
+#include "StateHighScoreScreen.h"
 
 using namespace Graphics;
 using namespace Base;

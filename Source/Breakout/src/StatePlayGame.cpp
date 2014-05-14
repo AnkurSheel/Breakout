@@ -29,7 +29,7 @@
 #include "BrickDestroyedEventData.h"
 #include "Optional.h"
 #include "HighScoreTable.hxx"
-#include "StateEnterNameScreen.h"
+#include "StateHighScoreScreen.h"
 
 using namespace Base;
 using namespace GameBase;
@@ -116,7 +116,7 @@ void cStatePlayGame::VOnUpdate(const TICK currentTick, const float deltaTime)
 			{
 				if (m_pOwner && m_pOwner->m_pStateMachine)
 				{
-					m_pOwner->m_pStateMachine->RequestChangeState(cStateEnterNameScreen::Instance());
+					m_pOwner->m_pStateMachine->RequestChangeState(cStateHighScoreScreen::Instance());
 				}
 			}
 			else
@@ -252,16 +252,13 @@ void cStatePlayGame::OnBrickDestroyed(IEventDataPtr pEventData)
 		WaitToStart(true);
 		
 		m_pOwner->OnGameOver();
-		tOptional<int> scorePos = m_pOwner->m_pHighScoreTable->VIsHighScore(m_pGameTimer->VGetRunningTime());
-		if(scorePos.IsValid())
+		if(m_pOwner->m_pHighScoreTable->VIsHighScore(m_pGameTimer->VGetRunningTime()))
 		{
 			if (m_pHighScoreLabel != NULL)
 			{
 				m_pHighScoreLabel->VSetVisible(true);
 			}
-			shared_ptr<int> pPos(DEBUG_NEW int(*scorePos));
-			cStateEnterNameScreen::Instance()->SetNewScorePos(*scorePos);
-			cStateEnterNameScreen::Instance()->SetNewScore(m_pGameTimer->VGetRunningTime());
+			cStateHighScoreScreen::Instance()->SetNewScore(m_pGameTimer->VGetRunningTime());
 		}
 		else 
 		{
