@@ -23,6 +23,8 @@ using namespace AI;
 
 cStateHighScoreScreen::cStateHighScoreScreen()
 	: m_pHighScoreScreen(NULL)
+	, m_pLabelNameTemplate(NULL)
+	, m_pLabelScoreTemplate(NULL)
 {
 }
 
@@ -102,6 +104,9 @@ void cStateHighScoreScreen::VOnUpdate(const TICK currentTick, const float deltaT
 void cStateHighScoreScreen::VOnExit()
 {
 	m_pHighScoreScreen.reset();
+	m_pLabelNameTemplate.reset();
+	m_pLabelScoreTemplate.reset();
+
 	if (m_pOwner->m_pHumanView->m_pAppWindowControl != NULL)
 	{
 		m_pOwner->m_pHumanView->m_pAppWindowControl->VRemoveChildControl("highscorescreen");
