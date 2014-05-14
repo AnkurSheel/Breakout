@@ -9,12 +9,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>Includes;src;..\..\Engine\Source\AI\src;..\..\Engine\Source\GameBase\Includes;..\..\Engine\Source\Base\Includes;..\..\Engine\Source\Utilities\Includes;..\..\Engine\Source\GraphicsEngine\Includes;..\..\Engine\Source\Sound\Includes;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Includes;src;..\..\Engine\Source\AI\src;..\..\Engine\Source\GameBase\Includes;..\..\Engine\Source\Base\Includes;..\..\Engine\Source\Utilities\Includes;..\..\Engine\Source\GraphicsEngine\Includes;..\..\Engine\Source\Sound\Includes;$(DXSDK_DIR)\Include;..\..\Engine\extern\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;ASTEROID_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>..\..\bin\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\bin\;..\..\Engine\extern\Lib\VisualLeakDetector\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Utilities.lib;GameBase.lib;Sound.lib;Base.lib;GraphicsEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>

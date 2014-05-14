@@ -1,13 +1,8 @@
-// *****************************************************************************
-//  Main   version:  1.0   Ankur Sheel  date: 2013/04/02
-// *****************************************************************************
-//  purpose:	
-// *****************************************************************************
 #include "stdafx.h"
 #include "Main.h"
 #include "BaseApp.hxx"
 #include "Game.hxx"
-//#include "Game/Game.hxx"
+#include "VisualLeakDetector/vld.h"
 
 using namespace GameBase;
 using namespace Base;
@@ -22,8 +17,6 @@ int WINAPI WinMain(const HINSTANCE hInstance,
 				   LPSTR lpCmdLine, 
 				   int nCmdShow)
 {
-	CheckForMemoryLeaks() ;
-
 	pGame = IGame::CreateGame("Game");
 
 	pGame->VOnInitialization(hInstance, nCmdShow, "Options.ini");
@@ -33,25 +26,6 @@ int WINAPI WinMain(const HINSTANCE hInstance,
 	return 0;
 }
 
-// ***************************************************************
-// Checks for memory leaks
-// ***************************************************************
-void CheckForMemoryLeaks() 
-{
-#ifdef	_DEBUG
-	// Get Current flag
-	int flag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) ; 
-
-	// Turn on leak-checking bit
-	flag |= (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF) ; 
-
-	// Set flag to the new value
-	_CrtSetDbgFlag(flag) ; 
-#endif	_DEBUG
-}
-
-// ***************************************************************
-// Cleanup
 // ***************************************************************
 void Cleanup() 
 {

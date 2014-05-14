@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>Includes;src;..\..\Engine\Source\AI\src;..\..\Engine\Source\GameBase\Includes;..\..\Engine\Source\Base\Includes;..\..\Engine\Source\Utilities\Includes;..\..\Engine\Source\GraphicsEngine\Includes;..\..\Engine\Source\Sound\Includes;$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Includes;src;..\..\Engine\Source\AI\src;..\..\Engine\Source\GameBase\Includes;..\..\Engine\Source\Base\Includes;..\..\Engine\Source\Utilities\Includes;..\..\Engine\Source\GraphicsEngine\Includes;..\..\Engine\Source\Sound\Includes;$(DXSDK_DIR)\Include;..\..\Engine\extern\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
@@ -20,7 +20,7 @@
       <PrecompiledHeaderOutputFile>$(IntDir) $(ProjectName)$(Configuration).pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>..\..\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Debug\;..\..\Engine\extern\Lib\VisualLeakDetector\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Utilities_D.lib;GameBase_D.lib;Sound_D.lib;Base_D.lib;GraphicsEngine_D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
