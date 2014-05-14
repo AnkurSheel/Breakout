@@ -1,6 +1,6 @@
 !define APP_NAME "SpBreakOut"
-!define PRODUCT_VERSION "1.0"
-!define VERSION "00.00.01.0"
+!define PRODUCT_VERSION "1.1"
+!define VERSION "00.00.01.1"
 !define WEB_SITE "http://www.ankursheel.com/"
 !define DESCRIPTION "Application"
 !define INSTALLER_NAME "setup_v${PRODUCT_VERSION}.exe"
