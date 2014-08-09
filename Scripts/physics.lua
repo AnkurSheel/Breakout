@@ -22,5 +22,6 @@ return {
 			enginePath.."/extern/Lib/VisualLeakDetector/Win32"
 		}
 		pchsource (enginePath.."/Source/Physics/src/stdafx.cpp")
+		defines {"PHYSICS_EXPORTS"}
 	end
 }

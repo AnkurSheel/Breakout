@@ -31,5 +31,6 @@ return {
 			}
 		end
 		pchsource (enginePath.."/Source/Sound/src/stdafx.cpp")
+		defines {"SOUND_EXPORTS"}
 	end
 }

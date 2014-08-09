@@ -22,6 +22,7 @@ return {
 			enginePath.."/extern/Lib/VisualLeakDetector/Win32"
 		}
 		pchsource (enginePath.."/Source/AI/src/stdafx.cpp")
+		defines {"AI_EXPORTS"}
 	end
 }
 

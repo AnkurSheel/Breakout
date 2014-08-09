@@ -114,6 +114,7 @@ solution (projectName)
 			"../Engine/extern/Lib/VisualLeakDetector/Win32"
 		}		
 		pchsource (inputPath.."src/stdafx.cpp")
+		defines("BREAKOUT_EXPORTS")
 
 	mainProjectName = projectName.."Main"
 	project (mainProjectName)
