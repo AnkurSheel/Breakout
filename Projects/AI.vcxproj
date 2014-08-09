@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8EEB0A74-F01B-E84F-BF5F-1CE58C3C6E87}</ProjectGuid>
+    <RootNamespace>AI</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>..\Obj\Release\AI\</IntDir>
+    <TargetName>AI</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\Debug\</OutDir>
+    <IntDir>..\Obj\Debug\AI\</IntDir>
+    <TargetName>AI_d</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>..\Engine\Source\AI\src;..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\extern\Include\VisualLeakDetector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\Source\AI\src;..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\extern\Include\VisualLeakDetector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)AI.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\bin;..\Engine\extern\Lib\VisualLeakDetector\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\AI.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Engine\Source\AI\src;..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\extern\Include\VisualLeakDetector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ProgramDataBaseFileName>$(OutDir)AI_d.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\Source\AI\src;..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\extern\Include\VisualLeakDetector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OutputFile>$(OutDir)AI_d.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\Debug;..\Engine\extern\Lib\VisualLeakDetector\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\Debug\AI_d.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Engine\Source\AI\src\AIDefines.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\stdafx.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FSM\State.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FSM\StateMachine.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FSM\Telegram.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyModule.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyOperators.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyRule.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzySet.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzySetProxy.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzySetTypes.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyTerm.h" />
+    <ClInclude Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyVariable.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Engine\Source\AI\src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyModule.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyOperators.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyRule.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzySet.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzySetProxy.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzySetTypes.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyTerm.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\AI\src\FuzzyLogic\FuzzyVariable.cpp">
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Base.vcxproj">
+      <Project>{E18A817B-72CD-D241-A249-8AE70AA04BCE}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Utilities.vcxproj">
+      <Project>{9AE93437-0183-D148-B8B7-7FB7FE588C8D}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

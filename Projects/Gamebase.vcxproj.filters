@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{30E40B11-F949-794A-892E-FBC6CA1C55D8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{2989F1FB-873E-5C47-99B6-A63682D064A9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseApp.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseComponent.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseEntity.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseEventData.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\ComponentFactory.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\Config.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EntityFactory.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EventFactory.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\GameBaseDefines.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\GameControls.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\GameOptions.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\HumanView.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\InputSystem.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\KeyboardHandlerComponent.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\ModelComponent.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\PhysicsComponent.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\PhysicsSystem.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\RenderSystem.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\Score.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\SpriteComponent.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\TransformComponent.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\EntityInitializedEventData.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\EntityManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\EntityMovedEventData.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\EntityScaledEventData.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\EventManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\GameBaseDefines.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\GameLogic.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\HighScoreTable.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\KeyboardController.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\MainWindow.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\MessageDispatchManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\src\stdafx.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseApp.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseComponent.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseEntity.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EntityManager.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EventData.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EventManager.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\GameView.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\HighScoreTable.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\KeyboardController.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\MainWindow.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\MessageDispatchManager.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\RenderableComponent.hxx">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Engine\Source\GameBase\src\BaseApp.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\BaseComponent.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\BaseEntity.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\ComponentFactory.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\Config.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityFactory.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityInitializedEventData.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityManager.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityMovedEventData.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityScaledEventData.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EventFactory.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EventManager.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\GameControls.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\GameOptions.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\HighScoreTable.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\HumanView.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\InputSystem.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\KeyboardController.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\KeyboardHandlerComponent.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\MainWindow.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\MessageDispatchManager.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\ModelComponent.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\PhysicsComponent.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\PhysicsSystem.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\RenderSystem.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\Score.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\SpriteComponent.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\stdafx.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\TransformComponent.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

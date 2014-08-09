@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9AE93437-0183-D148-B8B7-7FB7FE588C8D}</ProjectGuid>
+    <RootNamespace>Utilities</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>..\Obj\Release\Utilities\</IntDir>
+    <TargetName>Utilities</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\Debug\</OutDir>
+    <IntDir>..\Obj\Debug\Utilities\</IntDir>
+    <TargetName>Utilities_d</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>..\Engine\Source\Utilities\Includes;..\Engine\Source\Base\Includes;..\Engine\extern\Include\VisualLeakDetector;..\Engine\extern\Include\zlib;..\Engine\extern\Include\TinyXml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;UTILITIES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;WIN32;UTILITIES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\Source\Utilities\Includes;..\Engine\Source\Base\Includes;..\Engine\extern\Include\VisualLeakDetector;..\Engine\extern\Include\zlib;..\Engine\extern\Include\TinyXml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)Utilities.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\bin;..\Engine\extern\Lib\Zlib;..\Engine\extern\Lib\VisualLeakDetector\Win32;..\Engine\extern\Lib\TinyXml\VS2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Utilities.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Engine\Source\Utilities\Includes;..\Engine\Source\Base\Includes;..\Engine\extern\Include\VisualLeakDetector;..\Engine\extern\Include\zlib;..\Engine\extern\Include\TinyXml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;UTILITIES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ProgramDataBaseFileName>$(OutDir)Utilities_d.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;WIN32;UTILITIES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\Source\Utilities\Includes;..\Engine\Source\Base\Includes;..\Engine\extern\Include\VisualLeakDetector;..\Engine\extern\Include\zlib;..\Engine\extern\Include\TinyXml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OutputFile>$(OutDir)Utilities_d.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\Debug;..\Engine\extern\Lib\Zlib;..\Engine\extern\Lib\VisualLeakDetector\Win32;..\Engine\extern\Lib\TinyXml\VS2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\Debug\Utilities_d.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\GameDirectories.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\Process.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\Resources.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\UtilitiesDefines.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\FileInput.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\FileOutput.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\Logger.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\ParamLoader.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\ProcessManager.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\RandomGenerator.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\ResCache.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\ResourceManager.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\stdafx.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\SystemChecker.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\Timer.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\XMLFileIO.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\XMLNode.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\src\ZipFile.h" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\FileInput.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\FileOutput.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\GameDirectories.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\Logger.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\ParamLoaders.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\ProcessManager.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\RandomGenerator.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\ResCache.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\ResourceManager.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\SystemChecker.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\Timer.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\XMLFileIO.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\XMLNode.hxx" />
+    <ClInclude Include="..\Engine\Source\Utilities\Includes\ZipFile.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Engine\Source\Utilities\src\FileInput.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\FileOutput.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\GameDirectories.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\Logger.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\ParamLoader.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\Process.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\ProcessManager.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\RandomGenerator.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\ResCache.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\ResourceManager.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\Resources.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\SystemChecker.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\Timer.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\XMLFileIO.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\XMLNode.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Utilities\src\ZipFile.cpp">
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Base.vcxproj">
+      <Project>{E18A817B-72CD-D241-A249-8AE70AA04BCE}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

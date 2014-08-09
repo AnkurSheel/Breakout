@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{32BCCE16-7EEB-A54C-B8FC-41142626CBFC}</ProjectGuid>
+    <RootNamespace>Gamebase</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>..\Obj\Release\Gamebase\</IntDir>
+    <TargetName>Gamebase</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\Debug\</OutDir>
+    <IntDir>..\Obj\Debug\Gamebase\</IntDir>
+    <TargetName>Gamebase_d</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>..\Engine\Source\GameBase\Includes;..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\Source\AI\src;..\Engine\Source\GraphicsEngine\Includes;..\Engine\Source\Physics\Includes;..\Engine\Source\Sound\Includes;..\Engine\extern\Include\VisualLeakDetector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;GAMEBASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;WIN32;GAMEBASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\Source\GameBase\Includes;..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\Source\AI\src;..\Engine\Source\GraphicsEngine\Includes;..\Engine\Source\Physics\Includes;..\Engine\Source\Sound\Includes;..\Engine\extern\Include\VisualLeakDetector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)Gamebase.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\bin;..\Engine\extern\Lib\VisualLeakDetector\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Gamebase.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Engine\Source\GameBase\Includes;..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\Source\AI\src;..\Engine\Source\GraphicsEngine\Includes;..\Engine\Source\Physics\Includes;..\Engine\Source\Sound\Includes;..\Engine\extern\Include\VisualLeakDetector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;GAMEBASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ProgramDataBaseFileName>$(OutDir)Gamebase_d.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;WIN32;GAMEBASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\Source\GameBase\Includes;..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\Source\AI\src;..\Engine\Source\GraphicsEngine\Includes;..\Engine\Source\Physics\Includes;..\Engine\Source\Sound\Includes;..\Engine\extern\Include\VisualLeakDetector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OutputFile>$(OutDir)Gamebase_d.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\Debug;..\Engine\extern\Lib\VisualLeakDetector\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\Debug\Gamebase_d.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseApp.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseComponent.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseEntity.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseEventData.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\ComponentFactory.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\Config.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EntityFactory.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EventFactory.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\GameBaseDefines.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\GameControls.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\GameOptions.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\HumanView.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\InputSystem.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\KeyboardHandlerComponent.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\ModelComponent.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\PhysicsComponent.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\PhysicsSystem.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\RenderSystem.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\Score.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\SpriteComponent.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\TransformComponent.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\EntityInitializedEventData.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\EntityManager.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\EntityMovedEventData.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\EntityScaledEventData.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\EventManager.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\GameBaseDefines.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\GameLogic.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\HighScoreTable.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\KeyboardController.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\MainWindow.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\MessageDispatchManager.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\src\stdafx.h" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseApp.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseComponent.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\BaseEntity.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EntityManager.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EventData.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\EventManager.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\GameView.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\HighScoreTable.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\KeyboardController.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\MainWindow.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\MessageDispatchManager.hxx" />
+    <ClInclude Include="..\Engine\Source\GameBase\Includes\RenderableComponent.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Engine\Source\GameBase\src\BaseApp.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\BaseComponent.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\BaseEntity.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\ComponentFactory.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\Config.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityFactory.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityInitializedEventData.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityManager.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityMovedEventData.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EntityScaledEventData.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EventFactory.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\EventManager.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\GameControls.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\GameOptions.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\HighScoreTable.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\HumanView.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\InputSystem.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\KeyboardController.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\KeyboardHandlerComponent.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\MainWindow.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\MessageDispatchManager.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\ModelComponent.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\PhysicsComponent.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\PhysicsSystem.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\RenderSystem.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\Score.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\SpriteComponent.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\GameBase\src\TransformComponent.cpp">
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Base.vcxproj">
+      <Project>{E18A817B-72CD-D241-A249-8AE70AA04BCE}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Utilities.vcxproj">
+      <Project>{9AE93437-0183-D148-B8B7-7FB7FE588C8D}</Project>
+    </ProjectReference>
+    <ProjectReference Include="AI.vcxproj">
+      <Project>{8EEB0A74-F01B-E84F-BF5F-1CE58C3C6E87}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Graphics.vcxproj">
+      <Project>{0C2D9C30-550F-E64F-B622-8FA91324092C}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Physics.vcxproj">
+      <Project>{764DD2E8-C533-2A49-97F9-D413415278AB}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Sound.vcxproj">
+      <Project>{9A7A3084-36F2-DA4F-AD39-231327CEBB00}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

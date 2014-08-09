@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{2B3D7CB8-DF61-174F-8D9E-8A493278DD9C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{E5054229-4663-3949-828C-9FE1E425A2AD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Engine\Source\Base\Includes\BaseDefines.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\BaseUtilities.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\Color.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\GenericObjectCreation.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\HashedString.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\Includes.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\Macros.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\MathIncludes.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\myString.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\NonCopyable.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\Optional.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\Structures.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\typedef.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\Vector2.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\Includes\Vector3.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Source\Base\src\stdafx.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Engine\Source\Base\src\Color.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Base\src\HashedString.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Base\src\myString.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Source\Base\src\stdafx.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

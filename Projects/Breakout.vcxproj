@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5E4E9F06-2CD0-354F-8079-E1365233B2A2}</ProjectGuid>
+    <RootNamespace>Breakout</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>..\Obj\Release\Breakout\</IntDir>
+    <TargetName>Breakout</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\Debug\</OutDir>
+    <IntDir>..\Obj\Debug\Breakout\</IntDir>
+    <TargetName>Breakout_d</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\Source\AI\src;..\Engine\Source\GraphicsEngine\Includes;..\Engine\Source\Physics\Includes;..\Engine\Source\Sound\Includes;..\Engine\Source\GameBase\Includes;..\Engine\extern\Include\VisualLeakDetector;..\Source\Breakout\Includes;..\Source\Breakout\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\Source\AI\src;..\Engine\Source\GraphicsEngine\Includes;..\Engine\Source\Physics\Includes;..\Engine\Source\Sound\Includes;..\Engine\Source\GameBase\Includes;..\Engine\extern\Include\VisualLeakDetector;..\Source\Breakout\Includes;..\Source\Breakout\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)Breakout.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\bin;..\Engine\extern\Lib\VisualLeakDetector\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Breakout.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\Source\AI\src;..\Engine\Source\GraphicsEngine\Includes;..\Engine\Source\Physics\Includes;..\Engine\Source\Sound\Includes;..\Engine\Source\GameBase\Includes;..\Engine\extern\Include\VisualLeakDetector;..\Source\Breakout\Includes;..\Source\Breakout\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ProgramDataBaseFileName>$(OutDir)Breakout_d.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\Source\Base\Includes;..\Engine\Source\Utilities\Includes;..\Engine\Source\AI\src;..\Engine\Source\GraphicsEngine\Includes;..\Engine\Source\Physics\Includes;..\Engine\Source\Sound\Includes;..\Engine\Source\GameBase\Includes;..\Engine\extern\Include\VisualLeakDetector;..\Source\Breakout\Includes;..\Source\Breakout\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OutputFile>$(OutDir)Breakout_d.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\Debug;..\Engine\extern\Lib\VisualLeakDetector\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\Debug\Breakout_d.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\Breakout\Includes\GameDefines.h" />
+    <ClInclude Include="..\Source\Breakout\src\Ball.h" />
+    <ClInclude Include="..\Source\Breakout\src\BaseBrick.h" />
+    <ClInclude Include="..\Source\Breakout\src\BreakoutConfig.h" />
+    <ClInclude Include="..\Source\Breakout\src\BreakoutControls.h" />
+    <ClInclude Include="..\Source\Breakout\src\BreakoutEntityFactory.h" />
+    <ClInclude Include="..\Source\Breakout\src\BreakoutView.h" />
+    <ClInclude Include="..\Source\Breakout\src\BrickDestroyedEventData.h" />
+    <ClInclude Include="..\Source\Breakout\src\EscapePressedEventData.h" />
+    <ClInclude Include="..\Source\Breakout\src\Game.h" />
+    <ClInclude Include="..\Source\Breakout\src\GameFlowStateMachine.h" />
+    <ClInclude Include="..\Source\Breakout\src\GameFlowStates.h" />
+    <ClInclude Include="..\Source\Breakout\src\Level.h" />
+    <ClInclude Include="..\Source\Breakout\src\LifeLostEventData.h" />
+    <ClInclude Include="..\Source\Breakout\src\Messages.h" />
+    <ClInclude Include="..\Source\Breakout\src\Paddle.h" />
+    <ClInclude Include="..\Source\Breakout\src\StateHelpScreen.h" />
+    <ClInclude Include="..\Source\Breakout\src\StateHighScoreScreen.h" />
+    <ClInclude Include="..\Source\Breakout\src\StateMenuScreen.h" />
+    <ClInclude Include="..\Source\Breakout\src\StateOptionScreen.h" />
+    <ClInclude Include="..\Source\Breakout\src\StatePauseScreen.h" />
+    <ClInclude Include="..\Source\Breakout\src\StatePlayGame.h" />
+    <ClInclude Include="..\Source\Breakout\src\StateRedefineControlsScreen.h" />
+    <ClInclude Include="..\Source\Breakout\src\StateTitleScreen.h" />
+    <ClInclude Include="..\Source\Breakout\src\stdafx.h" />
+    <ClInclude Include="..\Source\Breakout\src\Wall.h" />
+    <ClInclude Include="..\Source\Breakout\Includes\Game.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\Breakout\src\Ball.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\BaseBrick.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\BreakoutConfig.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\BreakoutControls.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\BreakoutEntityFactory.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\BreakoutView.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\BrickDestroyedEventData.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\EscapePressedEventData.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\Game.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\GameFlowStateMachine.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\GameFlowStates.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\Level.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\LifeLostEventData.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\Paddle.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\StateHelpScreen.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\StateHighScoreScreen.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\StateMenuScreen.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\StateOptionScreen.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\StatePauseScreen.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\StatePlayGame.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\StateRedefineControlsScreen.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\StateTitleScreen.cpp">
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Source\Breakout\src\Wall.cpp">
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Base.vcxproj">
+      <Project>{E18A817B-72CD-D241-A249-8AE70AA04BCE}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Utilities.vcxproj">
+      <Project>{9AE93437-0183-D148-B8B7-7FB7FE588C8D}</Project>
+    </ProjectReference>
+    <ProjectReference Include="AI.vcxproj">
+      <Project>{8EEB0A74-F01B-E84F-BF5F-1CE58C3C6E87}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Graphics.vcxproj">
+      <Project>{0C2D9C30-550F-E64F-B622-8FA91324092C}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Physics.vcxproj">
+      <Project>{764DD2E8-C533-2A49-97F9-D413415278AB}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Sound.vcxproj">
+      <Project>{9A7A3084-36F2-DA4F-AD39-231327CEBB00}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Gamebase.vcxproj">
+      <Project>{32BCCE16-7EEB-A54C-B8FC-41142626CBFC}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

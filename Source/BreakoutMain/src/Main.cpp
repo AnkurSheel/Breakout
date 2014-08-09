@@ -2,7 +2,7 @@
 #include "Main.h"
 #include "BaseApp.hxx"
 #include "Game.hxx"
-#include "VisualLeakDetector/vld.h"
+#include "vld.h"
 
 using namespace GameBase;
 using namespace Base;
