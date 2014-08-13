@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BreakoutMain", "BreakoutMain.vcxproj", "{3EFC7B72-DA4D-0249-92B6-EB9A79BEFB85}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4DCECAF4-0BF5-B745-8CF7-34A9A25BB703} = {4DCECAF4-0BF5-B745-8CF7-34A9A25BB703}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Breakout", "Breakout.vcxproj", "{4DCECAF4-0BF5-B745-8CF7-34A9A25BB703}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|Win32 = Release|Win32
+		Debug|Win32 = Debug|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EFC7B72-DA4D-0249-92B6-EB9A79BEFB85}.Release|Win32.ActiveCfg = Release|Win32
+		{3EFC7B72-DA4D-0249-92B6-EB9A79BEFB85}.Release|Win32.Build.0 = Release|Win32
+		{3EFC7B72-DA4D-0249-92B6-EB9A79BEFB85}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3EFC7B72-DA4D-0249-92B6-EB9A79BEFB85}.Debug|Win32.Build.0 = Debug|Win32
+		{4DCECAF4-0BF5-B745-8CF7-34A9A25BB703}.Release|Win32.ActiveCfg = Release|Win32
+		{4DCECAF4-0BF5-B745-8CF7-34A9A25BB703}.Release|Win32.Build.0 = Release|Win32
+		{4DCECAF4-0BF5-B745-8CF7-34A9A25BB703}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4DCECAF4-0BF5-B745-8CF7-34A9A25BB703}.Debug|Win32.Build.0 = Debug|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

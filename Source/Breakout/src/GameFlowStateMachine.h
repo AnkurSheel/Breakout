@@ -6,7 +6,7 @@
 #ifndef GameFlowStateMachine_h__
 #define GameFlowStateMachine_h__
 
-#include "fsm\statemachine.h"
+#include "statemachine.h"
 #include "Game.h"
 
 class cGameFlowStateMachine :

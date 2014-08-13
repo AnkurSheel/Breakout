@@ -6,7 +6,7 @@
 #ifndef GameFlowStates_h__
 #define GameFlowStates_h__
 
-#include "fsm/State.h"
+#include "State.h"
 
 namespace GameBase
 {
