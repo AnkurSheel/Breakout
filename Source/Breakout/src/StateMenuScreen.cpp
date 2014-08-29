@@ -58,41 +58,41 @@ void cStateMenuScreen::VOnEnter(cGame *pGame)
 		if(pPlayButton != NULL)
 		{
 			UIEventCallBackFn callbackPlayBtn = bind(&cStateMenuScreen::PlayButtonPressed, this, _1);
-			pPlayButton->VRegisterCallBack(UIET_BTNRELEASED, callbackPlayBtn);
+			pPlayButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackPlayBtn);
 		}
 
 		shared_ptr<Graphics::IBaseControl> pHelpButton = m_pMenuScreen->VFindChildControl("btnHelp");
 		if(pHelpButton != NULL)
 		{
 			UIEventCallBackFn callbackHelpBtn = bind(&cStateMenuScreen::HelpButtonPressed, this, _1);
-			pHelpButton->VRegisterCallBack(UIET_BTNRELEASED, callbackHelpBtn);
+			pHelpButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackHelpBtn);
 		}
 		
 		shared_ptr<Graphics::IBaseControl> pOptionsButton = m_pMenuScreen->VFindChildControl("btnOption");
 		if(pOptionsButton != NULL)
 		{
 			UIEventCallBackFn callbackOptionsBtn = bind(&cStateMenuScreen::OptionsButtonPressed, this, _1);
-			pOptionsButton->VRegisterCallBack(UIET_BTNRELEASED, callbackOptionsBtn);
+			pOptionsButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackOptionsBtn);
 		}
 
 		shared_ptr<Graphics::IBaseControl> pRedefineControlsButton = m_pMenuScreen->VFindChildControl("btnControls");
 		if(pRedefineControlsButton != NULL)
 		{
 			UIEventCallBackFn callbackRedefineControlsBtn = bind(&cStateMenuScreen::ControlsButtonPressed, this, _1);
-			pRedefineControlsButton->VRegisterCallBack(UIET_BTNRELEASED, callbackRedefineControlsBtn);
+			pRedefineControlsButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackRedefineControlsBtn);
 		}
 
 		shared_ptr<Graphics::IBaseControl> pHighScoreButton = m_pMenuScreen->VFindChildControl("btnHighScore");
 		if(pHighScoreButton != NULL)
 		{
 			UIEventCallBackFn callbackHighScoreBtn = bind(&cStateMenuScreen::HighScoreButtonPressed, this, _1);
-			pHighScoreButton->VRegisterCallBack(UIET_BTNRELEASED, callbackHighScoreBtn);
+			pHighScoreButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackHighScoreBtn);
 		}
 		shared_ptr<Graphics::IBaseControl> pQuitButton = m_pMenuScreen->VFindChildControl("btnQuit");
 		if(pQuitButton != NULL)
 		{
 			UIEventCallBackFn callbackQuitBtn = bind(&cStateMenuScreen::QuitButtonPressed, this, _1);
-			pQuitButton->VRegisterCallBack(UIET_BTNRELEASED, callbackQuitBtn);
+			pQuitButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackQuitBtn);
 		}
 	}
 

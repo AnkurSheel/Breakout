@@ -42,7 +42,7 @@ cStateOptionsScreen* cStateOptionsScreen::Instance()
 void cStateOptionsScreen::VOnEnter(cGame *pGame)
 {
 	cGameFlowStates::VOnEnter(pGame);
-	
+
 	if (pGame->m_pHumanView->m_pAppWindowControl != NULL)
 	{
 		m_pOptionsScreen = IUiManager::GetInstance()->VCreateUI("optionscreen");
@@ -52,28 +52,28 @@ void cStateOptionsScreen::VOnEnter(cGame *pGame)
 		if(pMusicCheckBoxControl != NULL)
 		{
 			UIEventCallBackFn musicCheckBoxCallback = bind(&cStateOptionsScreen::MusicCheckBoxPressed, this, _1);
-			pMusicCheckBoxControl->VRegisterCallBack(UIET_BTNPRESSED, musicCheckBoxCallback);
+			pMusicCheckBoxControl->VRegisterCallBack(UIEVENTTYPE::BUTTONPRESSED, musicCheckBoxCallback);
 		}
 
 		shared_ptr<Graphics::IBaseControl> pMusicScrollBarControl = m_pOptionsScreen->VFindChildControl("hsbMusicVolume");
 		if(pMusicScrollBarControl != NULL)
 		{
 			UIEventCallBackFn musicScrollbarcallback = bind(&cStateOptionsScreen::MusicScrollbarChanged, this, _1);
-			pMusicScrollBarControl->VRegisterCallBack(UIET_SCBCHANGED, musicScrollbarcallback);
+			pMusicScrollBarControl->VRegisterCallBack(UIEVENTTYPE::SCROLLBARCHANGED, musicScrollbarcallback);
 		}
 
 		shared_ptr<Graphics::IBaseControl> pSFXScrollBarControl = m_pOptionsScreen->VFindChildControl("hsbSFXVolume");
 		if(pSFXScrollBarControl != NULL)
 		{
 			UIEventCallBackFn SFXScrollbarcallback = bind(&cStateOptionsScreen::SFXScrollbarChanged, this, _1);
-			pSFXScrollBarControl->VRegisterCallBack(UIET_SCBCHANGED, SFXScrollbarcallback);
+			pSFXScrollBarControl->VRegisterCallBack(UIEVENTTYPE::SCROLLBARCHANGED, SFXScrollbarcallback);
 		}
 
 		shared_ptr<Graphics::IBaseControl> pBackButton = m_pOptionsScreen->VFindChildControl("hsbMusicVolume");
 		if(pBackButton != NULL)
 		{
 			UIEventCallBackFn callBackBtn= bind(&cStateOptionsScreen::BackButtonPressed, this, _1);
-			pBackButton->VRegisterCallBack(UIET_BTNRELEASED, callBackBtn);
+			pBackButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callBackBtn);
 		}
 
 		/*IBaseControl * pSfxCheckBoxControl = IBaseControl::CreateCheckBoxControl(checkboxControlDef);
@@ -126,7 +126,7 @@ void cStateOptionsScreen::MusicScrollbarChanged(const stUIEventCallbackParam & p
 {
 	shared_ptr<IBaseControl> pMusicTextBox = m_pOptionsScreen->VFindChildControl("tbMusicVolume");
 	//cGameOptions::GameOptions().iMusicVolume = params.iThumbPos * 5;
-	pMusicTextBox->VSetText(cString(20, "%d", params.iThumbPos));
+	pMusicTextBox->VSetText(cString::MakeFormatted("%d", params.iThumbPos));
 	//m_pOwner->m_pHumanView->SetMusicVolume();
 }
 
@@ -135,7 +135,7 @@ void cStateOptionsScreen::SFXScrollbarChanged(const Graphics::stUIEventCallbackP
 {
 	shared_ptr<IBaseControl> pSFXTextBox = m_pOptionsScreen->VFindChildControl("tbSFXVolume");
 	//cGameOptions::GameOptions().iSFXVolume = params.iThumbPos * 5;
-	pSFXTextBox->VSetText(cString(20, "%d", params.iThumbPos));
+	pSFXTextBox->VSetText(cString::MakeFormatted("%d", params.iThumbPos));
 	//m_pOwner->m_pHumanView->SetSFXVolume();
 }
 

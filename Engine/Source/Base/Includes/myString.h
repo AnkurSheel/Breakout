@@ -48,14 +48,6 @@ namespace Base
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		BASE_API cString(std::string const & s);
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/// Constructor
-		///
-		/// @param[in] lpFmt The fromat control
-		/// @param[in] ... variable number of arguments 
-		///
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		BASE_API explicit cString(const int iMaxSize, const char * const  lpFmt, ...);
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// Copy Constructor
 		///
 		///
@@ -81,7 +73,6 @@ namespace Base
 		///
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		BASE_API bool operator <(const cString & str) const;
-		//BASE_API bool operator == (const char * szRight) const;
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// Returns true if the current string is equal to the passed in string
 		///
@@ -132,74 +123,59 @@ namespace Base
 		/// Returns the substring of the string from uiStartIndex to uiEndIndex.
 		/// uiStartIndex anduiEndIndex are between 0 and string length
 		///
-		/// @param[in] uiStartIndex The start index for the substring
-		/// @param[in] uiEndIndex The end index for the substring
-		/// @return The substring of the string starting from uiStartIndex
-		/// to uiEndIndex
+		/// @param[in] startIndex The start index for the substring.
+		/// @param[in] endIndex The end index for the substring.
+		/// @return The substring of the string starting from startIndex to endIndex.
 		///
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		BASE_API cString GetSubString(const unsigned int uiStartIndex,
-			const unsigned int uiEndIndex) const;
+		BASE_API cString GetSubString(const int startIndex, const int endIndex) const;
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// Searches the string for the first occurrence of a character starting
 		/// from an offset.
 		///
 		/// @param[in] chChar The character to be found
 		/// @param[in] iOffset The index to start the search from
-		/// @return The index of the character when successful. Invalid optional
-		/// otherwise 
+		/// @return The index of the character when successful. Invalid optional  otherwise 
 		///
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		BASE_API Base::tOptional<int> FindIndex(const char chChar,
-			const int iOffset) const;
+		BASE_API Base::tOptional<int> FindIndex(const char chararcter, const int offset) const;
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/// Searches the string for the first occurrence of any of the passed in 
-		/// characters starting from an offset.
+		/// Searches the string for the first occurrence of any of the passed in characters starting from an offset.
 		///
-		/// @param[in] strChars The characters for which the function is to search
-		/// @param[in] iOffset The index to start the search from
+		/// @param[in] characters The characters for which the function is to search
+		/// @param[in] offset The index to start the search from
 		/// @return The index of the first character that is found when successful.
 		/// Invalid optional otherwise 
 		///
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		BASE_API Base::tOptional<int> FindFirstOf(const cString & strChars,
-			const int iOffset) const;
+		BASE_API Base::tOptional<int> FindFirstOfAny(const cString & characters, const int offset) const;
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/// Searches the string for the first character thats is not any of the passed in 
-		/// characters starting from an offset.
+		/// Searches the string for the first character thats is any of the passed in characters starting from an offset.
 		///
-		/// @param[in] strChars The characters for which the function is to search
-		/// @param[in] iOffset The index to start the search from
-		/// @return The index of the first character that is found when successful.
-		/// Invalid optional otherwise 
+		/// @param[in] characters The characters for which the function is to search
+		/// @param[in] offset The index to start the search from
+		/// @return The index of the first character that is found when successful. Invalid optional otherwise 
 		///
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		BASE_API Base::tOptional<int> FindFirstNotOf(const cString & strChars,
-			const int iOffset) const;
+		BASE_API Base::tOptional<int> FindFirstNotOfAny(const cString & characters, const int offset) const;
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/// Searches the string for the last occurrence of any of the passed in 
-		/// characters till an offset.
+		/// Searches the string for the last occurrence of any of the passed in characters before the offset.
 		///
-		/// @param[in] strChars The characters for which the function is to search
-		/// @param[in] iOffset The index at which the search should end
-		/// @return The index of the last character that is found when successful.
-		/// Invalid optional otherwise 
+		/// @param[in] characters The characters for which the function is to search.
+		/// @param[in] offset The index at which the search should end.
+		/// @return The index of the last character that is found when successful. Invalid optional otherwise.
 		///
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		BASE_API Base::tOptional<int> FindLastOf(const cString & strChars,
-			const int iOffset) const;
+		BASE_API Base::tOptional<int> FindLastOfAny(const cString & characters, const int offset) const;
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/// Searches the string for the last character thats is not any of the
-		///  passed in characters till an offset.
+		/// Searches the string for the last character thats is not any of the passed in characters before the offset.
 		///
-		/// @param[in] strChars The characters for which the function is to search
-		/// @param[in] iOffset The index at which the search should end
-		/// @return The index of the last character that is found when successful.
-		/// Invalid optional otherwise 
+		/// @param[in] characters The characters for which the function is to search
+		/// @param[in] offset The index at which the search should end
+		/// @return The index of the last character that is found when successful. Invalid optional otherwise 
 		///
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		BASE_API Base::tOptional<int> FindLastNotOf(const cString & strChars,
-			const int iOffset) const;
+		BASE_API Base::tOptional<int> FindLastNotOfAny(const cString & characters, const int offset) const;
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// Case Insensitive comparison of current string with passed in string
 		///
@@ -209,7 +185,7 @@ namespace Base
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		BASE_API bool CompareInsensitive (const cString & str) const;
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/// Removes whitespace characters from the begining of the string
+		/// Removes whitespace characters from the beginning of the string
 		///
 		///
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -297,8 +273,16 @@ namespace Base
 		///
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		BASE_API static cString CalendarTimeToString(time_t time);
-	
-private:
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/// Makes a formatted string
+		///
+		/// @param[in] inpFmt The format control
+		/// @param[in] ... variable number of arguments
+		///
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		BASE_API static cString MakeFormatted(const char * const  inpFmt, ...);
+
+	private:
 		std::string m_str;
 	};
 

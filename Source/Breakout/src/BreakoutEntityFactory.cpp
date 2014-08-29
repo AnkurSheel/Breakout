@@ -48,8 +48,7 @@ IBaseEntity * cBreakOutEntityFactory::VCreateEntity(const cHashedString & Type)
 		const cEntityDef * const pEntityDef = cConfig::GetEntityDef(Type);
 		if(pEntityDef != NULL)
 		{
-			ComponentMap::const_iterator Iter;
-			for (Iter = pEntityDef->m_Components.begin(); Iter != pEntityDef->m_Components.end(); Iter++)
+			for (auto Iter = pEntityDef->m_Components.begin(); Iter != pEntityDef->m_Components.end(); Iter++)
 			{
 				IBaseComponent * pComponent = cComponentFactory::Instance()->GetDuplicateComponent(Iter->second);
 				if(pComponent != NULL)

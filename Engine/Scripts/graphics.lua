@@ -2,14 +2,11 @@ local utils = require('utils')
 
 return {
 	run = function(enginePath, outputDirectory)
-		require('Base').run(enginePath, outputDirectory)
-		require('Utilities').run(enginePath, outputDirectory)
 		project "Graphics"
 		kind "SharedLib"
 		location = outputDirectory
 		inputPath = enginePath.."/Source/GraphicsEngine"
 		utils.addfiles(inputPath) 
-		links { "Base", "Utilities" }
 		includedirs
 		{
 			enginePath.."/Source/GraphicsEngine/Includes",
@@ -26,5 +23,9 @@ return {
 		pchsource (enginePath.."/Source/GraphicsEngine/src/stdafx.cpp")
 		defines {"GRAPHICSENGINE_EXPORTS"}
 		excludes {"**/ScreenElement.hxx"}
+		configuration ("Debug")
+			links { "Base_d", "Utilities_d"}
+		configuration ("Release")
+			links { "Base", "Utilities" }
 	end
 }

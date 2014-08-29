@@ -53,28 +53,28 @@ void cStatePauseScreen::VOnEnter(cGame *pGame)
 	if(pOptionsButton != NULL)
 	{
 		UIEventCallBackFn callbackOptionsBtn = bind(&cStatePauseScreen::OptionsButtonPressed, this, _1);
-		pOptionsButton->VRegisterCallBack(UIET_BTNRELEASED, callbackOptionsBtn);
+		pOptionsButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackOptionsBtn);
 	}
 	
 	shared_ptr<Graphics::IBaseControl> pHelpButton= m_pPauseScreen->VFindChildControl("btnHelp");
 	if(pHelpButton != NULL)
 	{
 		UIEventCallBackFn callbackHelpBtn = bind(&cStatePauseScreen::HelpButtonPressed, this, _1);
-		pHelpButton->VRegisterCallBack(UIET_BTNRELEASED, callbackHelpBtn);
+		pHelpButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackHelpBtn);
 	}
 
 	shared_ptr<Graphics::IBaseControl> pQuitButton= m_pPauseScreen->VFindChildControl("btnQuit");
 	if(pQuitButton != NULL)
 	{
 		UIEventCallBackFn callbackQuitBtn = bind(&cStatePauseScreen::QuitButtonPressed, this, _1);
-		pQuitButton->VRegisterCallBack(UIET_BTNRELEASED, callbackQuitBtn);
+		pQuitButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackQuitBtn);
 	}
 
 	shared_ptr<Graphics::IBaseControl> pBackButton= m_pPauseScreen->VFindChildControl("btnBack");
 	if(pBackButton != NULL)
 	{
 		UIEventCallBackFn callbackBackBtn = bind(&cStatePauseScreen::BackButtonPressed, this, _1);
-		pBackButton->VRegisterCallBack(UIET_BTNRELEASED, callbackBackBtn);
+		pBackButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackBackBtn);
 	}
 
 	EventListenerCallBackFn listener = bind(&cStatePauseScreen::EscapePressedListener, this, _1);

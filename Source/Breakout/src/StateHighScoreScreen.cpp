@@ -67,7 +67,7 @@ void cStateHighScoreScreen::VOnEnter(cGame *pGame)
 		int index = 0;
 		if(pGame->m_pHighScoreTable->VIsAscendingOrder())
 		{
-			for(IHighScoreTable::ScoreSet::reverse_iterator iter = highScores.rbegin(); iter != highScores.rend(); iter++)
+			for(auto iter = highScores.rbegin(); iter != highScores.rend(); iter++)
 			{
 				DisplayScore(*iter, index);
 				index++;
@@ -75,7 +75,7 @@ void cStateHighScoreScreen::VOnEnter(cGame *pGame)
 		}
 		else
 		{
-			for(IHighScoreTable::ScoreSet::iterator iter = highScores.begin(); iter != highScores.end(); iter++)
+			for(auto iter = highScores.begin(); iter != highScores.end(); iter++)
 			{
 				DisplayScore(*iter, index);
 				index++;
@@ -87,7 +87,7 @@ void cStateHighScoreScreen::VOnEnter(cGame *pGame)
 	if(pBackButton != NULL)
 	{
 		UIEventCallBackFn callbackBackBtn = bind(&cStateHighScoreScreen::BackButtonPressed, this, _1);
-		pBackButton->VRegisterCallBack(UIET_BTNRELEASED, callbackBackBtn);
+		pBackButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackBackBtn);
 	}
 
 	EventListenerCallBackFn listener = bind(&cStateHighScoreScreen::EscapePressedListener, this, _1);
@@ -129,13 +129,13 @@ void cStateHighScoreScreen::DisplayScore(const shared_ptr<const cScore> pScore, 
 		ptbNewHighScoreName->VSetVisible(true);
 		UIEventCallBackFn callBackTextBox;
 		callBackTextBox = bind(&cStateHighScoreScreen::OnNameEntered, this, _1);
-		ptbNewHighScoreName->VRegisterCallBack(UIET_FOCUSLOST, callBackTextBox);
+		ptbNewHighScoreName->VRegisterCallBack(UIEVENTTYPE::FOCUSLOST, callBackTextBox);
 		AddScoreLabel(inIndex, *m_NewScore, posY);
 	}
 	else
 	{
 		shared_ptr<IBaseControl> pNameControl = m_pLabelNameTemplate->VDuplicate();
-		pNameControl->VSetControlName(cString(50, "Name%d", inIndex));
+		pNameControl->VSetControlName(cString::MakeFormatted("Name%d", inIndex));
 		pNameControl->VSetText(pScore->GetPlayerName());
 		pNameControl->VSetPosition(cVector2(0.0f, posY));
 		pNameControl->VSetVisible(true);
@@ -179,10 +179,10 @@ void cStateHighScoreScreen::OnNameEntered(const Graphics::stUIEventCallbackParam
 void cStateHighScoreScreen::AddScoreLabel(const int inIndex, const int inScore, const int posY)
 {
 	shared_ptr<IBaseControl> pScoreControl = m_pLabelScoreTemplate->VDuplicate();
-	pScoreControl->VSetControlName(cString(50, "Score%d", inIndex));
+	pScoreControl->VSetControlName(cString::MakeFormatted("Score%d", inIndex));
 	int hour, minutes, seconds;
 	GetTimeAsHHMMSS(inScore, hour, minutes, seconds);
-	pScoreControl->VSetText(cString(30, "%02d : %02d : %02d", hour, minutes, seconds));
+	pScoreControl->VSetText(cString::MakeFormatted("%02d : %02d : %02d", hour, minutes, seconds));
 	pScoreControl->VSetPosition(cVector2(250.0f, posY));
 	pScoreControl->VSetVisible(true);
 	m_pHighScoreScreen->VAddChildControl(pScoreControl);

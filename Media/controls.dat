@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Keys>
+    <Key id="0" name="Move Paddle Left" code="37"/>
+    <Key id="1" name="Move Paddle Right" code="39"/>
+</Keys>

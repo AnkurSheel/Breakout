@@ -31,19 +31,28 @@
     -- }
 	
 	-- project "Dummy" 	
-
+package.path = "../Engine/Scripts/?.lua;" .. package.path
+require('premake_options')
 local utils = require('utils')
-	
-	
---utils.CreateProjectForGithub("Test/")
+
+pathPrefix = "../"
+--pathPrefix = "../../Breakout_Github"
+if _OPTIONS["path_prefix"] then
+	pathPrefix = _OPTIONS["path_prefix"]
+end
+
+if _OPTIONS["no_engine_project"] ~= nil then
+	utils.CreateProjectForGithub(pathPrefix)
+end
 
 projectName = "Breakout"
 
+
 solution (projectName)
-	outputDirectory = "../Projects"
+	outputDirectory = pathPrefix.."/Projects"
 	location (outputDirectory)
 	language "C++"
-	objdir "../Obj/"
+	objdir (pathPrefix.."/Obj/")
 	--configurations {"Release", "Debug", "ReleaseCandidate"}
 	configurations {"Release", "Debug"}
 	pchheader "stdafx.h"
@@ -52,14 +61,14 @@ solution (projectName)
 		defines { "_DEBUG" }
 		flags { "Symbols" } -- Debug symbols
 		targetsuffix '_d' 
-		targetdir "../Debug"
-		libdirs {"../Debug"}
+		targetdir (pathPrefix.."/Debug")
+		libdirs {pathPrefix.."/Debug"}
 		
 	configuration { "Release*" } -- Selects both Release
 		defines { "NDEBUG" }
 		flags { "Optimize" } -- Optimization switches on
-		targetdir "../bin"
-		libdirs {"../bin"}
+		targetdir (pathPrefix.."/bin")
+		libdirs {pathPrefix.."/bin"}
 		
 	-- configuration { "ReleaseCandidate" } -- All ReleaseCandidates needs a special define
 		-- defines { "RELEASE_CANDIDATE" }
@@ -77,70 +86,85 @@ solution (projectName)
 
 	vpaths 
 	{
-		["Interfaces"] = {"../**.hxx"},
-		["Headers"] = {"../**.h"},
-		["Sources"] = {"../**.c", "../**.cpp"}
+		["Interfaces"] = {pathPrefix.."/**.hxx"},
+		["Headers"] = {pathPrefix.."/**.h"},
+		["Sources"] = {pathPrefix.."/**.c", pathPrefix.."/**.cpp"}
 	}
-
-	require('ai').run("../Engine", outputDirectory)
-	require('base').run("../Engine", outputDirectory)
-	require('gameBase').run("../Engine", outputDirectory)
-	require('utilities').run("../Engine", outputDirectory)
-	require('graphics').run("../Engine", outputDirectory)
-	require('physics').run("../Engine", outputDirectory)
-	require('sound').run("../Engine", outputDirectory)
-		
-	project (projectName)
-		kind "SharedLib"
-		location = outputDirectory
-		inputPath = "../Source/"..projectName.."/"
-		utils.addfiles(inputPath) 
-		links { "Base", "Utilities", "AI", "Graphics", "Physics", "Sound", "Gamebase" }
-		includedirs
-		{
-			"../Engine/Source/Base/Includes",
-			"../Engine/Source/Utilities/Includes",
-			"../Engine/Source/AI/src",
-			"../Engine/Source/GraphicsEngine/Includes",
-			"../Engine/Source/Physics/Includes",
-			"../Engine/Source/Sound/Includes",
-			"../Engine/Source/GameBase/Includes",
-			"../Engine/extern/Include/VisualLeakDetector",
-			inputPath.."Includes",
-			inputPath.."src"
-		}	
-		libdirs 
-		{
-			"../Engine/extern/Lib/VisualLeakDetector/Win32"
-		}		
-		pchsource (inputPath.."src/stdafx.cpp")
-		defines("BREAKOUT_EXPORTS")
 
 	mainProjectName = projectName.."Main"
 	project (mainProjectName)
 		kind "WindowedApp"
 		location = outputDirectory
-		inputPath = "../Source/"..mainProjectName.."/"
+		inputPath = pathPrefix.."/Source/"..mainProjectName.."/"
 		utils.addfiles(inputPath) 
-		links { projectName, "Base", "Utilities" }
+		if _OPTIONS["no_engine_project"] == nil then
+			links { projectName, "Base", "Utilities" }
+		end
 		includedirs
 		{
-			"../Source/"..projectName.."/Includes",
-			"../Engine/Source/Base/Includes",
-			"../Engine/Source/Utilities/Includes",
-			"../Engine/Source/GameBase/Includes",
+			pathPrefix.."/Source/"..projectName.."/Includes",
+			pathPrefix.."/Engine/Source/Base/Includes",
+			pathPrefix.."/Engine/Source/Utilities/Includes",
+			pathPrefix.."/Engine/Source/GameBase/Includes",
 			inputPath.."src",
-			"../Engine/extern/Include/VisualLeakDetector"
+			pathPrefix.."/Engine/extern/Include/VisualLeakDetector"
 		}
 		libdirs 
 		{
-			"../Engine/extern/Lib/VisualLeakDetector/Win32"
+			pathPrefix.."/Engine/extern/Lib/VisualLeakDetector/Win32"
 		}
 		pchsource (inputPath.."src/stdafx.cpp")
 		flags{"WinMain"}
 		configuration ("Debug")
-			debugdir "../Debug"
+			debugdir (pathPrefix.."/Debug")
+			if _OPTIONS["no_engine_project"] ~= nil then
+				links { projectName, "Base_d", "Utilities_d" }
+			end
 		configuration ("Release")
-			debugdir "../bin"
-
+			debugdir (pathPrefix.."/bin")
+			if _OPTIONS["no_engine_project"] ~= nil then
+				links { projectName, "Base", "Utilities" }
+			end
 			
+	project (projectName)
+		kind "SharedLib"
+		location = outputDirectory
+		inputPath = pathPrefix.."/Source/"..projectName.."/"
+		utils.addfiles(inputPath) 
+		if _OPTIONS["no_engine_project"] == nil then
+			links { "Base", "Utilities", "AI", "Graphics", "Physics", "Sound", "Gamebase" }
+		end
+		includedirs
+		{
+			pathPrefix.."/Engine/Source/Base/Includes",
+			pathPrefix.."/Engine/Source/Utilities/Includes",
+			pathPrefix.."/Engine/Source/AI/Includes",
+			pathPrefix.."/Engine/Source/GraphicsEngine/Includes",
+			pathPrefix.."/Engine/Source/Physics/Includes",
+			pathPrefix.."/Engine/Source/Sound/Includes",
+			pathPrefix.."/Engine/Source/GameBase/Includes",
+			pathPrefix.."/Engine/extern/Include/VisualLeakDetector",
+			inputPath.."Includes",
+			--inputPath.."src"
+		}	
+		libdirs 
+		{
+			pathPrefix.."/Engine/extern/Lib/VisualLeakDetector/Win32"
+		}		
+		pchsource (inputPath.."src/stdafx.cpp")
+		defines("BREAKOUT_EXPORTS")
+	if _OPTIONS["no_engine_project"] ~= nil then
+		configuration ("Debug")
+			links { "Base_d", "Utilities_d", "AI_d", "Graphics_d", "Physics_d", "Sound_d", "Gamebase_d" }
+		configuration ("Release")
+			links { "Base", "Utilities", "AI", "Graphics", "Physics", "Sound", "Gamebase" }
+	else		
+		require('ai').run(pathPrefix.."/Engine", outputDirectory)
+		require('base').run(pathPrefix.."/Engine", outputDirectory)
+		require('gameBase').run(pathPrefix.."/Engine", outputDirectory)
+		require('utilities').run(pathPrefix.."/Engine", outputDirectory)
+		require('graphics').run(pathPrefix.."/Engine", outputDirectory)
+		require('physics').run(pathPrefix.."/Engine", outputDirectory)
+		require('sound').run(pathPrefix.."/Engine", outputDirectory)
+	end
+	

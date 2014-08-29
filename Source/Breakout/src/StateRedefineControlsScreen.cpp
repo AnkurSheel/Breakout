@@ -48,15 +48,14 @@ void cStateRedefineControlsScreen::VOnEnter(cGame * pGame)
 		m_pBtnControlKeyTemplate = m_pRedefineControlsScreen->VFindChildControl("btnControlKeyTemplate");
 
 		cGameControls::KeyMapping keyMap = pGame->m_pGameControls->GetKeyMap();
-		cGameControls::KeyMapping::iterator iter;
 		int i = 0;
 		int currentPosY = 220;
-		for(iter = keyMap.begin(); iter != keyMap.end(); iter++)
+		for(auto iter = keyMap.begin(); iter != keyMap.end(); iter++)
 		{
 			stGameControl gameControl = iter->second;
 
 			shared_ptr<IBaseControl> pNameControl = m_pLabelControlDisplayNameTemplate->VDuplicate();
-			pNameControl->VSetControlName(cString(50, "Name%d", i));
+			pNameControl->VSetControlName(cString::MakeFormatted("Name%d", i));
 			pNameControl->VSetText(gameControl.m_DisplayName);
 			pNameControl->VSetPosition(cVector2(0.0f, currentPosY));
 			pNameControl->VSetVisible(true);
@@ -64,7 +63,7 @@ void cStateRedefineControlsScreen::VOnEnter(cGame * pGame)
 			pNameControl.reset();
 
 			shared_ptr<IBaseControl> pKeyControl = m_pBtnControlKeyTemplate->VDuplicate();
-			pKeyControl->VSetControlName(cString(50, "Key%d", i));
+			pKeyControl->VSetControlName(cString::MakeFormatted("Key%d", i));
 			pKeyControl->VSetText(pGame->m_pGameControls->GetKeyName(gameControl.m_KeyCode));
 			pKeyControl->VSetPosition(cVector2(300.0f, currentPosY));
 			pKeyControl->VSetVisible(true);
@@ -77,13 +76,13 @@ void cStateRedefineControlsScreen::VOnEnter(cGame * pGame)
 				m_currentlyEditingID = id;
 				m_pKeyControls[m_currentlyEditingID]->VSetText("Press Any Key");
 			};
-			pKeyControl->VRegisterCallBack(UIET_BTNRELEASED, btnClick);
+			pKeyControl->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, btnClick);
 
 			UIEventCallBackFn  btnKeyDown = [this] (const stUIEventCallbackParam & params)
 			{
 				this->OnKeyChanged(params.uiCharId);
 			};
-			pKeyControl->VRegisterCallBack(UIET_ONKEYDOWN, btnKeyDown);
+			pKeyControl->VRegisterCallBack(UIEVENTTYPE::KEYDOWN, btnKeyDown);
 			pKeyControl.reset();
 
 			i++;
@@ -95,21 +94,21 @@ void cStateRedefineControlsScreen::VOnEnter(cGame * pGame)
 	if(pOkButton != NULL)
 	{
 		UIEventCallBackFn callbackBackBtn = bind(&cStateRedefineControlsScreen::OKButtonPressed, this, _1);
-		pOkButton->VRegisterCallBack(UIET_BTNRELEASED, callbackBackBtn);
+		pOkButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackBackBtn);
 	}
 
 	shared_ptr<Graphics::IBaseControl> pResetButton = m_pRedefineControlsScreen->VFindChildControl("btnReset");
 	if(pResetButton != NULL)
 	{
 		UIEventCallBackFn callbackBackBtn = bind(&cStateRedefineControlsScreen::ResetButtonPressed, this, _1);
-		pResetButton->VRegisterCallBack(UIET_BTNRELEASED, callbackBackBtn);
+		pResetButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackBackBtn);
 	}
 
 	shared_ptr<Graphics::IBaseControl> pCancelButton = m_pRedefineControlsScreen->VFindChildControl("btnCancel");
 	if(pCancelButton != NULL)
 	{
 		UIEventCallBackFn callbackBackBtn = bind(&cStateRedefineControlsScreen::CancelButtonPressed, this, _1);
-		pCancelButton->VRegisterCallBack(UIET_BTNRELEASED, callbackBackBtn);
+		pCancelButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackBackBtn);
 	}
 
 	EventListenerCallBackFn listener = bind(&cStateRedefineControlsScreen::EscapePressedListener, this, _1);
@@ -188,7 +187,6 @@ void cStateRedefineControlsScreen::OnKeyChanged(unsigned int uiCharId)
 void cStateRedefineControlsScreen::SetAllKeyControlsText()
 {
 	cGameControls::KeyMapping keyMap = m_pOwner->m_pGameControls->GetKeyMap();
-	cGameControls::KeyMapping::iterator iter;
 	for(int i=0; i<m_pKeyControls.size(); i++)
 	{
 		m_pKeyControls[i]->VSetText(m_pOwner->VGetGameControls()->GetKeyName(keyMap[i].m_KeyCode));

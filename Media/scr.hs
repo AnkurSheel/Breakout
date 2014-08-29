@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HighScores>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>20000</score>
+    </HighScore>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>19500</score>
+    </HighScore>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>19000</score>
+    </HighScore>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>18500</score>
+    </HighScore>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>18000</score>
+    </HighScore>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>17500</score>
+    </HighScore>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>17000</score>
+    </HighScore>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>16500</score>
+    </HighScore>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>16000</score>
+    </HighScore>
+    <HighScore>
+        <name>Speedrun</name>
+        <score>15500</score>
+    </HighScore>
+</HighScores>

@@ -2,24 +2,17 @@ local utils = require('utils')
 
 return {
 	run = function(enginePath, outputDirectory)
-		require('Base').run(enginePath, outputDirectory)
-		require('Utilities').run(enginePath, outputDirectory)
-		require('AI').run(enginePath, outputDirectory)
-		require('Graphics').run(enginePath, outputDirectory)
-		require('Physics').run(enginePath, outputDirectory)
-		require('Sound').run(enginePath, outputDirectory)
 		project "Gamebase"
 		kind "SharedLib"
 		location = outputDirectory
 		inputPath = enginePath.."/Source/GameBase"
 		utils.addfiles(inputPath) 
-		links { "Base", "Utilities", "AI", "Graphics", "Physics", "Sound" }
 		includedirs
 		{
 			enginePath.."/Source/GameBase/Includes",
 			enginePath.."/Source/Base/Includes",
 			enginePath.."/Source/Utilities/Includes",
-			enginePath.."/Source/AI/src",
+			enginePath.."/Source/AI/Includes",
 			enginePath.."/Source/GraphicsEngine/Includes",
 			enginePath.."/Source/Physics/Includes",
 			enginePath.."/Source/Sound/Includes",
@@ -31,5 +24,9 @@ return {
 		}		
 		pchsource (enginePath.."/Source/GameBase/src/stdafx.cpp")
 		defines {"GAMEBASE_EXPORTS" }
+		configuration ("Debug")
+			links { "Base_d", "Utilities_d", "AI_d", "Graphics_d", "Physics_d", "Sound_d" }
+		configuration ("Release")
+			links { "Base", "Utilities", "AI", "Graphics", "Physics", "Sound" }
 	end
 }

@@ -85,7 +85,7 @@ void cStatePlayGame::VOnEnter(cGame * pGame)
 
 		if(m_pLivesLabel != NULL)
 		{
-			m_pLivesLabel->VSetText(cString(20, "%01d", m_pOwner->m_CurrentLives));
+			m_pLivesLabel->VSetText(cString::MakeFormatted("%01d", m_pOwner->m_CurrentLives));
 		}
 	}
 
@@ -211,7 +211,7 @@ void cStatePlayGame::OnLifeLost(IEventDataPtr pEventData)
 	m_pOwner->m_CurrentLives--;
 	if(m_pLivesLabel != NULL)
 	{
-		m_pLivesLabel->VSetText(cString(20, "%01d", m_pOwner->m_CurrentLives));
+		m_pLivesLabel->VSetText(cString::MakeFormatted("%01d", m_pOwner->m_CurrentLives));
 	}
 
 	if(m_pPaddle != NULL)
@@ -250,7 +250,7 @@ void cStatePlayGame::OnBrickDestroyed(IEventDataPtr pEventData)
 	if(m_RemainingBricks == 0)
 	{
 		WaitToStart(true);
-		
+
 		m_pOwner->OnGameOver();
 		if(m_pOwner->m_pHighScoreTable->VIsHighScore(m_pGameTimer->VGetRunningTime()))
 		{
@@ -278,7 +278,7 @@ void cStatePlayGame::DisplayTimerOnHUD()
 		int time = static_cast<int>(m_pGameTimer->VGetRunningTime());
 		int hour, minutes, seconds;
 		GetTimeAsHHMMSS(time, hour, minutes, seconds);
-		m_pTimerLabel->VSetText(cString(30, "%02d:%02d:%02d", hour, minutes, seconds));
+		m_pTimerLabel->VSetText(cString::MakeFormatted("%02d:%02d:%02d", hour, minutes, seconds));
 	}
 }
 
@@ -286,7 +286,7 @@ void cStatePlayGame::DisplayTimerOnHUD()
 void cStatePlayGame::WaitToStart(bool Wait)
 {
 	m_WaitingToStart = Wait;
-	
+
 	if(m_pGameTimer != NULL)
 	{
 		if(Wait)

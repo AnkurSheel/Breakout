@@ -2,13 +2,11 @@ local utils = require('utils')
 
 return {
 	run = function(enginePath, outputDirectory)
-		require('Base').run(enginePath, outputDirectory)
 		project "Utilities"
 		kind "SharedLib"
 		location = outputDirectory
 		inputPath = enginePath.."/Source/Utilities"
 		utils.addfiles(inputPath)
-		links { "Base" }
 		includedirs
 		{
 			enginePath.."/Source/Utilities/Includes",
@@ -30,5 +28,9 @@ return {
 		end
 		pchsource (enginePath.."/Source/Utilities/src/stdafx.cpp")
 		defines {"UTILITIES_EXPORTS"}
+		configuration ("Debug")
+			links { "Base_d" }
+		configuration ("Release")
+			links { "Base" }
 	end
 }

@@ -2,17 +2,14 @@ local utils = require('utils')
 
 return {
 	run = function(enginePath, outputDirectory)
-		require('base').run(enginePath, outputDirectory)
-		require('utilities').run(enginePath, outputDirectory)
 		project "AI"
 		kind "SharedLib"
 		location = outputDirectory
 		inputPath = enginePath.."/Source/AI/"
 		utils.addfiles(inputPath)
-		links { "Base", "Utilities" }
 		includedirs
 		{
-			enginePath.."/Source/AI/src",
+			enginePath.."/Source/AI/Includes",
 			enginePath.."/Source/Base/Includes",
 			enginePath.."/Source/Utilities/Includes/",
 			enginePath.."/extern/Include/VisualLeakDetector"
@@ -23,6 +20,10 @@ return {
 		}
 		pchsource (enginePath.."/Source/AI/src/stdafx.cpp")
 		defines {"AI_EXPORTS"}
+		configuration ("Debug")
+			links { "Base_d", "Utilities_d" }
+		configuration ("Release")
+			links { "Base", "Utilities" }
 	end
 }
 

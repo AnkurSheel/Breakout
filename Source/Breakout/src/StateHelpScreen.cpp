@@ -45,7 +45,7 @@ void cStateHelpScreen::VOnEnter(cGame *pGame)
 		if(pBackButton != NULL)
 		{
 			UIEventCallBackFn callbackBackBtn = bind(&cStateHelpScreen::BackButtonPressed, this, _1);
-			pBackButton->VRegisterCallBack(UIET_BTNRELEASED, callbackBackBtn);
+			pBackButton->VRegisterCallBack(UIEVENTTYPE::BUTTONRELEASED, callbackBackBtn);
 		}
 
 		EventListenerCallBackFn listener = bind(&cStateHelpScreen::EscapePressedListener, this, _1);

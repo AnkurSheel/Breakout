@@ -22,14 +22,17 @@ namespace Graphics
 	/********************************************//**
      * @brief Callback Event Types for UI controls
      ***********************************************/
-	enum UIEVENTTYPE
-	{
-		UIET_BTNPRESSED,	/*!< Button was pressed */ 
-		UIET_BTNRELEASED,	/*!< Button was released */ 
-		UIET_SCBCHANGED,	/*!< The value of the Scrollbar was changed */ 
-		UIET_FOCUSLOST,		/*!< The UI control lost focus */ 
-		UIET_ONKEYDOWN,		/*!< A key was pressed */ 
-	};
+  namespace UIEVENTTYPE 
+  {
+    enum ENUM
+    {
+      BUTTONPRESSED,	/*!< Button was pressed */ 
+      BUTTONRELEASED,	/*!< Button was released */ 
+      SCROLLBARCHANGED,	/*!< The value of the Scrollbar was changed */ 
+      FOCUSLOST,		/*!< The UI control lost focus */ 
+      KEYDOWN,		/*!< A key was pressed */ 
+    };
+  }
 
 	/********************************************//**
      * @brief Return structure for UI callback functions

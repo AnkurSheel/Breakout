@@ -117,14 +117,14 @@ namespace Graphics
 		 *
 		 * Sets the callback function to invoke when the eventType event occurs
 		 ***********************************************/
-		virtual void VRegisterCallBack(const UIEVENTTYPE eventType,
+		virtual void VRegisterCallBack(const UIEVENTTYPE::ENUM eventType,
 			UIEventCallBackFn fnCallback) = 0;
 		/********************************************//**
 		 * @param[in] eventType The type of the event for the call back.
 		 *
 		 * Unregisters the callback function for the eventtype event
 		 ***********************************************/
-		virtual void VUnregisterCallBack(const UIEVENTTYPE eventType) = 0;
+		virtual void VUnregisterCallBack(const UIEVENTTYPE::ENUM eventType) = 0;
 		virtual void VUnRegisterAllCallBacks() = 0;
 		/********************************************//**
 		 * @param[in] pControl The control to be moved to the front
