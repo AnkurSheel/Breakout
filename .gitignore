@@ -1,6 +1,4 @@
 Obj/
-[Dd]ebug*/
-[Bb]in/
 *.user
 *.*sdf
 *.suo
@@ -9,3 +7,5 @@ Obj/
 ipch/
 log.*
 *.bak
+*.idb
+[pP]rojects*/

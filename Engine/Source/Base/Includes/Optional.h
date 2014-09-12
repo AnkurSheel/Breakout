@@ -23,7 +23,7 @@ namespace Base
 	{
 	public:
 		tOptionalBase()
-		: m_bValid(false)
+			: m_bValid(false)
 		{
 		}
 
@@ -90,7 +90,7 @@ namespace Base
 		{
 			if(t.m_bValid)
 			{
-				construct(* t);
+				construct(t.GetValue());
 				m_bValid = true;
 			}
 		}
@@ -100,18 +100,18 @@ namespace Base
 			//TODO : change to assert later
 			assert(! (this  == &t));
 
-				if (m_bValid)
-				{
-					m_bValid = false;
-					Destroy();
-				}
+			if (m_bValid)
+			{
+				m_bValid = false;
+				Destroy();
+			}
 
-				if(t.m_bValid)
-				{
-					construct(*t);
-					m_bValid = true;
-				}
-				return * this;
+			if(t.m_bValid)
+			{
+				construct(t.GetValue());
+				m_bValid = true;
+			}
+			return * this;
 		}
 
 		const bool operator == (const tOptional & t)
@@ -155,25 +155,25 @@ namespace Base
 			}
 		}
 
-		const T & operator * () const
+		const T & GetValue() const
 		{ 
 			assert(m_bValid); 
 			return * GetT(); 
 		}
 
-		T & operator * ()
+		T & GetValue()
 		{ 
 			assert(m_bValid); 
 			return * GetT(); 
 		}
 
-		const T * const operator -> () const	
+		const T * const GetPtr() const	
 		{
 			assert(m_bValid); 
 			return GetT(); 
 		}
 
-		T * const operator -> ()
+		T * const GetPtr()
 		{ 
 			assert(m_bValid); 
 			return GetT(); 
@@ -190,17 +190,17 @@ namespace Base
 
 	private:
 
-		const T * const GetT() const 
+		const T * const GetT() const
 		{ 
 			return reinterpret_cast<T const * const>(m_Data); 
 		}
 
-		T * const GetT()			 
+		T * const GetT()
 		{ 
 			return reinterpret_cast<T * const>(m_Data);
 		}
 
-		void construct(T const & t)  
+		void construct(T const & t)
 		{ 
 			new (GetT()) T(t); 
 		}

@@ -42,7 +42,7 @@ void cBall::VInitialize()
 	m_pRandomGenerator = IRandomGenerator::CreateRandomGenerator();
 	if (m_pRandomGenerator)
 	{
-		Log_Write(ILogger::LT_DEBUG, 1, cString::MakeFormatted("Random Generator created for Ball with seed %u", m_pRandomGenerator->GetRandomSeed()));
+		Log_Write(ILogger::LT_DEBUG, 1, cStringUtilities::MakeFormatted("Random Generator created for Ball with seed %u", m_pRandomGenerator->GetRandomSeed()));
 	}
 
 	if(m_pTransFormComponent != NULL)

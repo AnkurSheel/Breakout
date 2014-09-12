@@ -55,7 +55,7 @@ void cStateRedefineControlsScreen::VOnEnter(cGame * pGame)
 			stGameControl gameControl = iter->second;
 
 			shared_ptr<IBaseControl> pNameControl = m_pLabelControlDisplayNameTemplate->VDuplicate();
-			pNameControl->VSetControlName(cString::MakeFormatted("Name%d", i));
+			pNameControl->VSetControlName(cStringUtilities::MakeFormatted("Name%d", i));
 			pNameControl->VSetText(gameControl.m_DisplayName);
 			pNameControl->VSetPosition(cVector2(0.0f, currentPosY));
 			pNameControl->VSetVisible(true);
@@ -63,7 +63,7 @@ void cStateRedefineControlsScreen::VOnEnter(cGame * pGame)
 			pNameControl.reset();
 
 			shared_ptr<IBaseControl> pKeyControl = m_pBtnControlKeyTemplate->VDuplicate();
-			pKeyControl->VSetControlName(cString::MakeFormatted("Key%d", i));
+			pKeyControl->VSetControlName(cStringUtilities::MakeFormatted("Key%d", i));
 			pKeyControl->VSetText(pGame->m_pGameControls->GetKeyName(gameControl.m_KeyCode));
 			pKeyControl->VSetPosition(cVector2(300.0f, currentPosY));
 			pKeyControl->VSetVisible(true);

@@ -28,9 +28,10 @@ return {
 		end
 		pchsource (enginePath.."/Source/Utilities/src/stdafx.cpp")
 		defines {"UTILITIES_EXPORTS"}
+		links { "zlibwapi" , "Winmm"}
 		configuration ("Debug")
-			links { "Base_d" }
+			links { "Base_d", "tinyxml2d" }
 		configuration ("Release")
-			links { "Base" }
+			links { "Base", "tinyxml2" }
 	end
 }

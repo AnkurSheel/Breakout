@@ -43,7 +43,11 @@ local function CreateProjectForGithub(dirPath)
 				or string.match(fname, "Scripts") ~= nil then
 					CreateDirs(fname, dirPath.."/")
 				end
-			elseif string.match(fname, "/Obj") == nil and string.match(fname, "Projects") == nil then
+			elseif string.match(fname, "Engine/Tests") ~= nil then
+				if string.match(fname, "/Obj") == nil and string.match(fname, "Projects") == nil then
+					CreateDirs(fname, dirPath.."/")
+				end
+			else
 				CreateDirs(fname, dirPath.."/")
 			end
 		elseif string.match(fname, "/Obj") == nil and string.match(fname, "Projects") == nil then
@@ -55,7 +59,7 @@ local function CreateProjectForGithub(dirPath)
 		if string.match(fname, "Debug") ~= nil or string.match(fname, "bin") ~= nil then
 			if string.match(fname, "lib") ~= nil or string.match(fname, "dll") ~= nil 
 			or string.match(fname, "ini") ~= nil or string.match(fname, "xsl") ~= nil 
-			or string.match(fname, "html") ~= nil then
+			or string.match(fname, "html") ~= nil or string.match(fname, "manifest") ~= nil then
 				CopyFiles(fname, dirPath.."/")
 			end
 		elseif string.match(fname, "Engine") ~= nil then

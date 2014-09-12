@@ -126,7 +126,7 @@ void cStateOptionsScreen::MusicScrollbarChanged(const stUIEventCallbackParam & p
 {
 	shared_ptr<IBaseControl> pMusicTextBox = m_pOptionsScreen->VFindChildControl("tbMusicVolume");
 	//cGameOptions::GameOptions().iMusicVolume = params.iThumbPos * 5;
-	pMusicTextBox->VSetText(cString::MakeFormatted("%d", params.iThumbPos));
+	pMusicTextBox->VSetText(cStringUtilities::MakeFormatted("%d", params.iThumbPos));
 	//m_pOwner->m_pHumanView->SetMusicVolume();
 }
 
@@ -135,7 +135,7 @@ void cStateOptionsScreen::SFXScrollbarChanged(const Graphics::stUIEventCallbackP
 {
 	shared_ptr<IBaseControl> pSFXTextBox = m_pOptionsScreen->VFindChildControl("tbSFXVolume");
 	//cGameOptions::GameOptions().iSFXVolume = params.iThumbPos * 5;
-	pSFXTextBox->VSetText(cString::MakeFormatted("%d", params.iThumbPos));
+	pSFXTextBox->VSetText(cStringUtilities::MakeFormatted("%d", params.iThumbPos));
 	//m_pOwner->m_pHumanView->SetSFXVolume();
 }
 

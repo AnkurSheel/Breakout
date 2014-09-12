@@ -23,6 +23,7 @@ return {
 		pchsource (enginePath.."/Source/GraphicsEngine/src/stdafx.cpp")
 		defines {"GRAPHICSENGINE_EXPORTS"}
 		excludes {"**/ScreenElement.hxx"}
+		links { "dxgi", "d3d11", "d3dx11", "d3dx10", "dxerr", "dxguid"}
 		configuration ("Debug")
 			links { "Base_d", "Utilities_d"}
 		configuration ("Release")

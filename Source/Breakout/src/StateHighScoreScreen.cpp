@@ -57,10 +57,10 @@ void cStateHighScoreScreen::VOnEnter(cGame *pGame)
 		if(m_NewScore.IsValid())
 		{
 			m_NewScorePos.clear();
-			tOptional<int> scorePos = m_pOwner->m_pHighScoreTable->VGetScorePositionInTable(*m_NewScore);
+			tOptional<int> scorePos = m_pOwner->m_pHighScoreTable->VGetScorePositionInTable(m_NewScore.GetValue());
 			if(scorePos.IsValid())
 			{
-				SetNewScorePos(*scorePos);
+				SetNewScorePos(scorePos.GetValue());
 			}
 		}
 		IHighScoreTable::ScoreSet highScores = pGame->m_pHighScoreTable->VGetScores();
@@ -122,7 +122,7 @@ void cStateHighScoreScreen::VOnExit()
 void cStateHighScoreScreen::DisplayScore(const shared_ptr<const cScore> pScore, const int inIndex)
 {
 	int posY = 220 + (40 * inIndex);
-	if (m_NewScorePos.IsValid() && inIndex == *m_NewScorePos)
+	if (m_NewScorePos.IsValid() && inIndex == m_NewScorePos.GetValue())
 	{
 		shared_ptr<Graphics::IBaseControl> ptbNewHighScoreName = m_pHighScoreScreen->VFindChildControl("tbNewHighScoreName");
 		ptbNewHighScoreName->VSetPosition(cVector2(0.0f, posY));
@@ -130,12 +130,12 @@ void cStateHighScoreScreen::DisplayScore(const shared_ptr<const cScore> pScore, 
 		UIEventCallBackFn callBackTextBox;
 		callBackTextBox = bind(&cStateHighScoreScreen::OnNameEntered, this, _1);
 		ptbNewHighScoreName->VRegisterCallBack(UIEVENTTYPE::FOCUSLOST, callBackTextBox);
-		AddScoreLabel(inIndex, *m_NewScore, posY);
+		AddScoreLabel(inIndex, m_NewScore.GetValue(), posY);
 	}
 	else
 	{
 		shared_ptr<IBaseControl> pNameControl = m_pLabelNameTemplate->VDuplicate();
-		pNameControl->VSetControlName(cString::MakeFormatted("Name%d", inIndex));
+		pNameControl->VSetControlName(cStringUtilities::MakeFormatted("Name%d", inIndex));
 		pNameControl->VSetText(pScore->GetPlayerName());
 		pNameControl->VSetPosition(cVector2(0.0f, posY));
 		pNameControl->VSetVisible(true);
@@ -154,7 +154,7 @@ void cStateHighScoreScreen::BackButtonPressed(const stUIEventCallbackParam & par
 		{
 			shared_ptr<cScore> pScore(DEBUG_NEW cScore());
 			pScore->SetPlayerName(m_PlayerName);
-			pScore->SetScore(*m_NewScore);
+			pScore->SetScore(m_NewScore.GetValue());
 			m_pOwner->m_pHighScoreTable->VAddNewScore(pScore);
 			m_pOwner->m_pHighScoreTable->VSave();
 		}
@@ -179,10 +179,10 @@ void cStateHighScoreScreen::OnNameEntered(const Graphics::stUIEventCallbackParam
 void cStateHighScoreScreen::AddScoreLabel(const int inIndex, const int inScore, const int posY)
 {
 	shared_ptr<IBaseControl> pScoreControl = m_pLabelScoreTemplate->VDuplicate();
-	pScoreControl->VSetControlName(cString::MakeFormatted("Score%d", inIndex));
+	pScoreControl->VSetControlName(cStringUtilities::MakeFormatted("Score%d", inIndex));
 	int hour, minutes, seconds;
 	GetTimeAsHHMMSS(inScore, hour, minutes, seconds);
-	pScoreControl->VSetText(cString::MakeFormatted("%02d : %02d : %02d", hour, minutes, seconds));
+	pScoreControl->VSetText(cStringUtilities::MakeFormatted("%02d : %02d : %02d", hour, minutes, seconds));
 	pScoreControl->VSetPosition(cVector2(250.0f, posY));
 	pScoreControl->VSetVisible(true);
 	m_pHighScoreScreen->VAddChildControl(pScoreControl);

@@ -26,6 +26,7 @@
 #include "typedef.h"
 #include "MathIncludes.h"
 #include "myString.h"
+#include "StringUtilities.h"
 #include "Color.h"
 #include "NonCopyable.h"
 #include "HashedString.h"

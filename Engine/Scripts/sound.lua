@@ -29,6 +29,7 @@ return {
 		end
 		pchsource (enginePath.."/Source/Sound/src/stdafx.cpp")
 		defines {"SOUND_EXPORTS"}
+		links {"libogg_static", "libvorbis_static", "libvorbisfile_static"}
 		configuration ("Debug")
 			links { "Base_d", "Utilities_d" }
 		configuration ("Release")
